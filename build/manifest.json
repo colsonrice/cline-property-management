@@ -1,0 +1,486 @@
+{
+ "lawn-mowing-striped-residential": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "lawn-mowing-stripes-spring": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "rough-mowing-overgrown-lot": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "commercial-field-mowing": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "large-property-mowing-roadside": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "acreage-mowing": {
+  "cat": "mowing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-install-front-entry": {
+  "cat": "mulching",
+  "w": 2600,
+  "h": 1950,
+  "orient": "landscape",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-install-entry-walkway": {
+  "cat": "mulching",
+  "w": 2600,
+  "h": 1950,
+  "orient": "landscape",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "hoa-entrance-mulch-harcourt-springs": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "hoa-monument-mulch-bed": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "curbside-mulch-bed": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "tree-ring-mulch-curbside": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-black-fence": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-spring-shrubs": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-brick-wall": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-fence-line": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-house-corner": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-bed-foundation": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-refresh-before": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "mulch-refresh-after": {
+  "cat": "mulching",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-removal-backpack-blower": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-vacuum-truck-curb": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-removal-raking-pile": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-removal-under-tree": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-removal-finished-lawn": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "fall-leaves-driveway": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-covered-yard": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-covered-driveway": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-covered-lawn": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "fall-cleanup-truck-ladder": {
+  "cat": "leaf-removal",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "commercial-median-crew": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "commercial-median-landscape": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "municipal-roadside-maintenance": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "commercial-median-shrub-beds": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "commercial-median-sunset": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "municipal-median-grasses": {
+  "cat": "commercial",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "soft-wash-siding-before": {
+  "cat": "soft-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "soft-wash-siding-after": {
+  "cat": "soft-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "driveway-pressure-washing-before": {
+  "cat": "pressure-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "driveway-pressure-washing-after": {
+  "cat": "pressure-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "concrete-pressure-washing-in-progress": {
+  "cat": "pressure-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "awning-pressure-washing-before": {
+  "cat": "pressure-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "awning-pressure-washing-after": {
+  "cat": "pressure-washing",
+  "w": 1950,
+  "h": 2600,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "fence-line-cleanup-before-after": {
+  "cat": "cleanups",
+  "w": 1080,
+  "h": 1350,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ }
+}

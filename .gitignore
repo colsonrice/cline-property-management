@@ -1,0 +1,10 @@
+# Mike's original phone photos/videos — 300+MB of HEIC and MOV.
+# Too large for git and not needed to serve the site; the build only needs them
+# when regenerating renditions. Keep a separate backup of photos/originals/.
+photos/originals/
+
+.DS_Store
+**/.DS_Store
+*.tmp.png
+__pycache__/
+*.pyc

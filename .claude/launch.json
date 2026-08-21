@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "cline-site",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["build/devserver.py", "4180"],
+      "port": 4180
+    }
+  ]
+}

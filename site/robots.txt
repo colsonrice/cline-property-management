@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://colsonrice.github.io/cline-property-management/sitemap.xml
