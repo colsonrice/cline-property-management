@@ -261,6 +261,34 @@
       var rt = form.elements['_replyto'];
       if (em && rt) rt.value = em.value;
 
+      // Every subject carries the [Cline Web] tag so one Gmail filter catches
+      // the lot, then the service and town so the inbox is sortable at a
+      // glance without opening anything.
+      var subj = form.elements['_subject'];
+      if (subj) {
+        var picked = Array.prototype.slice
+          .call(form.querySelectorAll('input[name="services"]:checked'))
+          .map(function (c) {
+            var lab = c.parentNode.querySelector('span');
+            return lab ? lab.textContent.trim() : c.value;
+          });
+        var who = (form.elements['name'] || {}).value || '';
+        var where = (form.elements['address'] || {}).value || '';
+        var what = picked.length === 0 ? 'General enquiry'
+                 : picked.length <= 2 ? picked.join(' + ')
+                 : picked.length + ' services';
+        var bits = ['[Cline Web]', what];
+        if (where) bits.push('\u00b7 ' + where);
+        if (who) bits.push('\u2014 ' + who);
+        subj.value = bits.join(' ');
+      }
+
+      // Tell Mike which page they were reading when they asked.
+      var src = form.elements['Submitted from'];
+      if (src) src.value = document.referrer && document.referrer.indexOf(location.host) > -1
+        ? document.referrer.replace(location.origin, '') + ' \u2192 ' + location.pathname
+        : location.pathname;
+
       fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
         method: 'POST',
         body: new FormData(form),

@@ -1148,7 +1148,8 @@ def page_contact():
 
         <form class="qform" name="estimate" method="POST" novalidate
               action="https://formsubmit.co/{SITE['email']}">
-          <input type="hidden" name="_subject" value="New estimate request from the Cline website">
+          <input type="hidden" name="_subject" value="[Cline Web] New estimate request">
+          <input type="hidden" name="Submitted from" value="">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_replyto" value="">
