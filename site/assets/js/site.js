@@ -245,30 +245,39 @@
       });
       if (!valid) { e.preventDefault(); return; }
 
-      // GitHub Pages (and file://) have no form backend -- a plain POST would
-      // silently discard the enquiry. Hand the filled-in details to the user's
-      // mail client instead. Set data-mode="post" once a real endpoint exists.
-      var handoff = form.dataset.mode === 'mailto' || location.protocol === 'file:';
-      if (handoff) {
-        e.preventDefault();
-        var g = function (n) { var el = form.elements[n]; return el ? el.value : ''; };
-        var svcs = Array.prototype.slice.call(form.querySelectorAll('input[name="services"]:checked'))
-          .map(function (c) { return c.value; }).join(', ');
-        var body = [
-          'Name: ' + g('name'),
-          'Phone: ' + g('phone'),
-          'Email: ' + g('email'),
-          'Property type: ' + g('property'),
-          'Address / area: ' + g('address'),
-          'Services: ' + (svcs || '—'),
-          '',
-          g('message')
-        ].join('\n');
-        window.location.href = 'mailto:Clinepropertymanagement@gmail.com'
-          + '?subject=' + encodeURIComponent('Quote request — ' + (g('name') || 'Website'))
-          + '&body=' + encodeURIComponent(body);
-        if (ok) { ok.classList.add('is-on'); form.style.display = 'none'; }
-      }
+      // FormSubmit delivers straight to Mike's inbox. Posting normally would
+      // bounce the visitor to formsubmit.co's own thank-you page, so send it
+      // over fetch and keep them here. The /ajax/ prefix is what makes
+      // FormSubmit answer with JSON instead of a redirect.
+      if (!window.fetch || !form.action || form.action.indexOf('formsubmit.co') === -1) return;
+      e.preventDefault();
+
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? btn.innerHTML : '';
+      if (btn) { btn.disabled = true; btn.innerHTML = 'Sending\u2026'; }
+
+      // Let Mike hit reply and have it go to the customer.
+      var em = form.elements['email'];
+      var rt = form.elements['_replyto'];
+      if (em && rt) rt.value = em.value;
+
+      fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      }).then(function (r) {
+        if (!r.ok) throw new Error('send failed');
+        if (ok) {
+          ok.classList.add('is-on');
+          form.hidden = true;
+          ok.setAttribute('tabindex', '-1');
+          ok.focus();
+        }
+      }).catch(function () {
+        if (btn) { btn.disabled = false; btn.innerHTML = label; }
+        var err = form.querySelector('.qsend-err');
+        if (err) { err.hidden = false; }
+      });
     });
 
     form.querySelectorAll('[required]').forEach(function (f) {

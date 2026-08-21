@@ -29,7 +29,7 @@ SITE = {
 # Flip to False, rebuild and redeploy once SITE["base"] is the real domain.
 STAGING = True
 
-MOW_AREAS = ["Whitestown", "Zionsville", "Westfield", "Carmel"]
+MOW_AREAS = ["Whitestown", "Zionsville", "Carmel"]
 
 SEASONS = [
     {
@@ -44,7 +44,7 @@ SEASONS = [
     },
     {
         "key": "summer", "name": "Summer", "months": "June – August",
-        "color": "#B98A28",
+        "color": "#8A6516",
         "count": "4 services",
         "head": "Keep it sharp every week",
         "body": "Weekly mowing on a set day, clean edges, and beds that stay tidy. Summer is also "
@@ -80,9 +80,9 @@ SERVICES = [
         "name": "Lawn Mowing",
         "nav": "Lawn Mowing",
         "short": "Weekly and bi-weekly cuts for homes, businesses, HOAs, and municipalities.",
-        "title": "Lawn Mowing in Whitestown, Zionsville, Westfield & Carmel IN",
+        "title": "Lawn Mowing in Whitestown, Zionsville & Carmel, IN",
         "desc": "Weekly lawn mowing for homes, businesses, HOAs and municipalities in Whitestown, "
-                "Zionsville, Westfield and Carmel, Indiana. Clean edges, free estimates.",
+                "Zionsville and Carmel, Indiana. Clean edges, free estimates.",
         "hero": ("mowing", "lawn-mowing-striped-residential"),
         "hero_alt": "Freshly striped residential lawn in Zionsville, Indiana",
         "lede": "A cut on a schedule you can plan your week around. Trimming, edging, and blow-off "
@@ -127,7 +127,8 @@ SERVICES = [
         ],
         "faqs": [
             ("Which towns do you mow?",
-             "We mow in Whitestown, Zionsville, Westfield, and Carmel."),
+             "We mow in Whitestown, Zionsville, and Carmel. Mowing routes stay tight so we can hold "
+             "a set day of the week. Our other six services do cover Westfield, so it's worth asking."),
             ("Weekly or every other week?",
              "Weekly is best during the main growing season. Bi-weekly service can work when growth slows."),
             ("Do I need to be home?",
@@ -211,8 +212,8 @@ SERVICES = [
         "title": "Spring & Fall Property Cleanups | Central Indiana",
         "desc": "Complete spring and fall property cleanups: bed clearing, cut-backs, debris removal "
                 "and edging in Whitestown, Zionsville, Westfield and Carmel, Indiana.",
-        "hero": ("cleanups", "fence-line-cleanup-before-after"),
-        "hero_alt": "Before and after of an overgrown fence line cleared and cut back",
+        "hero": ("leaf-removal", "leaf-removal-raking-pile"),
+        "hero_alt": "Raking a heavy leaf accumulation into piles during a fall property cleanup",
         "lede": "Two visits a year that make everything in between easier, and cheaper.",
         "body": [
             ("h2", "Spring cleanup"),
@@ -244,7 +245,6 @@ SERVICES = [
                   "back to a maintainable baseline."),
         ],
         "gallery": [
-            ("cleanups", "fence-line-cleanup-before-after", "Fence line before and after clearing"),
             ("leaf-removal", "leaf-removal-raking-pile", "Raking out a heavy leaf accumulation"),
             ("leaf-removal", "leaf-removal-finished-lawn", "Property finished and cleared"),
             ("mulching", "mulch-bed-spring-shrubs", "Beds cleared and cut back in spring"),
@@ -416,6 +416,7 @@ SERVICES = [
              "Vinyl siding", "Years of algae on a shaded elevation, removed without pressure damage"),
         ],
         "gallery": [
+            ("soft-washing", "fence-wash-before-after", "Iron fence before and after a low-pressure wash"),
             ("soft-washing", "soft-wash-siding-before", "Algae streaking on shaded vinyl siding"),
             ("soft-washing", "soft-wash-siding-after", "The same elevation after soft washing"),
         ],

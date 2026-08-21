@@ -400,13 +400,13 @@ def footer(depth):
       <p class="ftr__blurb">Year-round property care for homes, businesses, HOAs, and municipal properties in Whitestown, Zionsville, Westfield, and Carmel.</p>
     </div>
     <div>
-      <h4>Services</h4>
+      <h2 class="ftr__h">Services</h2>
       <ul>{svc}</ul>
     </div>
     <div>
-      <h4>Service Area</h4>
+      <h2 class="ftr__h">Service Area</h2>
       <ul>{area}</ul>
-      <h4 style="margin-top:1.6rem">Company</h4>
+      <h2 class="ftr__h" style="margin-top:1.6rem">Company</h2>
       <ul>
         <li><a href="{r}gallery.html">Our Work</a></li>
         <li><a href="{r}about.html">About</a></li>
@@ -414,7 +414,7 @@ def footer(depth):
       </ul>
     </div>
     <div>
-      <h4>Get In Touch</h4>
+      <h2 class="ftr__h">Get In Touch</h2>
       <div class="ftr__nap">
         <a href="tel:{SITE['phone_href']}">{icon('phone','')}<span>{SITE['phone_display']}</span></a>
         <a href="mailto:{SITE['email']}">{icon('mail','')}<span>Email us</span></a>
@@ -620,9 +620,8 @@ def page_home():
     <p class="standard__label">The Cline standard</p>
     <ul>
       <li><span>01</span> Set-day scheduling</li>
-      <li><span>02</span> Real local job photos</li>
-      <li><span>03</span> One crew, whole property</li>
-      <li><span>04</span> Straight answers</li>
+      <li><span>02</span> One crew, whole property</li>
+      <li><span>03</span> Straight answers</li>
     </ul>
   </div>
 </aside>
@@ -869,8 +868,10 @@ def page_service(s):
     area_note = ""
     if s.get("area_note"):
         area_note = f"""<div class="pricebox rv" style="margin-top:2rem">
-      <span class="tag">Service area</span>
-      <p style="margin-top:.8rem">We provide lawn mowing in <strong>{esc(", ".join(MOW_AREAS[:-1]))}, and {esc(MOW_AREAS[-1])}</strong>.</p>
+      <span class="tag">Mowing service area</span>
+      <p style="margin-top:.8rem">We mow in <strong>{esc(", ".join(MOW_AREAS[:-1]))}, and {esc(MOW_AREAS[-1])}</strong>.
+      Mowing routes stay tight so we can hold a set day of the week. Our other six services
+      also cover <strong>Westfield</strong>.</p>
     </div>"""
 
     photo_note = ""
@@ -957,7 +958,6 @@ def page_gallery():
         ("all", "Everything"), ("mowing", "Mowing"), ("mulching", "Mulching"),
         ("leaf-removal", "Leaf Removal"), ("commercial", "Commercial & HOA"),
         ("pressure-washing", "Pressure Washing"), ("soft-washing", "Soft Washing"),
-        ("cleanups", "Cleanups"),
     ]
     btns = "".join(
         f'<button data-filter="{k}" aria-pressed="{"true" if k=="all" else "false"}">{esc(lbl)}</button>'
@@ -999,7 +999,7 @@ def page_gallery():
     <div class="phead__in">
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
-    <h1 class="display h-1">{len(seen)} photos and {len(VIDEOS)} clips. All ours.</h1>
+    <h1 class="display h-1">View our work</h1>
     <p>Every image on this site is a real Cline job on a real property in our service area.
     Nothing here is stock photography.</p>
     </div>
@@ -1023,7 +1023,7 @@ def page_gallery():
 
 def page_about():
     depth = 0
-    title = "About Cline Property Management | Whitestown, IN"
+    title = "About Cline | Whitestown, Zionsville, Westfield & Carmel IN"
     desc = ("A local grounds care company serving Whitestown, Zionsville, Westfield and Carmel with "
             "mowing, landscape care, cleanups, snow removal and exterior washing.")
     steps = "".join(f'<div class="step"><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></div>' for t, d in PROCESS)
@@ -1142,10 +1142,13 @@ def page_contact():
           <a href="tel:{SITE['phone_href']}">{SITE['phone_display']}</a>.</span>
         </div>
 
-        <form class="qform" name="estimate" method="POST" data-netlify="true"
-              netlify-honeypot="company-website" action="thanks.html" data-mode="mailto">
-          <input type="hidden" name="form-name" value="estimate">
-          <p style="display:none"><label>Leave blank <input name="company-website"></label></p>
+        <form class="qform" name="estimate" method="POST" novalidate
+              action="https://formsubmit.co/{SITE['email']}">
+          <input type="hidden" name="_subject" value="New estimate request from the Cline website">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_replyto" value="">
+          <p class="vh" aria-hidden="true"><label>Leave this blank <input name="_honey" tabindex="-1" autocomplete="off"></label></p>
 
           <div class="qrow">
             <div class="field">
@@ -1198,6 +1201,8 @@ def page_contact():
           <button class="btn btn--primary" type="submit" style="justify-self:start">
             Send request {icon('arrow','arw')}
           </button>
+          <p class="qsend-err" role="alert" hidden>That didn't send. Please try again, or call
+            <a href="tel:{SITE['phone_href']}">{SITE['phone_display']}</a> and we'll pick up.</p>
           <p class="qnote">We'll only use this to get back to you about your property. No lists, no sharing.</p>
         </form>
       </div>
