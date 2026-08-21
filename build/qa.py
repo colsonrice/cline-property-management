@@ -160,7 +160,7 @@ def check(path):
         if "alt" not in a:
             prob(rel, f"img missing alt attribute: {src}")
         if src and not src.startswith(("http", "data:")):
-            t = os.path.normpath(os.path.join(pdir, unquote(src)))
+            t = os.path.normpath(os.path.join(pdir, unquote(urlparse(src).path)))
             if not os.path.exists(t):
                 prob(rel, f"missing image file -> {src}")
         if not a.get("loading") and not a.get("fetchpriority"):

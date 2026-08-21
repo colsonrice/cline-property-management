@@ -11,7 +11,7 @@ adjectives: "two to three inches" earns trust, "premium quality mulch" does not.
 SITE = {
     "name": "Cline Property Management",
     "short": "Cline",
-    "tagline": "Grounds care for every season",
+    "tagline": "Property care, done right.",
     "phone_display": "(317) 677-4709",
     "phone_href": "+13176774709",
     "email": "Clinepropertymanagement@gmail.com",
@@ -19,8 +19,7 @@ SITE = {
     "city": "Whitestown",
     "region": "IN",
     "region_long": "Indiana",
-    "county": "Boone County",
-    "areas_short": "Whitestown · Zionsville · West Carmel",
+    "areas_short": "Whitestown · Zionsville · Westfield · Carmel",
 }
 
 # The site currently lives on a borrowed GitHub Pages domain. Keep it out of
@@ -30,7 +29,7 @@ SITE = {
 # Flip to False, rebuild and redeploy once SITE["base"] is the real domain.
 STAGING = True
 
-MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
+MOW_AREAS = ["Whitestown", "Zionsville", "Westfield", "Carmel"]
 
 SEASONS = [
     {
@@ -81,9 +80,9 @@ SERVICES = [
         "name": "Lawn Mowing",
         "nav": "Lawn Mowing",
         "short": "Weekly and bi-weekly cuts for homes, businesses, HOAs, and municipalities.",
-        "title": "Lawn Mowing in Whitestown, Zionsville & West Carmel IN",
+        "title": "Lawn Mowing in Whitestown, Zionsville, Westfield & Carmel IN",
         "desc": "Weekly lawn mowing for homes, businesses, HOAs and municipalities in Whitestown, "
-                "Zionsville and West Carmel, Indiana. Clean edges, free estimates.",
+                "Zionsville, Westfield and Carmel, Indiana. Clean edges, free estimates.",
         "hero": ("mowing", "lawn-mowing-striped-residential"),
         "hero_alt": "Freshly striped residential lawn in Zionsville, Indiana",
         "lede": "A cut on a schedule you can plan your week around. Trimming, edging, and blow-off "
@@ -128,20 +127,13 @@ SERVICES = [
         ],
         "faqs": [
             ("Which towns do you mow?",
-             "We mow in Whitestown, Zionsville, and West Carmel. Keeping the route tight is what lets us "
-             "hold a consistent day of the week. Our other services travel further, so it's worth asking "
-             "even if you're outside those three towns."),
+             "We mow in Whitestown, Zionsville, Westfield, and Carmel."),
             ("Weekly or every other week?",
-             "Weekly through the main growing season is what we recommend, and it's what most properties "
-             "end up on. Bi-weekly works in the shoulder months. In May and June, though, a two-week gap "
-             "usually means cutting off more than a third of the blade, which stresses the lawn."),
+             "Weekly is best during the main growing season. Bi-weekly service can work when growth slows."),
             ("Do I need to be home?",
-             "No. As long as we can reach the turf, we'll take care of it. Just leave gates unlocked and "
-             "pets inside."),
+             "No. Leave gates unlocked, keep pets inside, and make sure we can reach the turf."),
             ("What happens if it rains on my day?",
-             "We move you to the next workable day. Cutting saturated turf ruts the ground and clumps the "
-             "clippings, which makes things worse. If weather pushes us more than a day or two, you'll "
-             "hear from us."),
+             "We move your service to the next workable day. If weather causes a longer delay, we'll let you know."),
         ],
     },
     {
@@ -149,9 +141,9 @@ SERVICES = [
         "name": "Mulching",
         "nav": "Mulching",
         "short": "Fresh mulch and re-cut bed edges, which is what makes a property look finished.",
-        "title": "Mulch Installation & Bed Edging | Whitestown, IN",
+        "title": "Mulch Installation & Bed Edging | Central Indiana",
         "desc": "Mulch installation, bed edging and seasonal refresh for homes, HOA entrances and "
-                "commercial properties across Boone County, Indiana.",
+                "commercial properties in Whitestown, Zionsville, Westfield and Carmel, Indiana.",
         "hero": ("mulching", "mulch-install-front-entry"),
         "hero_alt": "Fresh dark mulch installed around a front entry with trimmed shrubs",
         "lede": "Nothing changes how a property looks faster than fresh mulch and a sharp bed edge. "
@@ -216,9 +208,9 @@ SERVICES = [
         "name": "Spring & Fall Cleanups",
         "nav": "Spring & Fall Cleanups",
         "short": "A full-property reset at both ends of the season.",
-        "title": "Spring & Fall Property Cleanups | Boone County, IN",
+        "title": "Spring & Fall Property Cleanups | Central Indiana",
         "desc": "Complete spring and fall property cleanups: bed clearing, cut-backs, debris removal "
-                "and edging in Whitestown, Zionsville and West Carmel, Indiana.",
+                "and edging in Whitestown, Zionsville, Westfield and Carmel, Indiana.",
         "hero": ("cleanups", "fence-line-cleanup-before-after"),
         "hero_alt": "Before and after of an overgrown fence line cleared and cut back",
         "lede": "Two visits a year that make everything in between easier, and cheaper.",
@@ -275,8 +267,8 @@ SERVICES = [
         "name": "Leaf Removal",
         "nav": "Leaf Removal",
         "short": "Repeat visits through the drop, with a truck-mounted vacuum for the heavy stuff.",
-        "title": "Leaf Removal in Whitestown & Zionsville, IN",
-        "desc": "Fall leaf removal for homes, HOAs and commercial properties in Boone County, Indiana. "
+        "title": "Leaf Removal | Central Indiana",
+        "desc": "Fall leaf removal for homes, HOAs and commercial properties in Whitestown, Zionsville, Westfield and Carmel. "
                 "Multiple scheduled passes and truck-mounted leaf vacuum.",
         "hero": ("leaf-removal", "leaf-removal-backpack-blower"),
         "hero_alt": "Crew member clearing heavy leaf cover with a backpack blower",
@@ -330,9 +322,9 @@ SERVICES = [
         "name": "Snow Removal",
         "nav": "Snow Removal",
         "short": "Drives, lots, and walks cleared at an agreed depth, with priority commercial routing.",
-        "title": "Snow Removal & Ice Management | Whitestown, IN",
+        "title": "Snow Removal & Ice Management | Central Indiana",
         "desc": "Commercial and residential snow plowing, walk clearing and ice management in "
-                "Whitestown, Zionsville and West Carmel, Indiana.",
+                "Whitestown, Zionsville, Westfield and Carmel, Indiana.",
         "hero": ("commercial", "commercial-median-shrub-beds"),
         "hero_alt": "Dormant-season commercial property maintained through winter",
         "lede": "The point of snow service is that you don't have to think about it. You leave on time.",
@@ -383,9 +375,9 @@ SERVICES = [
         "name": "Soft Washing",
         "nav": "Soft Washing",
         "short": "Low-pressure cleaning for siding, roofs, and anything high pressure would damage.",
-        "title": "Soft Washing for Siding & Roofs | Zionsville, IN",
-        "desc": "Low-pressure soft washing for vinyl siding, roofs and painted exteriors in Whitestown "
-                "and Zionsville, Indiana. Removes algae and streaking.",
+        "title": "Soft Washing for Siding & Roofs | Central Indiana",
+        "desc": "Low-pressure soft washing for vinyl siding, roofs and painted exteriors in Whitestown, "
+                "Zionsville, Westfield and Carmel, Indiana. Removes algae and streaking.",
         "hero": ("soft-washing", "soft-wash-siding-after"),
         "hero_alt": "Vinyl siding after soft washing, clean and streak-free",
         "lede": "That green film down the shaded side of your house is algae. Blasting it with pressure "
@@ -445,9 +437,9 @@ SERVICES = [
         "name": "Pressure Washing",
         "nav": "Pressure Washing",
         "short": "Even, streak-free concrete, drives, and hardscape. No zebra stripes.",
-        "title": "Pressure Washing Driveways & Concrete | Whitestown IN",
+        "title": "Pressure Washing Driveways & Concrete | Central Indiana",
         "desc": "Pressure washing for driveways, sidewalks, patios and concrete in Whitestown, "
-                "Zionsville and West Carmel, Indiana. Even, streak-free results.",
+                "Zionsville, Westfield and Carmel, Indiana. Even, streak-free results.",
         "hero": ("pressure-washing", "driveway-pressure-washing-after"),
         "hero_alt": "Concrete driveway after pressure washing, clean and evenly finished",
         "lede": "Concrete collects grime so gradually that most people stop seeing it. Then half of it "
@@ -509,83 +501,24 @@ SERVICES = [
 ]
 
 AREAS = [
-    {
-        "slug": "whitestown",
-        "name": "Whitestown",
-        "full": "Whitestown, Indiana",
-        "blurb": "Our home base. Whitestown has grown fast, and much of that growth is newer "
-                 "subdivisions with HOA common areas and young landscaping.",
-        "detail": [
-            "Whitestown is where we're based. That means shorter drive times, easier scheduling, and "
-            "the flexibility to swing back if something needs a second look.",
-            "The building boom here left a lot of properties with landscaping installed to a budget and "
-            "never developed past it. Thin mulch, bed lines that have blurred into the turf, shrubs that "
-            "have never been shaped. All of that is fixable, usually in a single day.",
-        ],
-        "img": ("mulching", "hoa-entrance-mulch-harcourt-springs"),
-        "img_alt": "HOA entrance landscaping maintained in Whitestown, Indiana",
-        "highlights": ["HOA common areas and entrances", "New-construction landscape establishment",
-                       "Commercial frontage along the 267 corridor", "Full winter snow routing"],
-    },
-    {
-        "slug": "zionsville",
-        "name": "Zionsville",
-        "full": "Zionsville, Indiana",
-        "blurb": "Mature trees, established landscaping, and a high standard. Zionsville lots mean "
-                 "serious fall leaf volume and beds worth maintaining properly.",
-        "detail": [
-            "Zionsville properties are generally older and more heavily wooded than the newer "
-            "developments nearby, and that changes the work. Mature oaks and maples mean leaf removal "
-            "is a rotation through October and November, not a single visit.",
-            "Established landscaping also rewards proper maintenance in a way new plantings can't yet. "
-            "Beds cared for over years, with clean edges and correct mulch depth, are the difference "
-            "between a property that looks maintained and one that looks expensive.",
-        ],
-        "img": ("mowing", "lawn-mowing-striped-residential"),
-        "img_alt": "Striped residential lawn maintained in Zionsville, Indiana",
-        "highlights": ["Weekly mowing with detail trim and edging", "Multi-visit fall leaf removal",
-                       "Established bed and mulch maintenance", "Soft washing for shaded elevations"],
-    },
-    {
-        "slug": "west-carmel",
-        "name": "West Carmel",
-        "full": "West Carmel, Indiana",
-        "blurb": "Larger lots and higher expectations. West Carmel properties usually want the whole "
-                 "package handled by one crew instead of four separate vendors.",
-        "detail": [
-            "West Carmel sits at the edge of our mowing territory, and it suits the way we work. These "
-            "are larger properties where one company handling mowing, beds, washing, and snow beats "
-            "coordinating between several.",
-            "Bigger lots also mean the finish details carry more weight. On a large property, edges that "
-            "wander and beds with soft lines read from the street immediately. That's why we treat "
-            "edging and trim as part of every visit rather than an add-on.",
-        ],
-        "img": ("mulching", "mulch-install-front-entry"),
-        "img_alt": "Front entry landscaping and mulch installation in West Carmel, Indiana",
-        "highlights": ["Full-property programs under one crew", "Large-lot mowing and detail",
-                       "Mulch, wash, and seasonal packages", "Priority winter service"],
-    },
+    {"slug": "whitestown", "name": "Whitestown"},
+    {"slug": "zionsville", "name": "Zionsville"},
+    {"slug": "westfield", "name": "Westfield"},
+    {"slug": "carmel", "name": "Carmel"},
 ]
 
 HOME_FAQS = [
     ("What areas do you serve?",
-     "We mow in Whitestown, Zionsville, and West Carmel, which keeps our routes tight enough to hold a "
-     "reliable day of the week. Everything else we do travels further across Boone County and the "
-     "northwest side. If you're nearby but not in those three towns, it's still worth a call."),
+     "We provide all seven services in Whitestown, Zionsville, Westfield, and Carmel."),
     ("Do you work with HOAs and commercial properties?",
-     "Yes, and it's a large part of what we do. We maintain HOA entrances, monument signs, and common "
-     "areas, along with commercial frontage and municipal right-of-way work. Those run on contracts and "
-     "scheduled rotations rather than one-off visits."),
+     "Yes. We maintain homes, businesses, HOA common areas, and municipal properties."),
     ("Can I get more than one service on the same visit?",
-     "Usually that's the most cost-effective way to do it. Mulching alongside a spring cleanup, or soft "
-     "washing the house the same day we pressure wash the drive, saves you a separate trip each time."),
+     "Yes. We can combine services such as cleanup and mulching, or soft washing and pressure washing."),
     ("How do I get a quote?",
-     "Call or text " + SITE["phone_display"] + ", send us an email, or fill in the form on this site. We "
-     "can quote most work from a quick look at the property. Larger commercial and HOA properties usually "
-     "need a walkthrough, so the scope is clear on both sides."),
+     "Call or text " + SITE["phone_display"] + ", email us, or use the contact form. Larger commercial "
+     "and HOA properties may need a walkthrough."),
     ("Are you insured?",
-     "Yes. Certificates are available on request, which commercial and HOA clients typically need before "
-     "work begins."),
+     "Yes. Certificates of insurance are available on request."),
 ]
 
 PROCESS = [
@@ -648,7 +581,7 @@ VIDEOS = [
         "note": "Hardwood mulch, grasses, river rock edge",
         "alt": "Freshly mulched commercial entrance bed with ornamental grasses and a river rock border",
         "desc": "Freshly installed hardwood mulch with ornamental grasses and a river rock "
-                "border at a commercial property entrance in Boone County, Indiana.",
+                "border at a commercial property entrance in Central Indiana.",
         "service": "mulching",
         "w": 640, "h": 1070, "secs": 6,
     },
@@ -658,7 +591,7 @@ VIDEOS = [
         "note": "Roadside median beds on a commercial route",
         "alt": "Driving slowly past maintained roadside median planting beds",
         "desc": "Roadside median planting beds maintained along a commercial corridor in "
-                "Boone County, Indiana.",
+                "Central Indiana.",
         "service": "lawn-mowing",
         "w": 640, "h": 910, "secs": 6,
     },
