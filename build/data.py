@@ -625,3 +625,45 @@ GALLERY_EXTRA = {
     "awning-pressure-washing-before": "Weather-stained metal awning before cleaning",
     "awning-pressure-washing-after": "The same awning cleaned back to white",
 }
+
+
+# Short silent loops cut from Mike's phone footage. All were shot in portrait,
+# so they are presented at their native aspect instead of cropped to landscape.
+# Bottom of frame is trimmed on two of them to drop the truck mirror and the
+# operator's own shadow.
+VIDEOS = [
+    {
+        "slug": "striped-lawn",
+        "title": "A finished cut",
+        "note": "Residential lawn, mid-summer",
+        "alt": "Slow pan across a freshly mowed residential lawn showing mowing stripes",
+        "desc": "A freshly mowed residential lawn in Zionsville, Indiana, showing the stripe "
+                "pattern left by alternating the mowing direction each visit.",
+        "service": "lawn-mowing",
+        "w": 640, "h": 750, "secs": 6,
+    },
+    {
+        "slug": "mulch-entrance",
+        "title": "Mulch at a commercial entrance",
+        "note": "Hardwood mulch, grasses, river rock edge",
+        "alt": "Freshly mulched commercial entrance bed with ornamental grasses and a river rock border",
+        "desc": "Freshly installed hardwood mulch with ornamental grasses and a river rock "
+                "border at a commercial property entrance in Boone County, Indiana.",
+        "service": "mulching",
+        "w": 640, "h": 1070, "secs": 6,
+    },
+    {
+        "slug": "median-corridor",
+        "title": "A maintained corridor",
+        "note": "Roadside median beds on a commercial route",
+        "alt": "Driving slowly past maintained roadside median planting beds",
+        "desc": "Roadside median planting beds maintained along a commercial corridor in "
+                "Boone County, Indiana.",
+        "service": "lawn-mowing",
+        "w": 640, "h": 910, "secs": 6,
+    },
+]
+
+VIDEO_BY_SERVICE = {}
+for _v in VIDEOS:
+    VIDEO_BY_SERVICE.setdefault(_v["service"], []).append(_v)

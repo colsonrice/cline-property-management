@@ -11,7 +11,7 @@ from html import escape as esc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS,
+from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
                   GALLERY_EXTRA, STAGING)  # noqa
 
 OUT = os.path.join(os.path.dirname(HERE), "site")
@@ -151,6 +151,70 @@ SVC_ICON = {
 # --------------------------------------------------------------------------
 # chrome
 # --------------------------------------------------------------------------
+
+def clip(v, depth=0, cls=""):
+    """One portrait clip: poster first, video bytes only once it scrolls in."""
+    r = rel(depth)
+    base = f"{r}assets/video/{v['slug']}"
+    extra = f" {cls}" if cls else ""
+    return f"""<figure class="clip{extra}">
+      <picture class="clip__poster">
+        <source type="image/webp" srcset="{base}-poster.webp">
+        <img src="{base}-poster.jpg" alt="{esc(v['alt'])}" loading="lazy" decoding="async"
+             width="{v['w']}" height="{v['h']}">
+      </picture>
+      <video muted loop playsinline preload="none" disablepictureinpicture
+             width="{v['w']}" height="{v['h']}" aria-label="{esc(v['alt'])}">
+        <source data-src="{base}.mp4" type="video/mp4">
+      </video>
+      <span class="clip__mute">No sound</span>
+      <button class="clip__btn" type="button" aria-label="Play or pause this clip">
+        <svg class="i-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="i-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
+      </button>
+      <figcaption class="clip__scrim"><b>{esc(v['title'])}</b><span>{esc(v['note'])}</span></figcaption>
+    </figure>"""
+
+
+def video_ld(v):
+    base = SITE["base"]
+    return {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": v["title"],
+        "description": v["desc"],
+        "thumbnailUrl": f"{base}/assets/video/{v['slug']}-poster.jpg",
+        "contentUrl": f"{base}/assets/video/{v['slug']}.mp4",
+        "uploadDate": "2026-08-21",
+        "duration": f"PT{v['secs']}S",
+        "isFamilyFriendly": True,
+        "publisher": {"@id": base + "/#business"},
+    }
+
+
+def reel_section(depth, heading="Work in motion", eyebrow="Video",
+                 blurb=None, videos=None):
+    vids = videos if videos is not None else VIDEOS
+    strip = "".join(clip(v, depth) for v in vids)
+    b = blurb or ("Short clips from real jobs. No sound, and nothing loads until "
+                  "you scroll this far.")
+    return f"""<section class="section rule-top">
+  <div class="wrap">
+    <div class="shead">
+      <div class="shead__top">
+        <div>
+          <span class="eyebrow">{esc(eyebrow)}</span>
+          <h2 class="display h-1" style="margin-top:.7rem">{esc(heading)}</h2>
+        </div>
+        <p>{esc(b)}</p>
+      </div>
+    </div>
+    <div class="reel rv">{strip}</div>
+    <p class="reel-note">{icon('check','')}<span>Filmed on the job by our own crew, not stock footage.</span></p>
+  </div>
+</section>"""
+
+
 def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="", noindex=False):
     r = rel(depth)
     og = og_img or "assets/img/mowing/lawn-mowing-striped-residential-800.jpg"
@@ -749,6 +813,28 @@ def page_service(s):
     if s.get("faqs"):
         ld.append(faq_ld(s["faqs"]))
 
+    svc_vids = VIDEO_BY_SERVICE.get(s["slug"], [])
+    ld += [video_ld(v) for v in svc_vids]
+    vid = ""
+    if svc_vids:
+        v0 = svc_vids[0]
+        vid = f"""<section class="section rule-top">
+      <div class="wrap wrap--tight">
+        <div class="clip-aside rv">
+          {clip(v0, depth, "clip--inline")}
+          <div>
+            <span class="eyebrow">On the job</span>
+            <h2 class="display h-2" style="margin:.8rem 0 .9rem">{esc(v0['title'])}</h2>
+            <p style="color:var(--muted);max-width:44ch">{esc(v0['desc'])}</p>
+            <p style="color:var(--muted);max-width:44ch;margin-top:.9rem;font-size:.9rem">
+              Filmed on a real job by our crew. It plays without sound, and loops.</p>
+            <a class="btn btn--solid-dark" style="margin-top:1.4rem" href="../gallery.html">
+              See more of our work {icon('arrow','arw')}</a>
+          </div>
+        </div>
+      </div>
+    </section>"""
+
     body = f'<div class="prose rv">{render_body(s["body"], depth)}</div>'
 
     ba = ""
@@ -825,6 +911,7 @@ def page_service(s):
 </section>
 
 {ba}
+{vid}
 {gal}
 {faqs}
 
@@ -1002,6 +1089,7 @@ def page_gallery():
                      f'<figcaption>{esc(alt)}</figcaption></figure>')
 
     ld = [breadcrumb_ld([("Home", "/"), ("Our Work", "/gallery.html")])]
+    ld += [video_ld(v) for v in VIDEOS]
     return head(title, desc, depth, "/gallery.html", extra_ld=ld) + header(depth, "gallery") + f"""
 <main id="main">
 <section class="phead">
@@ -1009,7 +1097,7 @@ def page_gallery():
     <div class="phead__in">
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
-    <h1 class="display h-1">{len(seen)} photos. All ours.</h1>
+    <h1 class="display h-1">{len(seen)} photos and {len(VIDEOS)} clips. All ours.</h1>
     <p>Every image on this site is a real Cline job on a real property around Boone County.
     Nothing here is stock photography.</p>
     </div>
@@ -1023,6 +1111,8 @@ def page_gallery():
     <div class="gal">{figs}</div>
   </div>
 </section>
+
+{reel_section(depth)}
 
 {cta_band(depth)}
 </main>

@@ -98,6 +98,16 @@ def check(path):
     p = P()
     p.feed(html)
 
+    # Redirect stubs are intentionally bare: noindex, a canonical pointing at
+    # the surviving page, and a meta refresh. Holding them to full-page SEO
+    # rules just produces noise. Same for local-only scratch pages.
+    is_stub = ('http-equiv="refresh"' in html and "noindex" in html)
+    is_scratch = os.path.basename(rel).startswith("_")
+    if is_stub or is_scratch:
+        if is_stub and not p.canonical:
+            prob(rel, "redirect stub without canonical")
+        return
+
     # --- meta / seo
     if not p.title:
         prob(rel, "missing <title>")
@@ -193,6 +203,8 @@ def main():
     for pg in pages:
         p = check(pg)
         rel = os.path.relpath(pg, SITE)
+        if p is None:          # redirect stub or scratch page
+            continue
         if p.title:
             titles.setdefault(p.title.strip(), []).append(rel)
         dsc = p.metas.get("description", "")
@@ -218,6 +230,18 @@ def main():
             paths.add(pp if pp != "/" else "/index.html")
         indexable = {"/" + os.path.relpath(p, SITE).replace(os.sep, "/") for p in pages}
         indexable = {p for p in indexable if not p.endswith(("404.html", "thanks.html"))}
+
+        def sitemap_exempt(relurl):
+            """Redirect stubs and local scratch pages are excluded on purpose."""
+            if os.path.basename(relurl).startswith("_"):
+                return True
+            fp = os.path.join(SITE, relurl.lstrip("/"))
+            if not os.path.exists(fp):
+                return False
+            h = open(fp, encoding="utf-8").read()
+            return 'http-equiv="refresh"' in h and "noindex" in h
+
+        indexable = {p for p in indexable if not sitemap_exempt(p)}
         for p in sorted(indexable):
             alt = p.replace("/index.html", "/")
             if p not in paths and alt not in paths:

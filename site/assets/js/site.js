@@ -82,57 +82,129 @@
     var set = function (pct) {
       pct = Math.max(0, Math.min(100, pct));
       ba.style.setProperty('--pos', pct + '%');
-      ba.setAttribute('aria-valuenow', Math.round(pct));
+      var before = Math.round(pct);
+      ba.setAttribute('aria-valuenow', before);
+      ba.setAttribute('aria-valuetext', before === 0 ? 'After image only'
+        : before === 100 ? 'Before image only'
+        : before + '% before, ' + (100 - before) + '% after');
     };
-    var fromEvent = function (e) {
+    var fromPoint = function (clientX) {
       var r = ba.getBoundingClientRect();
-      var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+      var x = clientX - r.left;
       set((x / r.width) * 100);
     };
     var dragging = false;
-    var start = function (e) { dragging = true; fromEvent(e); };
-    var move = function (e) { if (dragging) { fromEvent(e); } };
-    var end = function () { dragging = false; };
+    var activePointer = null;
+    var finish = function (e) {
+      if (!dragging || (e && activePointer !== null && e.pointerId !== activePointer)) return;
+      dragging = false;
+      ba.classList.remove('is-dragging');
+      ba.classList.add('is-used');
+      if (e && ba.hasPointerCapture && ba.hasPointerCapture(e.pointerId)) ba.releasePointerCapture(e.pointerId);
+      activePointer = null;
+    };
 
-    ba.addEventListener('mousedown', function (e) { e.preventDefault(); start(e); });
-    window.addEventListener('mousemove', move);
-    window.addEventListener('mouseup', end);
-    ba.addEventListener('touchstart', start, { passive: true });
-    ba.addEventListener('touchmove', move, { passive: true });
-    ba.addEventListener('touchend', end);
-    ba.addEventListener('click', fromEvent);
+    ba.addEventListener('pointerdown', function (e) {
+      if (e.button !== undefined && e.button !== 0) return;
+      dragging = true;
+      activePointer = e.pointerId;
+      ba.classList.add('is-dragging', 'is-used');
+      if (ba.setPointerCapture) ba.setPointerCapture(e.pointerId);
+      fromPoint(e.clientX);
+    });
+    ba.addEventListener('pointermove', function (e) {
+      if (!dragging || e.pointerId !== activePointer) return;
+      fromPoint(e.clientX);
+      if (e.cancelable) e.preventDefault();
+    });
+    ba.addEventListener('pointerup', finish);
+    ba.addEventListener('pointercancel', finish);
+    ba.addEventListener('lostpointercapture', function () { finish(); });
 
     ba.addEventListener('keydown', function (e) {
       var now = parseFloat(ba.getAttribute('aria-valuenow') || '50');
-      if (e.key === 'ArrowLeft') { e.preventDefault(); set(now - 4); }
-      if (e.key === 'ArrowRight') { e.preventDefault(); set(now + 4); }
-      if (e.key === 'Home') { e.preventDefault(); set(0); }
-      if (e.key === 'End') { e.preventDefault(); set(100); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); set(now - 5); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); set(now + 5); }
+      else if (e.key === 'Home') { e.preventDefault(); set(0); }
+      else if (e.key === 'End') { e.preventDefault(); set(100); }
+      else return;
+      ba.classList.add('is-used');
     });
 
     set(50);
-
-    // gentle nudge on first view so the control is discoverable
-    if (!reduced && 'IntersectionObserver' in window) {
-      var seen = false;
-      var o = new IntersectionObserver(function (en) {
-        if (en[0].isIntersecting && !seen) {
-          seen = true;
-          var t0 = null;
-          var tick = function (t) {
-            if (!t0) t0 = t;
-            var k = (t - t0) / 1100;
-            if (k >= 1) { set(50); return; }
-            set(50 + Math.sin(k * Math.PI * 2) * 14);
-            requestAnimationFrame(tick);
-          };
-          setTimeout(function () { requestAnimationFrame(tick); }, 320);
-          o.disconnect();
-        }
-      }, { threshold: 0.45 });
-      o.observe(ba);
-    }
   });
+
+
+  /* ---------- Motion reel ----------
+     Clips carry no audio track and never fetch a byte until they scroll into
+     view. Autoplay is paused again on exit so a backgrounded tab is not
+     decoding video nobody is watching. */
+  var clips = document.querySelectorAll('.clip');
+  if (clips.length) {
+    var canObserve = 'IntersectionObserver' in window;
+
+    clips.forEach(function (clip) {
+      var video = clip.querySelector('video');
+      var btn = clip.querySelector('.clip__btn');
+      if (!video) return;
+
+      var wanted = false;   // user asked for it explicitly
+      var loaded = false;
+
+      // Two hazards to avoid here. Calling play() immediately after
+      // video.load() aborts the load it depends on; but waiting on a single
+      // readiness event hangs forever if that event never arrives. So: try
+      // once now, and try again on canplay. Both attempts swallow rejection.
+      var load = function () {
+        if (loaded) return;
+        loaded = true;
+        clip.querySelectorAll('source[data-src]').forEach(function (s) {
+          s.src = s.dataset.src;
+        });
+        video.load();
+      };
+
+      var attempt = function () {
+        if (video.error) return;
+        var p = video.play();
+        if (p && p.catch) p.catch(function () { /* poster stays; button still works */ });
+      };
+
+      var play = function () {
+        load();
+        attempt();
+        video.addEventListener('canplay', attempt, { once: true });
+      };
+
+      var pause = function () { if (!video.paused) video.pause(); };
+
+      video.addEventListener('playing', function () { clip.classList.add('is-playing'); });
+      video.addEventListener('pause', function () { clip.classList.remove('is-playing'); });
+
+      if (btn) {
+        btn.addEventListener('click', function () {
+          if (video.paused) { wanted = true; play(); }
+          else { wanted = false; pause(); }
+        });
+      }
+
+      if (canObserve) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (en.isIntersecting) {
+              if (!reduced || wanted) play();
+              else load();
+            } else if (!wanted) {
+              pause();
+            }
+          });
+        }, { threshold: 0.4 });
+        io.observe(clip);
+      } else if (!reduced) {
+        play();
+      }
+    });
+  }
 
   /* ---------- Gallery filter ---------- */
   var gf = document.querySelector('.gal-filter');
