@@ -187,6 +187,12 @@ def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="",
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={CSS_V}">
+<noscript><style>
+  /* Scroll-reveal hides content until JS marks it visible. Without JS that
+     would leave most of the page blank, so opt out of the animation entirely. */
+  .rv,.rise{{opacity:1!important;transform:none!important;animation:none!important}}
+  .seasons__panel[hidden]{{display:grid!important}}
+</style></noscript>
 <link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{r}assets/favicon.svg">
 {ld_tags}
