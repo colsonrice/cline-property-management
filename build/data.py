@@ -8,7 +8,7 @@ SITE = {
     "phone_display": "(317) 677-4709",
     "phone_href": "+13176774709",
     "email": "Clinepropertymanagement@gmail.com",
-    "base": "https://colsonrice.github.io/cline-property-management",  # change + rebuild when a real domain is ready
+    "base": "https://www.squatchcraft.com/cline-property-management",  # real serving URL; change + rebuild when Cline has its own domain
     "city": "Whitestown",
     "region": "IN",
     "region_long": "Indiana",
@@ -17,6 +17,13 @@ SITE = {
 }
 
 # Mowing is limited to these three; other services travel wider.
+# The site currently lives on a borrowed GitHub Pages domain. Keep it out of
+# the search index until it sits on a real Cline domain -- otherwise Google
+# builds ranking authority at an address that is going to change, and the
+# listings show someone else's brand in the URL.
+# Flip to False, rebuild and redeploy the moment SITE["base"] is the real domain.
+STAGING = True
+
 MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
 
 SEASONS = [

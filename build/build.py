@@ -12,7 +12,7 @@ from html import escape as esc
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS,
-                  GALLERY_EXTRA)  # noqa
+                  GALLERY_EXTRA, STAGING)  # noqa
 
 OUT = os.path.join(os.path.dirname(HERE), "site")
 IMG = os.path.join(OUT, "assets", "img")
@@ -167,7 +167,7 @@ def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="",
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE['base']}{canonical}">
-<meta name="robots" content="{'noindex,follow' if noindex else 'index,follow,max-image-preview:large'}">
+<meta name="robots" content="{'noindex,follow' if (noindex or STAGING) else 'index,follow,max-image-preview:large'}">
 <meta name="theme-color" content="#1B3324">
 <meta name="format-detection" content="telephone=yes">
 
@@ -1323,7 +1323,14 @@ def main():
     sm.append("</urlset>")
     w("sitemap.xml", "\n".join(sm))
 
-    w("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE['base']}/sitemap.xml\n")
+    if STAGING:
+        w("robots.txt",
+          "# Temporary preview URL -- not the final home of this site.\n"
+          "# Remove this block (set STAGING = False in build/data.py) once the\n"
+          "# site is on its own domain.\n"
+          "User-agent: *\nDisallow: /\n")
+    else:
+        w("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE['base']}/sitemap.xml\n")
 
     # Netlify: pretty URLs + security headers
     w("_headers", """/*
