@@ -406,6 +406,7 @@ def footer(depth):
     <div>
       <h2 class="ftr__h">Service Area</h2>
       <ul>{area}</ul>
+      <p class="ftr__note">Mowing: Whitestown, Zionsville, and West Carmel only.</p>
       <h2 class="ftr__h" style="margin-top:1.6rem">Company</h2>
       <ul>
         <li><a href="{r}gallery.html">Our Work</a></li>
@@ -563,7 +564,7 @@ def page_home():
     area_cards = "".join(
         f'''<div class="service-city"><span class="service-city__no">{i+1:02d}</span>
           <span class="service-city__name display">{esc(a['name'])}</span>
-          <span class="service-city__copy">All seven services available.</span></div>'''
+          <span class="service-city__copy">{esc(a['note'])}</span></div>'''
         for i, a in enumerate(AREAS))
 
     steps = "".join(
@@ -727,9 +728,10 @@ def page_home():
       <div class="shead__top">
         <div>
           <span class="eyebrow">Service area</span>
-          <h2 class="display h-1" style="margin-top:.7rem">Four cities.<br>Same seven services.</h2>
+          <h2 class="display h-1" style="margin-top:.7rem">Four cities.<br>One crew.</h2>
         </div>
-        <p>We offer the same complete service list in Whitestown, Zionsville, Westfield, and Carmel.</p>
+        <p>Mulching, cleanups, leaf removal, snow removal, and washing cover all four cities.
+        Mowing routes are tighter: Whitestown, Zionsville, and West Carmel.</p>
       </div>
     </div>
     <div class="service-city-grid rv">{area_cards}</div>
@@ -809,7 +811,9 @@ def page_service(s):
             "name": s["name"], "description": s["desc"],
             "serviceType": s["name"],
             "provider": {"@id": SITE["base"] + "/#business"},
-            "areaServed": [{"@type": "City", "name": f"{a['name']}, IN"} for a in AREAS],
+            "areaServed": ([{"@type": "City", "name": f"{t}, IN"} for t in MOW_AREAS]
+                           if s["slug"] == "lawn-mowing"
+                           else [{"@type": "City", "name": f"{a['name']}, IN"} for a in AREAS]),
             "url": f"{SITE['base']}/services/{s['slug']}.html",
         },
     ]
@@ -1082,7 +1086,7 @@ def page_about():
           <div class="grid" style="gap:1.1rem;margin-top:1.1rem">
             <dl class="kv"><dt>Based in</dt><dd>{esc(SITE['city'])}, {SITE['region_long']}</dd></dl>
             <dl class="kv"><dt>Service area</dt><dd>{esc(SITE['areas_short'])}</dd></dl>
-            <dl class="kv"><dt>Services</dt><dd>Same seven services in every city</dd></dl>
+            <dl class="kv"><dt>Services</dt><dd>Seven services. Mowing in Whitestown, Zionsville, and West Carmel</dd></dl>
             <dl class="kv"><dt>Property types</dt><dd>Residential · Commercial · HOA · Municipal</dd></dl>
             <dl class="kv"><dt>Insurance</dt><dd>Certificates available on request</dd></dl>
           </div>
@@ -1217,7 +1221,7 @@ def page_contact():
           <hr style="border:0;border-top:1px solid var(--rule);margin:1.5rem 0">
           <dl class="kv" style="gap:.9rem">
             <div><dt>Service area</dt><dd>{esc(SITE['areas_short'])}</dd></div>
-            <div><dt>Services</dt><dd>Same seven services in every city</dd></div>
+            <div><dt>Services</dt><dd>Seven services. Mowing in Whitestown, Zionsville, and West Carmel</dd></div>
             <div><dt>Estimates</dt><dd>Free, and we'll tell you if you don't need the work</dd></div>
           </dl>
         </div>

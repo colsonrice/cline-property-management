@@ -1240,3 +1240,13 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
   font-size: .9rem;
 }
 .qsend-err a { color: inherit; font-weight: 600; }
+
+/* The footer lists all four cities under Service Area, but mowing is
+   narrower. Say so rather than letting the list imply otherwise. */
+.ftr__note {
+  margin-top: .7rem;
+  font-size: .78rem;
+  line-height: 1.45;
+  color: var(--sage-dim);
+  max-width: 22ch;
+}

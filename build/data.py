@@ -29,7 +29,7 @@ SITE = {
 # Flip to False, rebuild and redeploy once SITE["base"] is the real domain.
 STAGING = True
 
-MOW_AREAS = ["Whitestown", "Zionsville", "Carmel"]
+MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
 
 SEASONS = [
     {
@@ -80,9 +80,9 @@ SERVICES = [
         "name": "Lawn Mowing",
         "nav": "Lawn Mowing",
         "short": "Weekly and bi-weekly cuts for homes, businesses, HOAs, and municipalities.",
-        "title": "Lawn Mowing in Whitestown, Zionsville & Carmel, IN",
+        "title": "Lawn Mowing in Whitestown, Zionsville & West Carmel IN",
         "desc": "Weekly lawn mowing for homes, businesses, HOAs and municipalities in Whitestown, "
-                "Zionsville and Carmel, Indiana. Clean edges, free estimates.",
+                "Zionsville and West Carmel, Indiana. We do not mow in Westfield.",
         "hero": ("mowing", "lawn-mowing-striped-residential"),
         "hero_alt": "Freshly striped residential lawn in Zionsville, Indiana",
         "lede": "A cut on a schedule you can plan your week around. Trimming, edging, and blow-off "
@@ -127,8 +127,11 @@ SERVICES = [
         ],
         "faqs": [
             ("Which towns do you mow?",
-             "We mow in Whitestown, Zionsville, and Carmel. Mowing routes stay tight so we can hold "
-             "a set day of the week. Our other six services do cover Westfield, so it's worth asking."),
+             "We mow in Whitestown, Zionsville, and West Carmel. Mowing routes stay tight so we can "
+             "hold a set day of the week."),
+            ("Do you mow in Westfield?",
+             "No. Westfield is outside our mowing routes. Our other six services -- mulching, cleanups, "
+             "leaf removal, snow removal, soft washing, and pressure washing -- do cover Westfield."),
             ("Weekly or every other week?",
              "Weekly is best during the main growing season. Bi-weekly service can work when growth slows."),
             ("Do I need to be home?",
@@ -502,10 +505,14 @@ SERVICES = [
 ]
 
 AREAS = [
-    {"slug": "whitestown", "name": "Whitestown"},
-    {"slug": "zionsville", "name": "Zionsville"},
-    {"slug": "westfield", "name": "Westfield"},
-    {"slug": "carmel", "name": "Carmel"},
+    {"slug": "whitestown", "name": "Whitestown", "mows": True,
+     "note": "All seven services, mowing included."},
+    {"slug": "zionsville", "name": "Zionsville", "mows": True,
+     "note": "All seven services, mowing included."},
+    {"slug": "westfield", "name": "Westfield", "mows": False,
+     "note": "Six services. Mowing routes don't reach Westfield."},
+    {"slug": "carmel", "name": "Carmel", "mows": True,
+     "note": "All seven services. Mowing covers West Carmel."},
 ]
 
 HOME_FAQS = [
