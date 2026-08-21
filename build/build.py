@@ -185,7 +185,7 @@ def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="",
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..700,0..100&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={CSS_V}">
 <noscript><style>
   /* Scroll-reveal hides content until JS marks it visible. Without JS that
@@ -309,7 +309,7 @@ def header(depth, active=""):
   </nav>
   <div class="hdr__cta">
     <a class="tel" href="tel:{SITE['phone_href']}">{icon('phone','')}<span>{SITE['phone_display']}</span></a>
-    <a class="btn btn--primary" href="{r}contact.html">Free Estimate</a>
+    <a class="btn btn--primary" href="{r}contact.html">Free estimate</a>
     <button class="burger" aria-expanded="false" aria-controls="drawer" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -372,7 +372,7 @@ def footer(depth):
         </span>
       </div>
       <a class="btn btn--primary" style="margin-top:1.3rem" href="{r}contact.html">
-        Request an Estimate {icon('arrow','arw')}
+        Request an estimate {icon('arrow','arw')}
       </a>
     </div>
   </div>
@@ -384,7 +384,7 @@ def footer(depth):
 </footer>
 <div class="callbar">
   <a class="btn btn--solid-dark" href="tel:{SITE['phone_href']}">{icon('phone','')} Call</a>
-  <a class="btn btn--primary" href="{r}contact.html">Free Estimate</a>
+  <a class="btn btn--primary" href="{r}contact.html">Free estimate</a>
 </div>
 <script src="{r}assets/js/site.js?v={JS_V}" defer></script>
 </body>
@@ -407,7 +407,7 @@ def crumbs(items, depth):
 
 def cta_band(depth, cat="mowing", slug="large-property-mowing-roadside",
              head_txt="Let's get your property on the schedule.",
-             sub="Free estimates. Straight answers. A crew that shows up when we said we would."):
+             sub="Free estimates, straight answers, and a crew that shows up when we said it would."):
     r = rel(depth)
     return f"""<section class="cta-band">
   <div class="cta-band__bg">{picture(cat, slug, "", depth, sizes="100vw")}</div>
@@ -416,7 +416,7 @@ def cta_band(depth, cat="mowing", slug="large-property-mowing-roadside",
     <h2 class="display h-1 rv">{esc(head_txt)}</h2>
     <p class="rv rv-d1">{esc(sub)}</p>
     <div class="cta-band__acts rv rv-d2">
-      <a class="btn btn--primary" href="{r}contact.html">Request an Estimate {icon('arrow','arw')}</a>
+      <a class="btn btn--primary" href="{r}contact.html">Request an estimate {icon('arrow','arw')}</a>
       <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
     </div>
   </div></div>
@@ -539,10 +539,10 @@ def page_home():
     <div class="hero-s__body">
       <span class="hero-s__kicker rise d1"><span class="dot"></span>{esc(SITE['areas_short'])}</span>
       <h1 class="display h-hero rise d2">Grounds care for <em>every season</em>.</h1>
-      <p class="hero-s__lede rise d3">Mowing, mulch, leaves and snow &mdash; handled by one crew, on a schedule
-        you can actually plan around. Homes, businesses, HOAs and municipalities across Boone County.</p>
+      <p class="hero-s__lede rise d3">Mowing, mulch, leaves, and snow, handled by one crew on a schedule you can
+        plan around. We work with homes, businesses, HOAs, and municipalities across Boone County.</p>
       <div class="hero-s__acts rise d4">
-        <a class="btn btn--primary" href="contact.html">Get a Free Estimate {icon('arrow','arw')}</a>
+        <a class="btn btn--primary" href="contact.html">Get a free estimate {icon('arrow','arw')}</a>
         <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
       </div>
       <div class="hero-s__foot rise d5">
@@ -572,8 +572,8 @@ def page_home():
           <span class="eyebrow">The whole year</span>
           <h2 class="display h-1" style="margin-top:.7rem">What your property<br>needs right now</h2>
         </div>
-        <p>Most companies handle one slice of the year. We're on the property in all four —
-        which means nothing falls through the gap between vendors.</p>
+        <p>Most companies handle one slice of the year. We're on the property for all four, so
+        nothing falls through the gap between vendors.</p>
       </div>
     </div>
     <div class="seasons rv">
@@ -592,8 +592,8 @@ def page_home():
           <span class="eyebrow">What we do</span>
           <h2 class="display h-1" style="margin-top:.7rem">Seven services,<br>one phone number</h2>
         </div>
-        <p>Everything below is done by our own crew. You're not being handed off to a
-        subcontractor you've never met.</p>
+        <p>Our own crew does all of it. You won't be handed off to a subcontractor
+        you've never met.</p>
       </div>
     </div>
     <div class="svc-list rv">{svc_rows}</div>
@@ -609,8 +609,8 @@ def page_home():
           <span class="eyebrow">Real jobs</span>
           <h2 class="display h-1" style="margin-top:.7rem">Drag to see<br>the difference</h2>
         </div>
-        <p>Every photo on this site is our own work on real properties around Boone County.
-        No stock photography, no other company's portfolio.</p>
+        <p>Every photo on this site is our own work, on real properties around Boone County.
+        None of it is stock photography.</p>
       </div>
     </div>
     <div class="grid g-3">{ba}</div>
@@ -633,10 +633,10 @@ def page_home():
         <h2 class="display h-1" style="margin-top:.9rem">Work that has to be<br>right in public.</h2>
         <div class="prose" style="margin-top:1.2rem">
           <p>Median and right-of-way work happens in live traffic, on a schedule, in high-visibility gear.
-          HOA entrances are the first thing residents see every day. Commercial frontage is a customer's
-          first impression before they reach the door.</p>
-          <p>That work carries different expectations than a back yard, and we run it accordingly —
-          scheduled rotations, written scope, and certificates of insurance on file before we start.</p>
+          HOA entrances are what residents see every day. Commercial frontage is a customer's first
+          impression, before they reach the door.</p>
+          <p>That carries different expectations than a back yard, and we run it accordingly: scheduled
+          rotations, written scope, and certificates of insurance on file before we start.</p>
         </div>
         <div class="grid g-2" style="margin-top:1.8rem;gap:1rem">
           <div class="card">{icon('route')}<h3>Scheduled rotations</h3>
@@ -659,8 +659,8 @@ def page_home():
           <h2 class="display h-1" style="margin-top:.7rem">Close to home,<br>on purpose</h2>
         </div>
         <p><strong style="color:var(--bone)">Mowing routes</strong> stay inside Whitestown, Zionsville and
-        West Carmel so we can hold a reliable day-of-week schedule. Our other services travel further
-        across Boone County — worth asking.</p>
+        West Carmel, so we can hold a reliable day of the week. Our other services travel further
+        across Boone County, so it's worth asking.</p>
       </div>
     </div>
     <div class="areas rv">{area_cards}</div>
@@ -808,7 +808,7 @@ def page_service(s):
     <h1 class="display h-1">{esc(s['name'])}</h1>
     <p>{esc(s['lede'])}</p>
     <div class="hero__acts" style="margin-top:.6rem">
-      <a class="btn btn--primary" href="../contact.html?service={s['slug']}">Get a Free Estimate {icon('arrow','arw')}</a>
+      <a class="btn btn--primary" href="../contact.html?service={s['slug']}">Get a free estimate {icon('arrow','arw')}</a>
       <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
     </div>
     </div>
@@ -920,7 +920,7 @@ def page_area(a):
     <h1 class="display h-1">{esc(a['name'])}, Indiana</h1>
     <p>{esc(a['blurb'])}</p>
     <div class="hero__acts" style="margin-top:.6rem">
-      <a class="btn btn--primary" href="../contact.html">Get a Free Estimate {icon('arrow','arw')}</a>
+      <a class="btn btn--primary" href="../contact.html">Get a free estimate {icon('arrow','arw')}</a>
       <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
     </div>
     </div>
@@ -1146,7 +1146,7 @@ def page_contact():
         <h2 class="display h-2" style="margin:.8rem 0 1.4rem">Tell us what you need</h2>
 
         <div class="qok" role="status">
-          <b>Thanks — that's on its way.</b>
+          <b>Thanks, that's on its way.</b>
           <span>We'll get back to you shortly. If it's urgent, call
           <a href="tel:{SITE['phone_href']}">{SITE['phone_display']}</a>.</span>
         </div>
@@ -1205,7 +1205,7 @@ def page_contact():
           </div>
 
           <button class="btn btn--primary" type="submit" style="justify-self:start">
-            Send Request {icon('arrow','arw')}
+            Send request {icon('arrow','arw')}
           </button>
           <p class="qnote">We'll only use this to get back to you about your property. No lists, no sharing.</p>
         </form>
@@ -1248,9 +1248,9 @@ def page_thanks():
 <section class="section" style="min-height:60vh;display:grid;place-items:center;text-align:center">
   <div class="wrap wrap--tight">
     <span class="eyebrow eyebrow--plain" style="justify-content:center">Received</span>
-    <h1 class="display h-1" style="margin:1rem 0">Thanks — that's in.</h1>
+    <h1 class="display h-1" style="margin:1rem 0">Thanks, we got it.</h1>
     <p class="lede" style="margin-inline:auto">We'll get back to you shortly. If you'd rather not wait,
-    give us a call and we'll pick up.</p>
+    give us a call.</p>
     <div class="hero__acts" style="justify-content:center;margin-top:2rem">
       <a class="btn btn--primary" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
       <a class="btn btn--ghost" href="index.html">Back to the site</a>
@@ -1269,8 +1269,8 @@ def page_404():
 <section class="section" style="min-height:60vh;display:grid;place-items:center;text-align:center">
   <div class="wrap wrap--tight">
     <span class="eyebrow eyebrow--plain" style="justify-content:center">404</span>
-    <h1 class="display h-1" style="margin:1rem 0">That page has been mowed over.</h1>
-    <p class="lede" style="margin-inline:auto">The link's dead, but the phone works.</p>
+    <h1 class="display h-1" style="margin:1rem 0">We can't find that page.</h1>
+    <p class="lede" style="margin-inline:auto">The link is dead, but the phone still works.</p>
     <div class="hero__acts" style="justify-content:center;margin-top:2rem">
       <a class="btn btn--primary" href="index.html">Back to the home page</a>
       <a class="btn btn--ghost" href="services/index.html">See our services</a>
