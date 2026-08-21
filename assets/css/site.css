@@ -31,7 +31,7 @@
   --muted:      #5C6656;
 
   /* Type */
-  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
   --body:    "Archivo", "Helvetica Neue", Helvetica, sans-serif;
 
   /* Space */
@@ -96,10 +96,9 @@ body::before {
 .display {
   font-family: var(--display);
   font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 16, "WONK" 0;
-  font-weight: 500;
-  line-height: .96;
-  letter-spacing: -.022em;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -.018em;
 }
 .h-hero  { font-size: clamp(2.9rem, 1.5rem + 6.4vw, 6.6rem); }
 .h-1     { font-size: clamp(2.3rem, 1.4rem + 3.9vw, 4.4rem); }
@@ -133,7 +132,7 @@ body::before {
 }
 .prose { max-width: var(--measure); }
 .prose p + p { margin-top: 1.1em; }
-.prose h2 { font-family: var(--display); font-size: clamp(1.6rem,1.2rem+1.6vw,2.2rem); line-height:1.1; margin: 2.2em 0 .55em; font-variation-settings:"SOFT" 14,"WONK" 0; }
+.prose h2 { font-family: var(--display); font-size: clamp(1.6rem,1.2rem+1.6vw,2.2rem); line-height:1.1; margin: 2.2em 0 .55em; font-weight: 600; }
 .prose h3 { font-family: var(--display); font-size: clamp(1.2rem,1.05rem+.7vw,1.5rem); margin: 1.8em 0 .4em; }
 .prose ul { margin: 1em 0; padding-left: 0; list-style: none; }
 .prose ul li { position: relative; padding-left: 1.6rem; margin: .5em 0; }
@@ -216,7 +215,7 @@ body::before {
 .brand__txt { display: flex; flex-direction: column; line-height: 1; }
 .brand__name {
   font-family: var(--display); font-weight: 600; font-size: 1.06rem;
-  letter-spacing: -.02em; font-variation-settings: "SOFT" 14, "WONK" 0;
+  letter-spacing: -.018em;
   color: var(--forest);
 }
 .brand__sub {
@@ -351,7 +350,7 @@ body::before {
 }
 .hero-s__kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
 .hero-s h1 { margin: 1.35rem 0 0; max-width: 13ch; }
-.hero-s h1 em { font-style: normal; color: var(--gold); font-variation-settings: "SOFT" 28, "WONK" 0; }
+.hero-s h1 em { font-style: normal; color: var(--gold); }
 .hero-s__lede { margin-top: 1.4rem; max-width: 42ch; color: rgba(243,239,228,.82); font-size: clamp(1.02rem,.98rem+.4vw,1.2rem); }
 .hero-s__acts { margin-top: 2.1rem; display: flex; flex-wrap: wrap; gap: .75rem; }
 .hero-s__foot {
@@ -430,7 +429,7 @@ body::before {
 }
 .hero__kicker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex: none; }
 .hero h1 { margin: 1.4rem 0 0; max-width: 15ch; }
-.hero h1 em { font-style: normal; color: var(--gold); font-variation-settings: "SOFT" 28, "WONK" 0; }
+.hero h1 em { font-style: normal; color: var(--gold); }
 .hero__lede { margin-top: 1.5rem; max-width: 44ch; color: rgba(243,239,228,.84); font-size: clamp(1.05rem,1rem+.45vw,1.25rem); }
 .hero__acts { margin-top: 2.3rem; display: flex; flex-wrap: wrap; gap: .8rem; }
 .hero__foot {
