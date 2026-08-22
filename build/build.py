@@ -18,6 +18,10 @@ OUT = os.path.join(os.path.dirname(HERE), "site")
 IMG = os.path.join(OUT, "assets", "img")
 
 SVC_BY_SLUG = {s["slug"]: s for s in SERVICES}
+AREA_NAMES = [a["name"] for a in AREAS]
+AREA_SENTENCE = ", ".join(AREA_NAMES[:-1]) + ", and " + AREA_NAMES[-1]
+AREA_DOTS = " · ".join(AREA_NAMES)
+MOW_SENTENCE = ", ".join(MOW_AREAS[:-1]) + ", and " + MOW_AREAS[-1]
 
 
 def asset_ver(relpath):
@@ -232,7 +236,7 @@ def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="",
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{SITE['base']}{canonical}">
 <meta name="robots" content="{'noindex,follow' if (noindex or STAGING) else 'index,follow,max-image-preview:large'}">
-<meta name="theme-color" content="#1B3324">
+<meta name="theme-color" content="#173B5E">
 <meta name="format-detection" content="telephone=yes">
 
 <meta property="og:type" content="website">
@@ -257,8 +261,8 @@ def head(title, desc, depth, canonical, og_img=None, extra_ld=None, page_cls="",
   .rv,.rise{{opacity:1!important;transform:none!important;animation:none!important}}
   .seasons__panel[hidden]{{display:grid!important}}
 </style></noscript>
-<link rel="icon" href="{r}assets/favicon.svg?v=20260821-logo" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{r}assets/favicon.svg?v=20260821-logo">
+<link rel="icon" href="{r}assets/favicon.svg?v=20260822-blue" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{r}assets/favicon.svg?v=20260822-blue">
 {ld_tags}
 </head>
 <body>
@@ -276,9 +280,9 @@ def local_business_ld():
         "telephone": SITE["phone_display"],
         "email": SITE["email"],
         "image": SITE["base"] + "/assets/img/mowing/lawn-mowing-striped-residential-800.jpg",
-        "description": ("Year-round property care in Whitestown, Zionsville, Westfield, and Carmel — "
-                        "mowing, mulching, cleanups, leaf removal, snow removal, soft washing, and "
-                        "pressure washing."),
+        "description": ("Year-round property care across Greater Indianapolis. Six services are "
+                        "available throughout the service area; mowing is limited to Whitestown, "
+                        "Zionsville, and West Carmel."),
         "address": {
             "@type": "PostalAddress",
             "addressLocality": SITE["city"],
@@ -325,7 +329,7 @@ def faq_ld(faqs):
 
 def logo(depth=0):
     r = rel(depth)
-    return (f'<img class="brand__mark" src="{r}assets/logo-mark.svg?v=20260821-logo" '
+    return (f'<img class="brand__mark" src="{r}assets/logo-mark.svg?v=20260822-blue" '
             'alt="" width="44" height="44" loading="eager" decoding="async">')
 
 
@@ -385,7 +389,7 @@ def header(depth, active=""):
 def footer(depth):
     r = rel(depth)
     svc = "".join(f'<li><a href="{r}services/{s["slug"]}.html">{esc(s["nav"])}</a></li>' for s in SERVICES)
-    area = f'<li><a href="{r}index.html#service-area">{esc(SITE["areas_short"])}</a></li>'
+    area = f'<li><a href="{r}index.html#service-area">10 communities across Greater Indianapolis</a></li>'
     return f"""<footer class="ftr">
 <div class="wrap">
   <div class="ftr__top">
@@ -397,7 +401,7 @@ def footer(depth):
           <span class="brand__sub">Property Management</span>
         </span>
       </a>
-      <p class="ftr__blurb">Year-round property care for homes, businesses, HOAs, and municipal properties in Whitestown, Zionsville, Westfield, and Carmel.</p>
+      <p class="ftr__blurb">Year-round property care for homes, businesses, HOAs, and municipal properties across Greater Indianapolis.</p>
     </div>
     <div>
       <h2 class="ftr__h">Services</h2>
@@ -406,7 +410,7 @@ def footer(depth):
     <div>
       <h2 class="ftr__h">Service Area</h2>
       <ul>{area}</ul>
-      <p class="ftr__note">Mowing: Whitestown, Zionsville, and West Carmel only.</p>
+      <p class="ftr__note">{esc(AREA_SENTENCE)}.<br>Mowing: {esc(MOW_SENTENCE)} only.</p>
       <h2 class="ftr__h" style="margin-top:1.6rem">Company</h2>
       <ul>
         <li><a href="{r}gallery.html">Our Work</a></li>
@@ -420,7 +424,7 @@ def footer(depth):
         <a href="tel:{SITE['phone_href']}">{icon('phone','')}<span>{SITE['phone_display']}</span></a>
         <a href="mailto:{SITE['email']}">{icon('mail','')}<span>Email us</span></a>
         <span style="display:inline-flex;gap:.5rem;align-items:flex-start;color:var(--sage-dim);font-size:.92rem">
-          {icon('pin','')}<span>Serving Whitestown, Zionsville,<br>Westfield, and Carmel</span>
+          {icon('pin','')}<span>Serving 10 communities<br>across Greater Indianapolis</span>
         </span>
       </div>
       <a class="btn btn--primary" style="margin-top:1.3rem" href="{r}contact.html">
@@ -430,7 +434,7 @@ def footer(depth):
   </div>
   <div class="ftr__bot">
     <span>&copy; <span data-year>2026</span> {esc(SITE['name'])}. All rights reserved.</span>
-    <span>Serving {esc(SITE['areas_short'])}</span>
+    <span>Serving Greater Indianapolis</span>
   </div>
 </div>
 </footer>
@@ -524,9 +528,9 @@ def render_body(blocks, depth):
 # --------------------------------------------------------------------------
 def page_home():
     depth = 0
-    title = "Property Care in Whitestown, Zionsville, Westfield & Carmel | Cline"
-    desc = ("Year-round property care in Whitestown, Zionsville, Westfield and Carmel. Mowing, mulch, "
-            "cleanups, leaf and snow removal, plus exterior washing.")
+    title = "Property Care Across Greater Indianapolis | Cline"
+    desc = ("Year-round property care across Greater Indianapolis, with mowing in Whitestown, "
+            "Zionsville, and West Carmel. Free estimates from Cline.")
 
     # season rail
     rail = ""
@@ -728,10 +732,10 @@ def page_home():
       <div class="shead__top">
         <div>
           <span class="eyebrow">Service area</span>
-          <h2 class="display h-1" style="margin-top:.7rem">Four cities.<br>One crew.</h2>
+          <h2 class="display h-1" style="margin-top:.7rem">Ten communities.<br>Six services throughout.</h2>
         </div>
-        <p>Mulching, cleanups, leaf removal, snow removal, and washing cover all four cities.
-        Mowing routes are tighter: Whitestown, Zionsville, and West Carmel.</p>
+        <p>Mulching, seasonal cleanups, leaf removal, snow removal, soft washing, and pressure washing
+        cover all ten communities. Mowing is limited to {esc(MOW_SENTENCE)}.</p>
       </div>
     </div>
     <div class="service-city-grid rv">{area_cards}</div>
@@ -760,8 +764,8 @@ def page_home():
 def page_services_index():
     depth = 1
     title = "Our Services | Lawn, Mulch, Snow & Washing | Cline"
-    desc = ("Seven property care services in Whitestown, Zionsville, Westfield, and Carmel: lawn mowing, "
-            "mulching, cleanups, leaf removal, snow removal, soft washing, and pressure washing.")
+    desc = ("Seven property care services across Greater Indianapolis, including mulch, cleanups, "
+            "leaf and snow removal, exterior washing, and mowing in select communities.")
     cards = ""
     for s in SERVICES:
         cat, slug = s["hero"]
@@ -890,6 +894,8 @@ def page_service(s):
         f'<a class="chip" href="{o["slug"]}.html"><span class="dot"></span>{esc(o["name"])}</a>'
         for o in SERVICES if o["slug"] != s["slug"])
 
+    area_label = MOW_SENTENCE if s["slug"] == "lawn-mowing" else SITE["areas_short"]
+
     return head(s["title"], s["desc"], depth, f"/services/{s['slug']}.html",
                 og_img=f"assets/img/{cat}/{hslug}-800.jpg", extra_ld=ld) + header(depth, "services") + f"""
 <main id="main">
@@ -897,7 +903,7 @@ def page_service(s):
   <div class="phead__grid">
     <div class="phead__in">
     {crumbs([("Home","index.html"),("Services","services/index.html"),(s['name'],None)], depth)}
-    <span class="eyebrow" style="color:var(--gold)">{esc(SITE['areas_short'])}</span>
+    <span class="eyebrow" style="color:var(--gold)">{esc(area_label)}</span>
     <h1 class="display h-1">{esc(s['name'])}</h1>
     <p>{esc(s['lede'])}</p>
     <div class="hero__acts" style="margin-top:.6rem">
@@ -1027,9 +1033,9 @@ def page_gallery():
 
 def page_about():
     depth = 0
-    title = "About Cline | Whitestown, Zionsville, Westfield & Carmel IN"
-    desc = ("A local grounds care company serving Whitestown, Zionsville, Westfield and Carmel with "
-            "mowing, landscape care, cleanups, snow removal and exterior washing.")
+    title = "About Cline Property Management | Central Indiana"
+    desc = ("A local grounds care company serving Greater Indianapolis with landscape care, cleanups, "
+            "snow removal, exterior washing, and mowing in select communities.")
     steps = "".join(f'<div class="step"><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></div>' for t, d in PROCESS)
     ld = [breadcrumb_ld([("Home", "/"), ("About", "/about.html")])]
     return head(title, desc, depth, "/about.html", extra_ld=ld) + header(depth, "about") + f"""
@@ -1040,8 +1046,7 @@ def page_about():
     {crumbs([("Home","index.html"),("About",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">About</span>
     <h1 class="display h-1">One crew. The whole property. All year.</h1>
-    <p>Cline Property Management provides year-round property care in Whitestown,
-    Zionsville, Westfield, and Carmel.</p>
+    <p>Cline Property Management provides year-round property care across Greater Indianapolis.</p>
     </div>
     <div class="phead__fig">{picture('commercial','commercial-median-crew','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
@@ -1060,9 +1065,9 @@ def page_about():
           your leaves in November and plows your drive in January. They know the property, they know
           where the sprinkler heads are, and they know what it's supposed to look like.</p>
           <h2>Who we work for</h2>
-          <p>We work for homeowners, businesses, HOAs, and municipalities in Whitestown, Zionsville,
-          Westfield, and Carmel. The same seven services are available in every city, from weekly
-          mowing and seasonal cleanup to snow removal and exterior washing.</p>
+          <p>We work for homeowners, businesses, HOAs, and municipalities in {esc(AREA_SENTENCE)}.
+          Mulching, cleanups, leaf removal, snow removal, soft washing, and pressure washing are
+          available throughout that service area. Mowing is limited to {esc(MOW_SENTENCE)}.</p>
           <p>Those are genuinely different jobs. A homeowner wants their Saturday back. An HOA board
           wants the entrance to look right and the invoices to match the contract. A property manager
           wants a certificate of insurance on file and someone who answers the phone. We're set up
@@ -1085,8 +1090,8 @@ def page_about():
           <h3 class="display h-3">At a glance</h3>
           <div class="grid" style="gap:1.1rem;margin-top:1.1rem">
             <dl class="kv"><dt>Based in</dt><dd>{esc(SITE['city'])}, {SITE['region_long']}</dd></dl>
-            <dl class="kv"><dt>Service area</dt><dd>{esc(SITE['areas_short'])}</dd></dl>
-            <dl class="kv"><dt>Services</dt><dd>Seven services. Mowing in Whitestown, Zionsville, and West Carmel</dd></dl>
+            <dl class="kv"><dt>Service area</dt><dd>{esc(AREA_SENTENCE)}</dd></dl>
+            <dl class="kv"><dt>Mowing area</dt><dd>{esc(MOW_SENTENCE)}</dd></dl>
             <dl class="kv"><dt>Property types</dt><dd>Residential · Commercial · HOA · Municipal</dd></dl>
             <dl class="kv"><dt>Insurance</dt><dd>Certificates available on request</dd></dl>
           </div>
@@ -1112,8 +1117,8 @@ def page_about():
 def page_contact():
     depth = 0
     title = "Contact & Free Estimate | (317) 677-4709 | Cline"
-    desc = ("Request a free estimate for lawn care, mulch, cleanups, leaf or snow removal in "
-            "Whitestown, Zionsville, Westfield or Carmel, Indiana. Call (317) 677-4709.")
+    desc = ("Request a free property care estimate across Greater Indianapolis. Mowing is available "
+            "in Whitestown, Zionsville, and West Carmel. Call (317) 677-4709.")
     checks = "".join(
         f'<label class="check"><input type="checkbox" name="services" value="{s["slug"]}">'
         f'<span>{esc(s["name"])}</span></label>' for s in SERVICES)
@@ -1221,8 +1226,8 @@ def page_contact():
           </div>
           <hr style="border:0;border-top:1px solid var(--rule);margin:1.5rem 0">
           <dl class="kv" style="gap:.9rem">
-            <div><dt>Service area</dt><dd>{esc(SITE['areas_short'])}</dd></div>
-            <div><dt>Services</dt><dd>Seven services. Mowing in Whitestown, Zionsville, and West Carmel</dd></div>
+            <div><dt>Service area</dt><dd>{esc(AREA_SENTENCE)}</dd></div>
+            <div><dt>Mowing area</dt><dd>{esc(MOW_SENTENCE)}</dd></div>
             <div><dt>Estimates</dt><dd>Free, and we'll tell you if you don't need the work</dd></div>
           </dl>
         </div>
@@ -1312,12 +1317,12 @@ def main():
     # favicon
     w("assets/favicon.svg",
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
-      '<rect width="64" height="64" rx="8" fill="#173523"/>'
-      '<path d="M47 14A24 24 0 1 0 47 50" fill="none" stroke="#F3EFE4" stroke-width="7" stroke-linecap="round"/>'
-      '<path d="M42 22A15 15 0 1 0 42 42" fill="none" stroke="#D2A03E" stroke-width="3.5" stroke-linecap="round"/>'
-      '<path d="M37 28A8 8 0 1 0 37 36" fill="none" stroke="#7C9A84" stroke-width="2.5" stroke-linecap="round"/>'
-      '<path d="M47 32H54" stroke="#BC5E2A" stroke-width="2"/>'
-      '<rect x="51" y="29" width="6" height="6" transform="rotate(45 54 32)" fill="#BC5E2A"/>'
+      '<rect width="64" height="64" rx="8" fill="#153A5B"/>'
+      '<path d="M47 14A24 24 0 1 0 47 50" fill="none" stroke="#F2F7FA" stroke-width="7" stroke-linecap="round"/>'
+      '<path d="M42 22A15 15 0 1 0 42 42" fill="none" stroke="#A8D3EC" stroke-width="3.5" stroke-linecap="round"/>'
+      '<path d="M37 28A8 8 0 1 0 37 36" fill="none" stroke="#8DBDDA" stroke-width="2.5" stroke-linecap="round"/>'
+      '<path d="M47 32H54" stroke="#E3F11B" stroke-width="2"/>'
+      '<rect x="51" y="29" width="6" height="6" transform="rotate(45 54 32)" fill="#E3F11B"/>'
       '</svg>')
 
     # sitemap

@@ -14,7 +14,7 @@ SEO-friendly option for a local service business.
 ```
 build/
   data.py       all copy, services, service areas, FAQs, SEO strings
-  build.py      generates the 18 HTML pages + sitemap.xml + robots.txt
+  build.py      generates the site pages, legacy redirects, sitemap.xml, and robots.txt
   images.py     originals -> orientation-corrected JPG + WebP renditions
   imagemap.py   original filename -> category + web slug
   qa.py         link/image/meta/schema/heading/a11y sweep

@@ -74,18 +74,16 @@ map pack for "lawn mowing near me."
 - **Years in business / founded.** Would strengthen the About page.
 - **Logo.** The current mark is one we generated. If there's a real logo, it
   should replace it.
-- **Service radius for the six non-mowing services.** We say they cover all four
-  cities. How much further do they actually travel — Lebanon, Brownsburg?
+- **Service radius is now confirmed.** The six non-mowing services cover the ten
+  communities listed below.
 
 ---
 
 ## 5. Service area — confirmed, noting it here so it stays straight
 
-- **Mowing:** Whitestown, Zionsville, **West Carmel** only. Not Westfield.
-- **The other six services:** Whitestown, Zionsville, Westfield, Carmel.
-
-Worth a second confirmation that the six non-mowing services really do cover
-Westfield, since mowing does not.
+- **Mowing:** Whitestown, Zionsville, **West Carmel** only.
+- **The other six services:** Whitestown, Zionsville, Indianapolis, Carmel,
+  Westfield, Brownsburg, Lebanon, Avon, Plainfield, and Fishers.
 
 ---
 

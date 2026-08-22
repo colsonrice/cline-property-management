@@ -19,7 +19,7 @@ SITE = {
     "city": "Whitestown",
     "region": "IN",
     "region_long": "Indiana",
-    "areas_short": "Whitestown · Zionsville · Westfield · Carmel",
+    "areas_short": "Whitestown · Greater Indianapolis",
 }
 
 # The site currently lives on a borrowed GitHub Pages domain. Keep it out of
@@ -82,7 +82,7 @@ SERVICES = [
         "short": "Weekly and bi-weekly cuts for homes, businesses, HOAs, and municipalities.",
         "title": "Lawn Mowing in Whitestown, Zionsville & West Carmel IN",
         "desc": "Weekly lawn mowing for homes, businesses, HOAs and municipalities in Whitestown, "
-                "Zionsville and West Carmel, Indiana. We do not mow in Westfield.",
+                "Zionsville and West Carmel, Indiana. Clean edges and free estimates.",
         "hero": ("mowing", "lawn-mowing-striped-residential"),
         "hero_alt": "Freshly striped residential lawn in Zionsville, Indiana",
         "lede": "A cut on a schedule you can plan your week around. Trimming, edging, and blow-off "
@@ -131,7 +131,8 @@ SERVICES = [
              "hold a set day of the week."),
             ("Do you mow in Westfield?",
              "No. Westfield is outside our mowing routes. Our other six services -- mulching, cleanups, "
-             "leaf removal, snow removal, soft washing, and pressure washing -- do cover Westfield."),
+             "leaf removal, snow removal, soft washing, and pressure washing -- cover all ten communities "
+             "in our broader service area."),
             ("Weekly or every other week?",
              "Weekly is best during the main growing season. Bi-weekly service can work when growth slows."),
             ("Do I need to be home?",
@@ -147,7 +148,7 @@ SERVICES = [
         "short": "Fresh mulch and re-cut bed edges, which is what makes a property look finished.",
         "title": "Mulch Installation & Bed Edging | Central Indiana",
         "desc": "Mulch installation, bed edging and seasonal refresh for homes, HOA entrances and "
-                "commercial properties in Whitestown, Zionsville, Westfield and Carmel, Indiana.",
+                "commercial properties across Greater Indianapolis.",
         "hero": ("mulching", "mulch-install-front-entry"),
         "hero_alt": "Fresh dark mulch installed around a front entry with trimmed shrubs",
         "lede": "Nothing changes how a property looks faster than fresh mulch and a sharp bed edge. "
@@ -213,8 +214,8 @@ SERVICES = [
         "nav": "Spring & Fall Cleanups",
         "short": "A full-property reset at both ends of the season.",
         "title": "Spring & Fall Property Cleanups | Central Indiana",
-        "desc": "Complete spring and fall property cleanups: bed clearing, cut-backs, debris removal "
-                "and edging in Whitestown, Zionsville, Westfield and Carmel, Indiana.",
+        "desc": "Complete spring and fall property cleanups across Greater Indianapolis: bed clearing, "
+                "cut-backs, debris removal and edging.",
         "hero": ("leaf-removal", "leaf-removal-raking-pile"),
         "hero_alt": "Raking a heavy leaf accumulation into piles during a fall property cleanup",
         "lede": "Two visits a year that make everything in between easier, and cheaper.",
@@ -271,7 +272,7 @@ SERVICES = [
         "nav": "Leaf Removal",
         "short": "Repeat visits through the drop, with a truck-mounted vacuum for the heavy stuff.",
         "title": "Leaf Removal | Central Indiana",
-        "desc": "Fall leaf removal for homes, HOAs and commercial properties in Whitestown, Zionsville, Westfield and Carmel. "
+        "desc": "Fall leaf removal for homes, HOAs and commercial properties across Greater Indianapolis. "
                 "Multiple scheduled passes and truck-mounted leaf vacuum.",
         "hero": ("leaf-removal", "leaf-removal-backpack-blower"),
         "hero_alt": "Crew member clearing heavy leaf cover with a backpack blower",
@@ -326,8 +327,8 @@ SERVICES = [
         "nav": "Snow Removal",
         "short": "Drives, lots, and walks cleared at an agreed depth, with priority commercial routing.",
         "title": "Snow Removal & Ice Management | Central Indiana",
-        "desc": "Commercial and residential snow plowing, walk clearing and ice management in "
-                "Whitestown, Zionsville, Westfield and Carmel, Indiana.",
+        "desc": "Commercial and residential snow plowing, walk clearing and ice management across "
+                "Greater Indianapolis.",
         "hero": ("commercial", "commercial-median-shrub-beds"),
         "hero_alt": "Dormant-season commercial property maintained through winter",
         "lede": "The point of snow service is that you don't have to think about it. You leave on time.",
@@ -379,8 +380,8 @@ SERVICES = [
         "nav": "Soft Washing",
         "short": "Low-pressure cleaning for siding, roofs, and anything high pressure would damage.",
         "title": "Soft Washing for Siding & Roofs | Central Indiana",
-        "desc": "Low-pressure soft washing for vinyl siding, roofs and painted exteriors in Whitestown, "
-                "Zionsville, Westfield and Carmel, Indiana. Removes algae and streaking.",
+        "desc": "Low-pressure soft washing for vinyl siding, roofs and painted exteriors across Greater "
+                "Indianapolis. Removes algae and streaking.",
         "hero": ("soft-washing", "soft-wash-siding-after"),
         "hero_alt": "Vinyl siding after soft washing, clean and streak-free",
         "lede": "That green film down the shaded side of your house is algae. Blasting it with pressure "
@@ -442,8 +443,8 @@ SERVICES = [
         "nav": "Pressure Washing",
         "short": "Even, streak-free concrete, drives, and hardscape. No zebra stripes.",
         "title": "Pressure Washing Driveways & Concrete | Central Indiana",
-        "desc": "Pressure washing for driveways, sidewalks, patios and concrete in Whitestown, "
-                "Zionsville, Westfield and Carmel, Indiana. Even, streak-free results.",
+        "desc": "Pressure washing for driveways, sidewalks, patios and concrete across Greater "
+                "Indianapolis. Even, streak-free results.",
         "hero": ("pressure-washing", "driveway-pressure-washing-after"),
         "hero_alt": "Concrete driveway after pressure washing, clean and evenly finished",
         "lede": "Concrete collects grime so gradually that most people stop seeing it. Then half of it "
@@ -509,15 +510,29 @@ AREAS = [
      "note": "All seven services, mowing included."},
     {"slug": "zionsville", "name": "Zionsville", "mows": True,
      "note": "All seven services, mowing included."},
-    {"slug": "westfield", "name": "Westfield", "mows": False,
-     "note": "Six services. Mowing routes don't reach Westfield."},
+    {"slug": "indianapolis", "name": "Indianapolis", "mows": False,
+     "note": "All services except mowing."},
     {"slug": "carmel", "name": "Carmel", "mows": True,
      "note": "All seven services. Mowing covers West Carmel."},
+    {"slug": "westfield", "name": "Westfield", "mows": False,
+     "note": "All services except mowing."},
+    {"slug": "brownsburg", "name": "Brownsburg", "mows": False,
+     "note": "All services except mowing."},
+    {"slug": "lebanon", "name": "Lebanon", "mows": False,
+     "note": "All services except mowing."},
+    {"slug": "avon", "name": "Avon", "mows": False,
+     "note": "All services except mowing."},
+    {"slug": "plainfield", "name": "Plainfield", "mows": False,
+     "note": "All services except mowing."},
+    {"slug": "fishers", "name": "Fishers", "mows": False,
+     "note": "All services except mowing."},
 ]
 
 HOME_FAQS = [
     ("What areas do you serve?",
-     "We provide all seven services in Whitestown, Zionsville, Westfield, and Carmel."),
+     "Mulching, seasonal cleanups, leaf removal, snow removal, soft washing, and pressure washing are "
+     "available in Whitestown, Zionsville, Indianapolis, Carmel, Westfield, Brownsburg, Lebanon, Avon, "
+     "Plainfield, and Fishers. Mowing is limited to Whitestown, Zionsville, and West Carmel."),
     ("Do you work with HOAs and commercial properties?",
      "Yes. We maintain homes, businesses, HOA common areas, and municipal properties."),
     ("Can I get more than one service on the same visit?",
