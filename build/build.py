@@ -1152,8 +1152,7 @@ def page_gallery():
             count = len(by_cat.get(c, [])) + sum(len(p["photos"]) for p in connected.get(c, []))
             project_section = ""
             if projects:
-                project_section = (f'<div class="gal__subhead"><strong>Connected projects</strong>'
-                                   f'<span>Photos from the same job stay together.</span></div>'
+                project_section = (f'<div class="gal__subhead"><strong>Connected projects</strong></div>'
                                    f'<div class="project-pairs gal__projects">{projects}</div>')
             loose_section = ""
             if figs:
