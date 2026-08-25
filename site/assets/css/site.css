@@ -843,7 +843,7 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
      wraps the same. */
   grid-template-columns: minmax(0, 1fr);
   gap: .55rem;
-  padding: clamp(1.5rem,3.5vw,2.8rem);
+  padding: clamp(1.25rem,2vw,1.75rem);
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
   background: linear-gradient(145deg,rgba(255,255,255,.03),transparent 70%);
@@ -853,7 +853,14 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
 .service-city:nth-last-child(-n+5) { border-bottom: 0; }
 .service-city:hover { background-color: rgba(243,239,228,.045); }
 .service-city__no { color: var(--gold); font-size: .63rem; font-weight: 700; letter-spacing: .16em; }
-.service-city__name { font-size: clamp(1.6rem,2.5vw,2.45rem); font-weight: 600; line-height: .95; }
+.service-city__name {
+  min-width: 0;
+  max-width: 100%;
+  font-size: clamp(1.5rem,2vw,2rem);
+  font-weight: 600;
+  line-height: .95;
+  overflow-wrap: break-word;
+}
 .service-city__copy { max-width: 42ch; color: var(--sage-dim); font-size: .88rem; line-height: 1.6; }
 .service-city-grid--light { border-color: var(--line); }
 .service-city-grid--light .service-city {
