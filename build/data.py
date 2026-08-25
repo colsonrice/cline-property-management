@@ -15,7 +15,7 @@ SITE = {
     "phone_display": "(317) 677-4709",
     "phone_href": "+13176774709",
     "email": "Clinepropertymanagement@gmail.com",
-    "base": "https://www.squatchcraft.com/cline-property-management",
+    "base": "https://clinepropertymgmt.com",
     "city": "Whitestown",
     "region": "IN",
     "region_long": "Indiana",
@@ -27,7 +27,7 @@ SITE = {
 # builds ranking authority at an address that is going to change, and the
 # listings show someone else's brand in the URL.
 # Flip to False, rebuild and redeploy once SITE["base"] is the real domain.
-STAGING = True
+STAGING = False
 
 MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
 

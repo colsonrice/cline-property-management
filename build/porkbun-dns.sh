@@ -68,14 +68,18 @@ for r in d['records']:
     print(f\"  [{r['id']:>10}] {r['type']:<6} {r['name']:<34} -> {r['content']}\")"
 
 # ids to remove: apex A records, and any www A/CNAME/ALIAS
+# Only the records that steer web traffic. MX, TXT/SPF and NS are left alone
+# so email forwarding and the zone's delegation keep working. The wildcard
+# CNAME is part of the Link in Bio setup and has to go, or every subdomain
+# keeps resolving to Porkbun's forwarder.
 doomed=$(echo "$recs" | python3 -c "
 import sys,json
 d=json.load(sys.stdin); out=[]
 for r in d['records']:
-    apex = r['name']=='$DOMAIN'
-    www  = r['name']=='www.$DOMAIN'
-    if apex and r['type'] in ('A','ALIAS','CNAME'): out.append(r['id'])
-    if www and r['type'] in ('A','ALIAS','CNAME'):  out.append(r['id'])
+    n, t = r['name'], r['type']
+    steers = t in ('A','AAAA','ALIAS','CNAME')
+    if steers and n in ('$DOMAIN', 'www.$DOMAIN', '*.$DOMAIN'):
+        out.append(r['id'])
 print(' '.join(out))")
 
 echo
