@@ -44,7 +44,7 @@ MAP = [
     ('IMG_6255', 'pressure-washing', 'concrete-pressure-washing-in-progress'),
     ('IMG_5456', 'pressure-washing', 'awning-pressure-washing-before'),
     ('IMG_5457', 'pressure-washing', 'awning-pressure-washing-after'),
-    ('012ddaff-187a-45ca-ae14-21c52c16222a', 'cleanups', 'fence-line-cleanup-before-after'),
+    ('012ddaff-187a-45ca-ae14-21c52c16222a', 'soft-washing', 'fence-wash-before-after'),
 ]
 
 HEROES = {
@@ -63,7 +63,6 @@ HEROES = {
     'mulch-install-entry-walkway',
     'commercial-median-landscape',
     'municipal-median-grasses',
-    'fence-line-cleanup-before-after',
     'commercial-median-shrub-beds',
     'lawn-mowing-stripes-spring',
 }

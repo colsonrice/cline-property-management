@@ -36,6 +36,15 @@ HERO_WIDTHS = [480, 800, 1280]
 JPG_Q = {480: 74, 800: 70, 1280: 64}
 WEBP_Q = {480: 72, 800: 66, 1280: 58}
 
+# Fractional crops for comparison frames that need to register against each
+# other. Keeping these in the main pipeline means a routine image rebuild
+# cannot silently undo the aligned mulch before/after created for the slider.
+# Values are crop width, crop height, left offset, and top offset.
+CROPS = {
+    "mulch-refresh-before": (0.74, 0.74, 0.13, 0.13),
+    "mulch-refresh-after": (0.74, 0.74, 0.04, 0.22),
+}
+
 
 def find_src(name):
     for ext in ("heic", "HEIC", "jpeg", "jpg", "JPG", "png"):
@@ -69,6 +78,18 @@ def load_upright(path):
     return im
 
 
+def apply_crop(im, slug):
+    """Apply a slug-specific fractional crop without changing aspect ratio."""
+    spec = CROPS.get(slug)
+    if not spec:
+        return im
+    cw, ch, cx, cy = spec
+    w, h = im.size
+    left, top = round(w * cx), round(h * cy)
+    right, bottom = round(left + w * cw), round(top + h * ch)
+    return im.crop((left, top, min(w, right), min(h, bottom)))
+
+
 def main():
     manifest = {}
     made = 0
@@ -77,7 +98,7 @@ def main():
         if not src:
             print("MISSING:", name)
             continue
-        im = load_upright(src)
+        im = apply_crop(load_upright(src), slug)
         w0, h0 = im.size
         os.makedirs(os.path.join(OUT, cat), exist_ok=True)
 

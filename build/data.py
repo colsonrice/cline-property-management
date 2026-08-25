@@ -180,16 +180,75 @@ SERVICES = [
             ("mulching", "mulch-refresh-before", "mulch-refresh-after",
              "Front bed refresh", "Thin, tired beds re-cut and topped with fresh dark mulch"),
         ],
+        "project_groups": [
+            {
+                "title": "HOA monument refresh",
+                "note": "The same Harcourt Springs entrance bed before and after fresh mulch.",
+                "photos": [
+                    ("Before", "mulching", "hoa-entrance-mulch-harcourt-springs",
+                     "Harcourt Springs monument bed before fresh mulch"),
+                    ("After", "mulching", "hoa-monument-mulch-bed",
+                     "The same monument bed edged and freshly mulched"),
+                ],
+            },
+            {
+                "title": "Curbside island refresh",
+                "note": "The same island bed from the curb, with the edge re-cut and mulch renewed.",
+                "photos": [
+                    ("Before", "mulching", "curbside-mulch-bed",
+                     "Curbside island bed before the mulch refresh"),
+                    ("After", "mulching", "tree-ring-mulch-curbside",
+                     "The same island bed after edging and fresh mulch"),
+                ],
+            },
+            {
+                "title": "Fence-line bed",
+                "note": "Opposite ends of the same bed show the full fence-line transformation.",
+                "photos": [
+                    ("Before", "mulching", "mulch-bed-black-fence",
+                     "Fence-line bed before fresh mulch"),
+                    ("After", "mulching", "mulch-bed-fence-line",
+                     "The same fence-line bed after fresh dark mulch"),
+                ],
+            },
+            {
+                "title": "Corner foundation bed",
+                "note": "The same corner bed after cleanup, edging, and a fresh top layer.",
+                "photos": [
+                    ("Before", "mulching", "mulch-bed-spring-shrubs",
+                     "Corner foundation bed before the spring refresh"),
+                    ("After", "mulching", "mulch-bed-house-corner",
+                     "The same corner bed edged and freshly mulched"),
+                ],
+            },
+            {
+                "title": "Brick foundation bed",
+                "note": "A second bed at the same property, photographed from each end.",
+                "photos": [
+                    ("Before", "mulching", "mulch-bed-brick-wall",
+                     "Brick foundation bed before fresh mulch"),
+                    ("After", "mulching", "mulch-bed-foundation",
+                     "The same foundation bed after fresh dark mulch"),
+                ],
+            },
+            {
+                "title": "Front entry install",
+                "note": "Two finished views of one completed front-entry installation.",
+                "photos": [
+                    ("Finished view", "mulching", "mulch-install-entry-walkway",
+                     "Finished mulch beds along the entry walkway"),
+                    ("Finished view", "mulching", "mulch-install-front-entry",
+                     "The same completed installation viewed from the front entry"),
+                ],
+            },
+        ],
         "gallery": [
-            ("mulching", "hoa-entrance-mulch-harcourt-springs", "HOA entrance beds at Harcourt Springs"),
             ("mulching", "hoa-monument-mulch-bed", "Monument sign bed, freshly mulched"),
             ("mulching", "mulch-install-entry-walkway", "Entry walkway beds with fresh mulch"),
-            ("mulching", "mulch-bed-brick-wall", "Foundation bed along a brick elevation"),
-            ("mulching", "mulch-bed-black-fence", "Bed line running along a wrought-iron fence"),
-            ("mulching", "curbside-mulch-bed", "Curbside island bed, edged and mulched"),
             ("mulching", "tree-ring-mulch-curbside", "Tree ring mulched to a clean circle"),
-            ("mulching", "mulch-bed-house-corner", "Corner bed with a re-cut edge"),
-            ("mulching", "mulch-bed-fence-line", "Fence-line bed, weeded and topped"),
+            ("mulching", "mulch-bed-house-corner", "Finished corner bed with a clean, re-cut edge"),
+            ("mulching", "mulch-bed-fence-line", "Finished fence-line bed with fresh dark mulch"),
+            ("mulching", "mulch-bed-foundation", "Finished foundation bed, edged and freshly mulched"),
         ],
         "faqs": [
             ("When is the best time to mulch?",
@@ -251,7 +310,7 @@ SERVICES = [
         "gallery": [
             ("leaf-removal", "leaf-removal-raking-pile", "Raking out a heavy leaf accumulation"),
             ("leaf-removal", "leaf-removal-finished-lawn", "Property finished and cleared"),
-            ("mulching", "mulch-bed-spring-shrubs", "Beds cleared and cut back in spring"),
+            ("mulching", "mulch-bed-house-corner", "Spring bed reset, edged and cleaned up"),
         ],
         "faqs": [
             ("When should a spring cleanup happen?",
@@ -445,9 +504,9 @@ SERVICES = [
              "Vinyl siding", "Years of algae on a shaded elevation, removed without pressure damage"),
         ],
         "gallery": [
-            ("soft-washing", "fence-wash-before-after", "Iron fence before and after a low-pressure wash"),
             ("soft-washing", "soft-wash-siding-before", "Algae streaking on shaded vinyl siding"),
             ("soft-washing", "soft-wash-siding-after", "The same elevation after soft washing"),
+            ("soft-washing", "fence-wash-before-after", "Iron fence before and after a low-pressure wash"),
         ],
         "faqs": [
             ("Will soft washing damage my siding or roof?",
@@ -605,6 +664,18 @@ GALLERY_EXTRA = {
     "driveway-pressure-washing-after": "The same driveway after pressure washing",
     "awning-pressure-washing-before": "Weather-stained metal awning before cleaning",
     "awning-pressure-washing-after": "The same awning cleaned back to white",
+}
+
+# Useful source or hero frames that should not appear as standalone showcase
+# cards. Most are the unlabelled "before" side of a mulch job. The intentional
+# mulch-refresh comparison remains in the gallery with explicit phase labels.
+GALLERY_EXCLUDE = {
+    "hoa-entrance-mulch-harcourt-springs",
+    "curbside-mulch-bed",
+    "mulch-bed-black-fence",
+    "mulch-bed-brick-wall",
+    "mulch-bed-spring-shrubs",
+    "mulch-install-front-entry",
 }
 
 

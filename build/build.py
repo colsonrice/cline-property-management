@@ -12,7 +12,7 @@ from html import escape as esc
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
-                  GALLERY_EXTRA, STAGING)  # noqa
+                  GALLERY_EXTRA, GALLERY_EXCLUDE, STAGING)  # noqa
 
 OUT = os.path.join(os.path.dirname(HERE), "site")
 IMG = os.path.join(OUT, "assets", "img")
@@ -858,17 +858,47 @@ def page_service(s):
         <div class="grid {cls}">{blocks}</div>
       </div></section>"""
 
+    projects = ""
+    if s.get("project_groups"):
+        project_cards = ""
+        for project in s["project_groups"]:
+            project_photos = ""
+            for phase, pcat, pslug, alt in project["photos"]:
+                phase_lower = phase.lower()
+                phase_class = ("before" if phase_lower.startswith("before") else
+                               "after" if phase_lower.startswith("after") else "finished")
+                project_photos += f"""<figure class="project-pair__photo">
+              {picture(pcat, pslug, alt, depth, sizes="(max-width:900px) 46vw, 22vw")}
+              <figcaption><span class="project-pair__phase project-pair__phase--{phase_class}">{esc(phase)}</span>
+                <span>{esc(alt)}</span></figcaption>
+            </figure>"""
+            project_cards += f"""<article class="project-pair rv">
+          <div class="project-pair__head">
+            <h3 class="display h-3">{esc(project['title'])}</h3>
+            <p>{esc(project['note'])}</p>
+          </div>
+          <div class="project-pair__photos">{project_photos}</div>
+        </article>"""
+        projects = f"""<section class="section">
+      <div class="wrap">
+        <div class="shead"><span class="eyebrow">Connected project photos</span>
+          <h2 class="display h-2">More mulch transformations</h2></div>
+        <div class="project-pairs">{project_cards}</div>
+      </div></section>"""
+
     gal = ""
-    if s.get("gallery"):
+    if s.get("gallery") and not s.get("project_groups"):
         figs = "".join(
             f'<a class="pcard rv" href="../gallery.html">'
             f'{picture(c, sl, alt, depth, sizes="(max-width:700px) 92vw, 30vw")}'
             f'<span class="pcard__cap"><span>{esc(alt)}</span></span></a>'
             for c, sl, alt in s["gallery"])
+        gallery_eyebrow = s.get("gallery_eyebrow", "Our work")
+        gallery_heading = s.get("gallery_heading", f"{s['name']} in our service area")
         gal = f"""<section class="section">
       <div class="wrap">
-        <div class="shead"><span class="eyebrow">Our work</span>
-          <h2 class="display h-2">{esc(s['name'])} in our service area</h2></div>
+        <div class="shead"><span class="eyebrow">{esc(gallery_eyebrow)}</span>
+          <h2 class="display h-2">{esc(gallery_heading)}</h2></div>
         <div class="grid g-3">{figs}</div>
       </div></section>"""
 
@@ -926,6 +956,7 @@ def page_service(s):
 
 {ba}
 {vid}
+{projects}
 {gal}
 {faqs}
 
@@ -971,6 +1002,7 @@ def page_gallery():
         ("commercial", "Commercial & HOA"),
         ("pressure-washing", "Pressure Washing"), ("soft-washing", "Soft Washing"),
     ]
+    cat_labels = dict(cats)
     btns = "".join(
         f'<button data-filter="{k}" aria-pressed="{"true" if k=="all" else "false"}">{esc(lbl)}</button>'
         for k, lbl in cats)
@@ -994,11 +1026,46 @@ def page_gallery():
                  "leaf-removal": "leaf-removal", "soft-washing": "soft-washing",
                  "pressure-washing": "pressure-washing", "snow-removal": "snow-removal"}
 
+    # A gallery tile is the wrong unit for a documented transformation. Build
+    # the known comparisons first so their photos share one card and can never
+    # be split by CSS reflow or by a category filter. The explicit project
+    # groups cover same-job photos taken from different angles; `beforeafter`
+    # covers the aligned comparisons used by the service-page sliders.
+    connected = {}
+    connected_slugs = set()
+    gallery_alt = {
+        slug: alt
+        for svc in SERVICES
+        for _cat, slug, alt in svc.get("gallery", [])
+    }
+    for svc in SERVICES:
+        for project in svc.get("project_groups", []):
+            photos = project["photos"]
+            cat = photos[0][1]
+            connected.setdefault(cat, []).append({
+                "title": project["title"],
+                "note": project["note"],
+                "photos": photos,
+            })
+            connected_slugs.update(photo[2] for photo in photos)
+        for cat, before, after, label, note in svc.get("beforeafter", []):
+            if before in connected_slugs or after in connected_slugs:
+                continue
+            connected.setdefault(cat, []).append({
+                "title": label,
+                "note": note,
+                "photos": [
+                    ("Before", cat, before, GALLERY_EXTRA.get(before) or gallery_alt.get(before) or before.replace("-", " ").capitalize()),
+                    ("After", cat, after, GALLERY_EXTRA.get(after) or gallery_alt.get(after) or after.replace("-", " ").capitalize()),
+                ],
+            })
+            connected_slugs.update((before, after))
+
     items, seen = [], set()
     for owned_only in (True, False):
         for svc in SERVICES:
             for c, sl, alt in svc.get("gallery", []):
-                if sl in seen:
+                if sl in seen or sl in connected_slugs or sl in GALLERY_EXCLUDE:
                     continue
                 owns = CAT_OWNER.get(c) == svc["slug"]
                 if owned_only != owns:
@@ -1013,7 +1080,7 @@ def page_gallery():
             if not f.endswith("-480.webp"):
                 continue
             sl = f[:-len("-480.webp")]
-            if sl in seen:
+            if sl in seen or sl in connected_slugs or sl in GALLERY_EXCLUDE:
                 continue
             seen.add(sl)
             items.append((c, sl, GALLERY_EXTRA.get(sl) or sl.replace("-", " ").capitalize()))
@@ -1023,7 +1090,7 @@ def page_gallery():
         by_cat.setdefault(c, []).append((sl, alt))
 
     def sequenced(lst):
-        """Keep before/after siblings adjacent and in the order a job happens."""
+        """Lead with comparison pairs, kept adjacent in job order."""
         pos = {sl: i for i, (sl, _) in enumerate(lst)}
 
         def split(sl):
@@ -1031,17 +1098,72 @@ def page_gallery():
             return (m.group(1), PHASE[m.group(2)]) if m else (sl, 0)
 
         anchor = {}
+        stem_count = {}
         for sl, _ in lst:
             stem, _p = split(sl)
             anchor[stem] = min(anchor.get(stem, len(lst) + 1), pos[sl])
-        return sorted(lst, key=lambda t: (anchor[split(t[0])[0]], split(t[0])[1], pos[t[0]]))
+            stem_count[stem] = stem_count.get(stem, 0) + 1
+        return sorted(lst, key=lambda t: (
+            0 if stem_count[split(t[0])[0]] > 1 else 1,
+            anchor[split(t[0])[0]], split(t[0])[1], pos[t[0]],
+        ))
 
-    figs = ""
-    for c in CAT_ORDER + [k for k in sorted(by_cat) if k not in CAT_ORDER]:
+    def project_card(project):
+        photos = ""
+        for phase, pcat, pslug, alt in project["photos"]:
+            phase_lower = phase.lower()
+            phase_class = ("before" if phase_lower.startswith("before") else
+                           "after" if phase_lower.startswith("after") else "finished")
+            photos += (f'<figure class="project-pair__photo">'
+                       f'{picture(pcat, pslug, alt, depth, sizes="(max-width:900px) 46vw, 22vw")}'
+                       f'<figcaption><span class="project-pair__phase project-pair__phase--{phase_class}">{esc(phase)}</span>'
+                       f'<span>{esc(alt)}</span></figcaption></figure>')
+        photo_slugs = " ".join(photo[2] for photo in project["photos"])
+        return (f'<article class="project-pair gal__project" data-photo-count="{len(project["photos"])}" '
+                f'data-project-photos="{esc(photo_slugs)}">'
+                f'<div class="project-pair__head"><h3 class="display h-3">{esc(project["title"])}</h3>'
+                f'<p>{esc(project["note"])}</p></div>'
+                f'<div class="project-pair__photos">{photos}</div></article>')
+
+    groups = ""
+    all_cats = set(by_cat) | set(connected)
+    for c in CAT_ORDER + [k for k in sorted(all_cats) if k not in CAT_ORDER]:
+        projects = "".join(project_card(project) for project in connected.get(c, []))
+        figs = ""
         for sl, alt in sequenced(by_cat.get(c, [])):
+            phase = ""
+            phase_class = ""
+            if sl.endswith("-before-after"):
+                phase, phase_class = "Before & after", "both"
+            else:
+                m = re.search(r"-(before|after|in-progress|during)$", sl)
+                if m:
+                    phase_class = m.group(1)
+                    phase = {
+                        "before": "Before", "after": "After",
+                        "in-progress": "In progress", "during": "In progress",
+                    }[phase_class]
+            phase_html = (f'<span class="gal__phase gal__phase--{phase_class}">{phase}</span>'
+                          if phase else "")
             figs += (f'<figure data-cat="{c}">'
-                     f'{picture(c, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:900px) 46vw, 31vw")}'
-                     f'<figcaption>{esc(alt)}</figcaption></figure>')
+                     f'{picture(c, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:1320px) 46vw, 600px")}'
+                     f'<figcaption>{phase_html}<span>{esc(alt)}</span></figcaption></figure>')
+        if projects or figs:
+            count = len(by_cat.get(c, [])) + sum(len(p["photos"]) for p in connected.get(c, []))
+            project_section = ""
+            if projects:
+                project_section = (f'<div class="gal__subhead"><strong>Connected projects</strong>'
+                                   f'<span>Photos from the same job stay together.</span></div>'
+                                   f'<div class="project-pairs gal__projects">{projects}</div>')
+            loose_section = ""
+            if figs:
+                loose_heading = (f'<div class="gal__subhead gal__subhead--more"><strong>More finished work</strong></div>'
+                                 if projects else "")
+                loose_section = f'{loose_heading}<div class="gal__grid">{figs}</div>'
+            groups += (f'<section class="gal__group" data-cat="{c}">'
+                       f'<div class="gal__heading"><h2 class="display h-3">{esc(cat_labels.get(c, c.replace("-", " ").title()))}</h2>'
+                       f'<span>{count} {"photo" if count == 1 else "photos"}</span></div>'
+                       f'{project_section}{loose_section}</section>')
 
     ld = [breadcrumb_ld([("Home", "/"), ("Our Work", "/gallery.html")])]
     ld += [video_ld(v) for v in VIDEOS]
@@ -1053,7 +1175,7 @@ def page_gallery():
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
     <h1 class="display h-1">View our work</h1>
-    <p>Work from across all seven services, around Greater Indianapolis.</p>
+    <p>Work from across all seven services, around Greater Indianapolis. Photos from the same job are grouped together.</p>
     </div>
     <div class="phead__fig">{picture('leaf-removal','leaf-vacuum-truck-curb','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
@@ -1062,7 +1184,7 @@ def page_gallery():
 <section class="section">
   <div class="wrap">
     <div class="gal-filter">{btns}</div>
-    <div class="gal">{figs}</div>
+    <div class="gal">{groups}</div>
   </div>
 </section>
 

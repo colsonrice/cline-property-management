@@ -12,7 +12,8 @@ from urllib.parse import urlparse, unquote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 sys.path.insert(0, os.path.join(ROOT, "build"))
-from data import SITE as CFG  # noqa
+from data import SITE as CFG, SERVICES, GALLERY_EXCLUDE  # noqa
+from imagemap import MAP  # noqa
 # Project sites (e.g. GitHub Pages) live under a path prefix; strip it before
 # comparing sitemap <loc> paths with on-disk file paths.
 BASE_PATH = urlparse(CFG["base"]).path.rstrip("/")
@@ -217,6 +218,73 @@ def main():
     for dsc, ps in descs.items():
         if len(ps) > 1:
             prob("SEO", f"duplicate meta description across {ps}")
+
+    # Image-data integrity. This catches the class of regression where a photo
+    # is moved to a different service in the built site but its source mapping
+    # is left behind, so the next image rebuild silently recreates it in the
+    # old category.
+    mapped = set()
+    for source, cat, slug in MAP:
+        if slug in mapped:
+            prob("images", f"duplicate mapped slug: {slug}")
+        mapped.add(slug)
+        for width in (480, 800, 1280):
+            for ext in ("jpg", "webp"):
+                fp = os.path.join(SITE, "assets", "img", cat, f"{slug}-{width}.{ext}")
+                if not os.path.exists(fp):
+                    prob("images", f"mapping {source} -> {cat}/{slug} has no {width}.{ext} rendition")
+
+    for svc in SERVICES:
+        for _cat, slug, _alt in svc.get("gallery", []):
+            if slug in GALLERY_EXCLUDE:
+                prob("images", f"{svc['slug']} gallery includes excluded image: {slug}")
+        for project in svc.get("project_groups", []):
+            photos = project.get("photos", [])
+            if len(photos) != 2:
+                prob("images", f"{svc['slug']} project '{project.get('title', '')}' should contain two connected photos")
+                continue
+            phases = [photo[0].lower() for photo in photos]
+            if "before" in phases or "after" in phases:
+                if phases != ["before", "after"]:
+                    prob("images", f"{svc['slug']} project '{project.get('title', '')}' is not ordered Before, After")
+        for cat, before, after, _label, _note in svc.get("beforeafter", []):
+            if not before.endswith("-before") or not after.endswith("-after"):
+                prob("images", f"{svc['slug']} comparison is not explicitly before/after: {before}, {after}")
+            if before.removesuffix("-before") != after.removesuffix("-after"):
+                prob("images", f"{svc['slug']} comparison mixes projects: {before}, {after}")
+            b = os.path.join(SITE, "assets", "img", cat, before + "-800.jpg")
+            a = os.path.join(SITE, "assets", "img", cat, after + "-800.jpg")
+            if os.path.exists(b) and os.path.exists(a):
+                if open(b, "rb").read() == open(a, "rb").read():
+                    prob("images", f"{svc['slug']} before/after use identical files: {before}, {after}")
+
+    gallery = os.path.join(SITE, "gallery.html")
+    if os.path.exists(gallery):
+        gallery_html = open(gallery, encoding="utf-8").read()
+        groups = set(re.findall(r'class="gal__group" data-cat="([^"]+)"', gallery_html))
+        buttons = set(re.findall(r'data-filter="([^"]+)"', gallery_html)) - {"all"}
+        for cat in sorted(groups - buttons):
+            prob("gallery.html", f"image group has no filter button: {cat}")
+        for cat in sorted(buttons - groups):
+            prob("gallery.html", f"filter button has no image group: {cat}")
+
+        connected = {
+            tuple(photo[2] for photo in project.get("photos", []))
+            for svc in SERVICES for project in svc.get("project_groups", [])
+        }
+        connected.update(
+            (before, after)
+            for svc in SERVICES
+            for _cat, before, after, _label, _note in svc.get("beforeafter", [])
+        )
+        rendered = {
+            tuple(value.split())
+            for value in re.findall(r'data-project-photos="([^"]+)"', gallery_html)
+        }
+        for pair in sorted(connected - rendered):
+            prob("gallery.html", f"connected project is not grouped: {' -> '.join(pair)}")
+        for pair in sorted(rendered - connected):
+            prob("gallery.html", f"unexpected connected project group: {' -> '.join(pair)}")
 
     # sitemap coverage
     sm = os.path.join(SITE, "sitemap.xml")
