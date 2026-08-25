@@ -209,15 +209,14 @@
   /* ---------- Gallery filter ---------- */
   var gf = document.querySelector('.gal-filter');
   if (gf) {
-    var figs = Array.prototype.slice.call(document.querySelectorAll('.gal figure'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.gal__group'));
     gf.addEventListener('click', function (e) {
       var b = e.target.closest('button');
       if (!b) return;
       var key = b.dataset.filter;
       gf.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
-      figs.forEach(function (f) {
-        var show = key === 'all' || f.dataset.cat === key;
-        f.style.display = show ? '' : 'none';
+      groups.forEach(function (g) {
+        g.hidden = key !== 'all' && g.dataset.cat !== key;
       });
     });
   }
