@@ -1,5 +1,4 @@
-# Temporary preview URL -- not the final home of this site.
-# Remove this block (set STAGING = False in build/data.py) once the
-# site is on its own domain.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://clinepropertymgmt.com/sitemap.xml
