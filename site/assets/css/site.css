@@ -1079,7 +1079,11 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
 .phead .crumbs a:hover { color: var(--gold); }
 .phead__fig { position: relative; overflow: hidden; min-height: 240px; }
 .phead__fig picture { display: block; width: 100%; height: 100%; }
-.phead__fig img { width: 100%; height: 100%; object-fit: cover; object-position: center 44%; }
+/* Per-service focal point. Portrait shots get cropped hard by the 16/9
+   slot on mobile, and the subject is not always in the middle -- the
+   plowed lot sits in the lower half of the snow photo. */
+.phead__fig img { width: 100%; height: 100%; object-fit: cover;
+  object-position: var(--fig-pos, center 44%); }
 .phead__fig::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(96deg, rgba(27,51,36,.78) 0%, rgba(27,51,36,.2) 36%, transparent 64%);

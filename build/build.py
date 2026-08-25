@@ -882,8 +882,10 @@ def page_service(s):
     </div>"""
 
     photo_note = ""
-    if s.get("needs_photos"):
-        photo_note = ""
+
+    # Some heroes need their focal point moved: the 16/9 slot on mobile crops a
+    # portrait shot hard, and the subject is not always centred.
+    fig_pos = f' style="--fig-pos: {s["hero_pos"]}"' if s.get("hero_pos") else ""
 
     faqs = ""
     if s.get("faqs"):
@@ -898,7 +900,7 @@ def page_service(s):
     return head(s["title"], s["desc"], depth, f"/services/{s['slug']}.html",
                 og_img=f"assets/img/{cat}/{hslug}-800.jpg", extra_ld=ld) + header(depth, "services") + f"""
 <main id="main">
-<section class="phead{' phead--winter' if s.get('needs_photos') else ''}">
+<section class="phead{' phead--winter' if s.get('winter_theme') else ''}">
   <div class="phead__grid">
     <div class="phead__in">
     {crumbs([("Home","index.html"),("Services","services/index.html"),(s['name'],None)], depth)}
@@ -910,7 +912,7 @@ def page_service(s):
       <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
     </div>
     </div>
-    <div class="phead__fig">{winterscape() if s.get('needs_photos') else picture(cat, hslug, "", depth, sizes="(max-width:900px) 100vw, 46vw", eager=True)}</div>
+    <div class="phead__fig"{fig_pos}>{picture(cat, hslug, "", depth, sizes="(max-width:900px) 100vw, 46vw", eager=True)}</div>
   </div>
 </section>
 

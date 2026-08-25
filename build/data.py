@@ -70,7 +70,7 @@ SEASONS = [
         "body": "We clear drives, lots, and walks once snow hits an agreed depth. Commercial and "
                 "HOA properties get priority routing and repeat passes while it's still falling.",
         "services": ["snow-removal"],
-        "img": ("commercial", "commercial-median-shrub-beds", "Dormant-season commercial bed maintenance"),
+        "img": ("snow-removal", "snow-parking-lot-after", "Commercial lot plowed clear after a snowfall"),
     },
 ]
 
@@ -333,8 +333,11 @@ SERVICES = [
         "desc": "Snow plowing, walk clearing and ice management across Greater Indianapolis. "
                 "Cleared at an agreed depth, with priority routing for commercial and HOA "
                 "properties.",
-        "hero": ("commercial", "commercial-median-shrub-beds"),
-        "hero_alt": "Dormant-season commercial property maintained through winter",
+        "hero": ("snow-removal", "snow-parking-lot-after"),
+        "hero_alt": "Commercial parking lot plowed clear to the pavement after a snowfall",
+        # The plowed lot sits low in frame; without this the mobile crop shows
+        # mostly sky and roofline.
+        "hero_pos": "50% 76%",
         "lede": "The point of snow service is that you don't have to think about it. You leave on time.",
         "body": [
             ("h2", "How service gets triggered"),
@@ -394,7 +397,7 @@ SERVICES = [
              "Two inches is standard, but we set it per property. Some commercial sites want a one-inch "
              "trigger because of foot traffic, and some residential drives are happy at three."),
         ],
-        "needs_photos": True,
+        "winter_theme": True,
     },
     {
         "slug": "soft-washing",
