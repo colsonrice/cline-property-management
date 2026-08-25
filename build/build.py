@@ -973,17 +973,36 @@ def page_gallery():
         f'<button data-filter="{k}" aria-pressed="{"true" if k=="all" else "false"}">{esc(lbl)}</button>'
         for k, lbl in cats)
 
-    seen = set()
-    figs = ""
-    for s in SERVICES:
-        for c, sl, alt in s.get("gallery", []):
-            if sl in seen:
-                continue
-            seen.add(sl)
-            figs += (f'<figure data-cat="{c}">'
-                     f'{picture(c, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:900px) 46vw, 31vw")}'
-                     f'<figcaption>{esc(alt)}</figcaption></figure>')
-    # sweep in anything not referenced by a service gallery
+    # Gallery order used to be: curated service lists first, then whatever was
+    # left on disk appended alphabetically. Two things went wrong with that.
+    # Alphabetically "-after" sorts before "-before", so every pair rendered
+    # backwards; and swept leftovers landed in a clump at the end instead of
+    # with their own category. Collect everything first, then group and order
+    # deliberately.
+    CAT_ORDER = ["mowing", "mulching", "leaf-removal", "commercial",
+                 "pressure-washing", "soft-washing"]
+    PHASE = {"before": 0, "in-progress": 1, "during": 1, "after": 2}
+
+    # Several images appear in more than one service's list -- the leaf shots
+    # are used by both Leaf Removal and Spring & Fall Cleanups. Whichever
+    # service ran first used to claim them, which dragged a "finished" caption
+    # to the top of the leaf-removal group ahead of its own before shots. Let
+    # the service that owns the category claim its images first.
+    CAT_OWNER = {"mowing": "lawn-mowing", "mulching": "mulching",
+                 "leaf-removal": "leaf-removal", "soft-washing": "soft-washing",
+                 "pressure-washing": "pressure-washing"}
+
+    items, seen = [], set()
+    for owned_only in (True, False):
+        for svc in SERVICES:
+            for c, sl, alt in svc.get("gallery", []):
+                if sl in seen:
+                    continue
+                owns = CAT_OWNER.get(c) == svc["slug"]
+                if owned_only != owns:
+                    continue
+                seen.add(sl)
+                items.append((c, sl, alt))
     for c in sorted(os.listdir(IMG)):
         d = os.path.join(IMG, c)
         if not os.path.isdir(d):
@@ -995,7 +1014,29 @@ def page_gallery():
             if sl in seen:
                 continue
             seen.add(sl)
-            alt = GALLERY_EXTRA.get(sl) or sl.replace("-", " ").capitalize()
+            items.append((c, sl, GALLERY_EXTRA.get(sl) or sl.replace("-", " ").capitalize()))
+
+    by_cat = {}
+    for c, sl, alt in items:
+        by_cat.setdefault(c, []).append((sl, alt))
+
+    def sequenced(lst):
+        """Keep before/after siblings adjacent and in the order a job happens."""
+        pos = {sl: i for i, (sl, _) in enumerate(lst)}
+
+        def split(sl):
+            m = re.match(r"^(.*?)-(before|after|in-progress|during)$", sl)
+            return (m.group(1), PHASE[m.group(2)]) if m else (sl, 0)
+
+        anchor = {}
+        for sl, _ in lst:
+            stem, _p = split(sl)
+            anchor[stem] = min(anchor.get(stem, len(lst) + 1), pos[sl])
+        return sorted(lst, key=lambda t: (anchor[split(t[0])[0]], split(t[0])[1], pos[t[0]]))
+
+    figs = ""
+    for c in CAT_ORDER + [k for k in sorted(by_cat) if k not in CAT_ORDER]:
+        for sl, alt in sequenced(by_cat.get(c, [])):
             figs += (f'<figure data-cat="{c}">'
                      f'{picture(c, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:900px) 46vw, 31vw")}'
                      f'<figcaption>{esc(alt)}</figcaption></figure>')

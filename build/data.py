@@ -299,14 +299,17 @@ SERVICES = [
                   "hazard. We run commercial properties on a tighter rotation for that reason."),
         ],
         "gallery": [
-            ("leaf-removal", "leaf-removal-backpack-blower", "Clearing leaves with a backpack blower"),
-            ("leaf-removal", "leaf-vacuum-truck-curb", "Truck-mounted leaf vacuum working a curb line"),
-            ("leaf-removal", "leaf-removal-raking-pile", "Raking out a heavy accumulation by hand"),
-            ("leaf-removal", "leaf-removal-under-tree", "Clearing beneath a mature canopy"),
-            ("leaf-removal", "leaf-removal-finished-lawn", "Turf cleared and ready for winter"),
+            # Ordered as the job runs: what we arrive to, the work, the result.
             ("leaf-removal", "leaf-covered-yard", "Heavy leaf cover before clearing"),
+            ("leaf-removal", "leaf-covered-lawn", "Leaves across a residential lawn before clearing"),
             ("leaf-removal", "leaf-covered-driveway", "Leaf-covered drive before a pass"),
             ("leaf-removal", "fall-leaves-driveway", "Leaf line along a driveway edge"),
+            ("leaf-removal", "leaf-removal-backpack-blower", "Clearing leaves with a backpack blower"),
+            ("leaf-removal", "leaf-removal-raking-pile", "Raking out a heavy accumulation by hand"),
+            ("leaf-removal", "leaf-vacuum-truck-curb", "Truck-mounted leaf vacuum working a curb line"),
+            ("leaf-removal", "leaf-removal-under-tree", "Clearing beneath a mature canopy"),
+            ("leaf-removal", "fall-cleanup-truck-ladder", "Fall cleanup with truck and ladder on site"),
+            ("leaf-removal", "leaf-removal-finished-lawn", "Turf cleared and ready for winter"),
         ],
         "faqs": [
             ("How many visits will I need?",
@@ -480,11 +483,11 @@ SERVICES = [
              "Metal awning", "Spotted and weather-stained metal brought back to white"),
         ],
         "gallery": [
-            ("pressure-washing", "concrete-pressure-washing-in-progress", "Mid-wash: the line between cleaned and untouched concrete"),
             ("pressure-washing", "driveway-pressure-washing-before", "Driveway before washing"),
             ("pressure-washing", "driveway-pressure-washing-after", "The same driveway, finished"),
             ("pressure-washing", "awning-pressure-washing-before", "Metal awning before cleaning"),
             ("pressure-washing", "awning-pressure-washing-after", "Awning after cleaning"),
+            ("pressure-washing", "concrete-pressure-washing-in-progress", "Mid-wash: the line between cleaned and untouched concrete"),
         ],
         "faqs": [
             ("How often should concrete be washed?",
