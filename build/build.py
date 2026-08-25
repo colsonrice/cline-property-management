@@ -685,8 +685,8 @@ def page_home():
           <span class="eyebrow">Real jobs</span>
           <h2 class="display h-1" style="margin-top:.7rem">Drag to see<br>the difference</h2>
         </div>
-        <p>Every photo on this site is our own work, on real properties in our service area.
-        None of it is stock photography.</p>
+        <p>Every photograph here is our own work on a real property. The one winter
+        illustration is marked as such.</p>
       </div>
     </div>
     <div class="grid g-3">{ba}</div>
@@ -966,7 +966,8 @@ def page_gallery():
             "commercial grounds care and exterior washing in our Central Indiana service area.")
     cats = [
         ("all", "Everything"), ("mowing", "Mowing"), ("mulching", "Mulching"),
-        ("leaf-removal", "Leaf Removal"), ("commercial", "Commercial & HOA"),
+        ("leaf-removal", "Leaf Removal"), ("snow-removal", "Snow Removal"),
+        ("commercial", "Commercial & HOA"),
         ("pressure-washing", "Pressure Washing"), ("soft-washing", "Soft Washing"),
     ]
     btns = "".join(
@@ -979,7 +980,7 @@ def page_gallery():
     # backwards; and swept leftovers landed in a clump at the end instead of
     # with their own category. Collect everything first, then group and order
     # deliberately.
-    CAT_ORDER = ["mowing", "mulching", "leaf-removal", "commercial",
+    CAT_ORDER = ["mowing", "mulching", "leaf-removal", "snow-removal", "commercial",
                  "pressure-washing", "soft-washing"]
     PHASE = {"before": 0, "in-progress": 1, "during": 1, "after": 2}
 
@@ -990,7 +991,7 @@ def page_gallery():
     # the service that owns the category claim its images first.
     CAT_OWNER = {"mowing": "lawn-mowing", "mulching": "mulching",
                  "leaf-removal": "leaf-removal", "soft-washing": "soft-washing",
-                 "pressure-washing": "pressure-washing"}
+                 "pressure-washing": "pressure-washing", "snow-removal": "snow-removal"}
 
     items, seen = [], set()
     for owned_only in (True, False):
@@ -1051,8 +1052,8 @@ def page_gallery():
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
     <h1 class="display h-1">View our work</h1>
-    <p>Every image on this site is a real Cline job on a real property in our service area.
-    Nothing here is stock photography.</p>
+    <p>Every photograph here is our own work on a real property. The one winter
+    illustration is marked as such.</p>
     </div>
     <div class="phead__fig">{picture('leaf-removal','leaf-vacuum-truck-curb','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>

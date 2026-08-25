@@ -360,6 +360,17 @@ SERVICES = [
                   "more in a hard one. Commercial properties are usually better off on contract, and "
                   "residential can go either way."),
         ],
+        "beforeafter": [
+            ("snow-removal", "snow-clearing-before", "snow-clearing-after",
+             "Illustration — trigger-depth snow clearing",
+             "Illustration, not a photograph. The same driveway shown before and after clearing."),
+        ],
+        "gallery": [
+            ("snow-removal", "snow-clearing-before",
+             "Illustration — snow-covered driveway before trigger-depth clearing"),
+            ("snow-removal", "snow-clearing-after",
+             "Illustration — the same driveway after trigger-depth clearing"),
+        ],
         "faqs": [
             ("What time will you get to me?",
              "Commercial and HOA properties are cleared first, so they're open for business hours. "
