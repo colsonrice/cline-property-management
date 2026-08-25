@@ -528,7 +528,7 @@ AREAS = [
     {"slug": "indianapolis", "name": "Indianapolis", "mows": False,
      "note": "All services except mowing."},
     {"slug": "carmel", "name": "Carmel", "mows": True,
-     "note": "All seven services. Mowing covers West Carmel."},
+     "note": "All seven services. Mowing: West Carmel."},
     {"slug": "westfield", "name": "Westfield", "mows": False,
      "note": "All services except mowing."},
     {"slug": "brownsburg", "name": "Brownsburg", "mows": False,

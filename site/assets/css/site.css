@@ -835,6 +835,13 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
      broken. Aligning to the top pins the numbers and names to a common line and
      lets the copy hang. */
   align-content: start;
+  /* One implicit column sized to `auto` means the widest child -- the city
+     name -- sets the column width, so "Indianapolis" stretched its column
+     206px wide while "Avon" got 146px. Identical description text then wrapped
+     to one line in some cards and two in others, and the long names overflowed
+     their own padding box. Pin the column to the content box so every card
+     wraps the same. */
+  grid-template-columns: minmax(0, 1fr);
   gap: .55rem;
   padding: clamp(1.5rem,3.5vw,2.8rem);
   border-right: 1px solid var(--rule);
