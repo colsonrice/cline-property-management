@@ -828,7 +828,13 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
 .service-city {
   min-height: 220px;
   display: grid;
-  align-content: end;
+  /* Top-aligned, not bottom. Bottom alignment lined up the descriptions, which
+     meant the city names floated to a different height in every card depending
+     on how many lines its copy wrapped to -- three lines for Carmel, one for
+     Indianapolis. The name is what the eye tracks across a row, so it read as
+     broken. Aligning to the top pins the numbers and names to a common line and
+     lets the copy hang. */
+  align-content: start;
   gap: .55rem;
   padding: clamp(1.5rem,3.5vw,2.8rem);
   border-right: 1px solid var(--rule);
