@@ -685,8 +685,8 @@ def page_home():
           <span class="eyebrow">Real jobs</span>
           <h2 class="display h-1" style="margin-top:.7rem">Drag to see<br>the difference</h2>
         </div>
-        <p>Every photograph here is our own work on a real property. The one winter
-        illustration is marked as such.</p>
+        <p>Every photograph here is our own work on a real property. The winter
+        illustrations are marked as such.</p>
       </div>
     </div>
     <div class="grid g-3">{ba}</div>
@@ -1052,8 +1052,8 @@ def page_gallery():
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
     <h1 class="display h-1">View our work</h1>
-    <p>Every photograph here is our own work on a real property. The one winter
-    illustration is marked as such.</p>
+    <p>Every photograph here is our own work on a real property. The winter
+    illustrations are marked as such.</p>
     </div>
     <div class="phead__fig">{picture('leaf-removal','leaf-vacuum-truck-curb','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
