@@ -330,8 +330,9 @@ SERVICES = [
         "nav": "Snow Removal",
         "short": "Drives, lots, and walks cleared at an agreed depth, with priority commercial routing.",
         "title": "Snow Removal & Ice Management | Central Indiana",
-        "desc": "Commercial and residential snow plowing, walk clearing and ice management across "
-                "Greater Indianapolis.",
+        "desc": "Snow plowing, walk clearing and ice management across Greater Indianapolis. "
+                "Cleared at an agreed depth, with priority routing for commercial and HOA "
+                "properties.",
         "hero": ("commercial", "commercial-median-shrub-beds"),
         "hero_alt": "Dormant-season commercial property maintained through winter",
         "lede": "The point of snow service is that you don't have to think about it. You leave on time.",
