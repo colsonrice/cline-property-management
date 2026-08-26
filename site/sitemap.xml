@@ -1,15 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clinepropertymgmt.com/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://clinepropertymgmt.com/gallery.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/contact.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/lawn-mowing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/mulching.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/spring-fall-cleanups.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/leaf-removal.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/snow-removal.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/soft-washing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://clinepropertymgmt.com/services/pressure-washing.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://clinepropertymgmt.com/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/gallery.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/about.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/contact.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/lawn-mowing.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/lawn-mowing-striped-residential-1280.jpg</image:loc><image:caption>Freshly striped residential lawn in Zionsville, Indiana</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/lawn-mowing-stripes-spring-1280.jpg</image:loc><image:caption>Early-season cut with clean stripe lines</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/rough-mowing-overgrown-lot-1280.jpg</image:loc><image:caption>Rough-cutting an overgrown lot</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/commercial-field-mowing-1280.jpg</image:loc><image:caption>Commercial frontage mowing</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/large-property-mowing-roadside-1280.jpg</image:loc><image:caption>Large roadside property, mowed and finished</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mowing/acreage-mowing-1280.jpg</image:loc><image:caption>Acreage mowing on open ground</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/mulching.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-install-front-entry-1280.jpg</image:loc><image:caption>Fresh dark mulch installed around a front entry with trimmed shrubs</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/hoa-monument-mulch-bed-1280.jpg</image:loc><image:caption>Monument sign bed, freshly mulched</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-install-entry-walkway-1280.jpg</image:loc><image:caption>Entry walkway beds with fresh mulch</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/tree-ring-mulch-curbside-1280.jpg</image:loc><image:caption>Tree ring mulched to a clean circle</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-bed-house-corner-1280.jpg</image:loc><image:caption>Finished corner bed with a clean, re-cut edge</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-bed-fence-line-1280.jpg</image:loc><image:caption>Finished fence-line bed with fresh dark mulch</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-bed-foundation-1280.jpg</image:loc><image:caption>Finished foundation bed, edged and freshly mulched</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/spring-fall-cleanups.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-raking-pile-1280.jpg</image:loc><image:caption>Raking a heavy leaf accumulation into piles during a fall property cleanup</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-finished-lawn-1280.jpg</image:loc><image:caption>Property finished and cleared</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/mulching/mulch-bed-house-corner-1280.jpg</image:loc><image:caption>Spring bed reset, edged and cleaned up</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/leaf-removal.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-backpack-blower-1280.jpg</image:loc><image:caption>Crew member clearing heavy leaf cover with a backpack blower</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-covered-yard-1280.jpg</image:loc><image:caption>Heavy leaf cover before clearing</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-covered-lawn-1280.jpg</image:loc><image:caption>Leaves across a residential lawn before clearing</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-covered-driveway-1280.jpg</image:loc><image:caption>Leaf-covered drive before a pass</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/fall-leaves-driveway-1280.jpg</image:loc><image:caption>Leaf line along a driveway edge</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-raking-pile-1280.jpg</image:loc><image:caption>Raking out a heavy accumulation by hand</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-vacuum-truck-curb-1280.jpg</image:loc><image:caption>Truck-mounted leaf vacuum working a curb line</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-under-tree-1280.jpg</image:loc><image:caption>Clearing beneath a mature canopy</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/fall-cleanup-truck-ladder-1280.jpg</image:loc><image:caption>Fall cleanup with truck and ladder on site</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/leaf-removal/leaf-removal-finished-lawn-1280.jpg</image:loc><image:caption>Turf cleared and ready for winter</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/snow-removal.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/snow-removal/snow-parking-lot-after-1280.jpg</image:loc><image:caption>Commercial parking lot plowed clear to the pavement after a snowfall</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/snow-removal/snow-clearing-before-1280.jpg</image:loc><image:caption>Snow-covered driveway before a trigger-depth clearing</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/snow-removal/snow-clearing-after-1280.jpg</image:loc><image:caption>The same driveway cleared to the pavement</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/snow-removal/snow-parking-lot-before-1280.jpg</image:loc><image:caption>Snow-covered commercial parking lot before plowing</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/soft-washing.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/soft-washing/soft-wash-siding-after-1280.jpg</image:loc><image:caption>Vinyl siding after soft washing, clean and streak-free</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/soft-washing/soft-wash-siding-before-1280.jpg</image:loc><image:caption>Algae streaking on shaded vinyl siding</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/soft-washing/fence-wash-before-after-1280.jpg</image:loc><image:caption>Iron fence before and after a low-pressure wash</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/pressure-washing.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/driveway-pressure-washing-after-1280.jpg</image:loc><image:caption>Concrete driveway after pressure washing, clean and evenly finished</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/driveway-pressure-washing-before-1280.jpg</image:loc><image:caption>Driveway before washing</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/awning-pressure-washing-before-1280.jpg</image:loc><image:caption>Metal awning before cleaning</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/awning-pressure-washing-after-1280.jpg</image:loc><image:caption>Awning after cleaning</image:caption></image:image>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/concrete-pressure-washing-in-progress-1280.jpg</image:loc><image:caption>Mid-wash: the line between cleaned and untouched concrete</image:caption></image:image>
+  </url>
 </urlset>

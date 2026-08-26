@@ -1488,18 +1488,104 @@ def main():
       '<rect x="51" y="29" width="6" height="6" transform="rotate(45 54 32)" fill="#E3F11B"/>'
       '</svg>')
 
-    # sitemap
+    # sitemap. lastmod comes from the newest source file that feeds the build,
+    # so it moves when the content actually changes rather than on every deploy.
+    # Google uses it to decide what to re-crawl; a sitemap without it is a
+    # sitemap Google has to guess about.
+    import datetime
+    srcs = [os.path.join(HERE, "data.py"), os.path.join(HERE, "build.py")]
+    stamp = max(os.path.getmtime(f) for f in srcs if os.path.exists(f))
+    lastmod = datetime.datetime.fromtimestamp(stamp, datetime.timezone.utc).strftime("%Y-%m-%d")
+
+    # Images carry their own namespace so the gallery can surface in Google
+    # Images. This site is photograph-led, so that is a real channel, not a
+    # box-tick.
+    page_imgs = {}
+    for svc in SERVICES:
+        u = f"/services/{svc['slug']}.html"
+        seen_i, lst = set(), []
+        c, sl = svc["hero"]
+        lst.append((f"assets/img/{c}/{sl}-1280.jpg", svc.get("hero_alt", svc["name"])))
+        seen_i.add(sl)
+        for gc, gsl, galt in svc.get("gallery", []) or []:
+            if gsl in seen_i:
+                continue
+            seen_i.add(gsl)
+            lst.append((f"assets/img/{gc}/{gsl}-1280.jpg", galt))
+        page_imgs[u] = lst[:12]
+
     urls = ["/", "/services/", "/gallery.html", "/about.html", "/contact.html"]
     urls += [f"/services/{s['slug']}.html" for s in SERVICES]
     prio = {"/": "1.0", "/services/": "0.9", "/contact.html": "0.9"}
     sm = ['<?xml version="1.0" encoding="UTF-8"?>',
-          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+          '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+          '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">']
     for u in urls:
-        sm.append(f"  <url><loc>{SITE['base']}{u}</loc>"
-                  f"<changefreq>monthly</changefreq>"
-                  f"<priority>{prio.get(u, '0.7')}</priority></url>")
+        sm.append(f"  <url>")
+        sm.append(f"    <loc>{SITE['base']}{u}</loc>")
+        sm.append(f"    <lastmod>{lastmod}</lastmod>")
+        sm.append(f"    <changefreq>monthly</changefreq>")
+        sm.append(f"    <priority>{prio.get(u, '0.7')}</priority>")
+        for src, cap in page_imgs.get(u, []):
+            sm.append(f"    <image:image><image:loc>{SITE['base']}/{src}</image:loc>"
+                      f"<image:caption>{esc(cap)}</image:caption></image:image>")
+        sm.append(f"  </url>")
     sm.append("</urlset>")
     w("sitemap.xml", "\n".join(sm))
+
+    # llms.txt -- a proposed convention (llmstxt.org) for handing an assistant a
+    # clean map of a site instead of making it scrape rendered HTML. It is NOT a
+    # search ranking signal and no major engine commits to reading it. It costs
+    # one generated file, and the failure mode if it is ignored is nothing at
+    # all, so it is worth having while the convention settles.
+    #
+    # Generated from the same data as the pages, so it cannot drift out of sync
+    # and start telling assistants things the site does not say.
+    mow = ", ".join(MOW_AREAS[:-1]) + ", and " + MOW_AREAS[-1]
+    all_areas = ", ".join(a["name"] for a in AREAS)
+    llms = [
+        f"# {SITE['name']}",
+        "",
+        f"> Grounds care and property maintenance in {SITE['city']}, {SITE['region_long']}, "
+        f"serving Greater Indianapolis. Seven services covering all four seasons for "
+        f"residential, commercial, HOA and municipal properties.",
+        "",
+        "## Contact",
+        "",
+        f"- Phone: {SITE['phone_display']}",
+        f"- Email: {SITE['email']}",
+        f"- Estimates: free, requested at {SITE['base']}/contact.html",
+        "",
+        "## Service area",
+        "",
+        f"- Mowing: {mow} only.",
+        f"- All other services: {all_areas}.",
+        "",
+        "## Services",
+        "",
+    ]
+    for svc in SERVICES:
+        llms.append(f"- [{svc['name']}]({SITE['base']}/services/{svc['slug']}.html): {svc['short']}")
+    llms += [
+        "",
+        "## Pages",
+        "",
+        f"- [Home]({SITE['base']}/): overview, services by season, service area",
+        f"- [All services]({SITE['base']}/services/): the seven services in one place",
+        f"- [Our work]({SITE['base']}/gallery.html): project photographs by service",
+        f"- [About]({SITE['base']}/about.html): how the company operates",
+        f"- [Contact]({SITE['base']}/contact.html): estimate request form",
+        "",
+        "## Notes for assistants",
+        "",
+        "- Mowing has a narrower service area than the other six services. Do not",
+        f"  tell someone outside {mow} that we mow; the other services do reach them.",
+        "- Estimates are free. The fastest route to a person is the phone number above.",
+        "- Photographs are of work across the service area. Do not attribute any",
+        "  single image to a named customer or address.",
+        "",
+    ]
+    w("llms.txt", "\n".join(llms))
 
     if STAGING:
         w("robots.txt",
@@ -1508,7 +1594,10 @@ def main():
           "# site is on its own domain.\n"
           "User-agent: *\nDisallow: /\n")
     else:
-        w("robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE['base']}/sitemap.xml\n")
+        w("robots.txt",
+          f"User-agent: *\nAllow: /\n\n"
+          f"Sitemap: {SITE['base']}/sitemap.xml\n"
+          f"# Site summary for language models: {SITE['base']}/llms.txt\n")
 
     # Netlify: pretty URLs + security headers
     w("_headers", """/*

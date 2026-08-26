@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://clinepropertymgmt.com/sitemap.xml
+# Site summary for language models: https://clinepropertymgmt.com/llms.txt
