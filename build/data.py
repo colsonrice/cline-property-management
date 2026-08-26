@@ -31,46 +31,72 @@ STAGING = False
 
 MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
 
+SEASONAL_SERVICE_NAMES = {
+    "window-cleaning": "Window Cleaning",
+    "gutter-cleanout": "Gutter Cleanout",
+    "junk-removal": "Junk Removal",
+    "interior-painting": "Interior Painting",
+}
+
 SEASONS = [
     {
         "key": "spring", "name": "Spring", "months": "March – May",
         "color": "#4E7F44",
-        "count": "4 services",
+        "count": "7 services",
         "head": "Reset the property",
         "body": "Winter leaves beds matted and edges ragged. In spring we clear all of it out, "
-                "re-cut the bed lines, lay fresh mulch, and get your first cuts on the schedule.",
-        "services": ["spring-fall-cleanups", "mulching", "lawn-mowing", "soft-washing"],
-        "img": ("mulching", "mulch-install-front-entry", "Fresh spring mulch install at a front entry"),
+                "re-cut the bed lines, clear the gutters, wash exterior surfaces and windows, "
+                "lay fresh mulch, and get your first cuts on the schedule.",
+        "services": ["spring-fall-cleanups", "mulching", "lawn-mowing", "soft-washing",
+                     "pressure-washing", "window-cleaning", "gutter-cleanout"],
+        "img": ("seasonal", "gutter-cleanout-service",
+                "Gutter cleanout at a two-story home", "Gutter cleanout"),
+        "img_inset": ("seasonal", "window-cleaning-service",
+                      "Exterior window cleaning with a water-fed pole", "Window cleaning"),
     },
     {
         "key": "summer", "name": "Summer", "months": "June – August",
         "color": "#8A6516",
-        "count": "4 services",
+        "count": "5 services",
         "head": "Keep it sharp every week",
         "body": "Weekly mowing on a set day, clean edges, and beds that stay tidy. Summer is also "
                 "the best window for washing, because siding and concrete dry fast and stay clean.",
-        "services": ["lawn-mowing", "pressure-washing", "soft-washing", "mulching"],
-        "img": ("mowing", "lawn-mowing-striped-residential", "Striped residential lawn after a summer cut"),
+        "services": ["lawn-mowing", "pressure-washing", "soft-washing", "mulching",
+                     "window-cleaning"],
+        "img": ("mowing", "lawn-mowing-striped-residential",
+                "Striped residential lawn after a summer cut", "Weekly mowing"),
+        "img_inset": ("seasonal", "window-cleaning-service",
+                      "Exterior window cleaning with a water-fed pole", "Window cleaning"),
     },
     {
         "key": "fall", "name": "Fall", "months": "September – November",
         "color": "#B0552A",
-        "count": "4 services",
+        "count": "7 services",
         "head": "Stay ahead of the leaves",
-        "body": "Leaves don't all come down at once, so one visit is rarely enough. We come back "
-                "through the drop, finish with a full cleanup, and leave the property ready for winter.",
-        "services": ["leaf-removal", "spring-fall-cleanups", "lawn-mowing", "mulching"],
-        "img": ("leaf-removal", "leaf-removal-backpack-blower", "Crew clearing fall leaves with backpack blowers"),
+        "body": "Leaves don't all come down at once, so one visit is rarely enough. We work through "
+                "the drop, clean gutters and windows, wash exterior surfaces, and leave the property "
+                "ready for winter.",
+        "services": ["leaf-removal", "spring-fall-cleanups", "lawn-mowing", "soft-washing",
+                     "pressure-washing", "gutter-cleanout", "window-cleaning"],
+        "img": ("leaf-removal", "leaf-removal-backpack-blower",
+                "Crew clearing fall leaves with backpack blowers", "Leaf removal"),
+        "img_inset": ("seasonal", "gutter-cleanout-service",
+                      "Fall gutter cleanout at a two-story home", "Gutter cleanout"),
     },
     {
         "key": "winter", "name": "Winter", "months": "December – February",
         "color": "#4A6B84",
-        "count": "Snow & ice",
-        "head": "Cleared before you leave",
-        "body": "We clear drives, lots, and walks once snow hits an agreed depth. Commercial and "
-                "HOA properties get priority routing and repeat passes while it's still falling.",
-        "services": ["snow-removal"],
-        "img": ("snow-removal", "snow-parking-lot-after", "Commercial lot plowed clear after a snowfall"),
+        "count": "5 services",
+        "head": "Keep winter moving",
+        "body": "We clear snow on an agreed trigger, clean gutters and windows between storms, "
+                "haul away unwanted household items, and handle interior painting while outdoor "
+                "projects are on pause.",
+        "services": ["snow-removal", "gutter-cleanout", "window-cleaning", "junk-removal",
+                     "interior-painting"],
+        "img": ("seasonal", "interior-painting-service",
+                "Interior wall being professionally painted in winter", "Interior painting"),
+        "img_inset": ("seasonal", "junk-removal-service",
+                      "Household junk being loaded into a utility trailer", "Junk removal"),
     },
 ]
 
@@ -357,6 +383,60 @@ SERVICES = [
                   "catch whatever blows in from around them. Wet leaves on a lot are also a real slip "
                   "hazard. We run commercial properties on a tighter rotation for that reason."),
         ],
+        "project_heading": "Five recent leaf-cleanup transformations",
+        "gallery_with_projects": True,
+        "project_groups": [
+            {
+                "title": "Blue house front lawn",
+                "note": "The same front lawn before and after a full leaf clearing.",
+                "photos": [
+                    ("Before", "leaf-removal", "leaf-cleanup-blue-house-front-before",
+                     "Front lawn under heavy late-fall leaf cover"),
+                    ("After", "leaf-removal", "leaf-cleanup-blue-house-front-after",
+                     "The same front lawn cleared down to the turf"),
+                ],
+            },
+            {
+                "title": "Driveway and side lawn",
+                "note": "Leaves cleared from the drive edge and the same side of the property.",
+                "photos": [
+                    ("Before", "leaf-removal", "leaf-cleanup-blue-house-driveway-before",
+                     "Driveway and side lawn before leaf removal"),
+                    ("After", "leaf-removal", "leaf-cleanup-blue-house-driveway-after",
+                     "The same driveway and side lawn after clearing"),
+                ],
+            },
+            {
+                "title": "Back and side yard",
+                "note": "A mature-tree property cleared without leaving leaf litter at the edges.",
+                "photos": [
+                    ("Before", "leaf-removal", "leaf-cleanup-blue-house-side-before",
+                     "Side yard covered with fallen leaves before cleanup"),
+                    ("After", "leaf-removal", "leaf-cleanup-blue-house-side-after",
+                     "The same side yard cleared after leaf removal"),
+                ],
+            },
+            {
+                "title": "Pool and garden beds",
+                "note": "The lawn, walk, and bed edges cleared around the same pool area.",
+                "photos": [
+                    ("Before", "leaf-removal", "leaf-cleanup-pool-yard-before",
+                     "Pool yard and garden beds before leaf removal"),
+                    ("After", "leaf-removal", "leaf-cleanup-pool-yard-after",
+                     "The same pool yard and beds after clearing"),
+                ],
+            },
+            {
+                "title": "Roadside property",
+                "note": "A long leaf windrow removed from the slope and roadside edge.",
+                "photos": [
+                    ("Before", "leaf-removal", "leaf-cleanup-roadside-house-before",
+                     "Roadside lawn with a heavy leaf windrow before clearing"),
+                    ("After", "leaf-removal", "leaf-cleanup-roadside-house-after",
+                     "The same roadside lawn cleared and opened back up"),
+                ],
+            },
+        ],
         "gallery": [
             # Ordered as the job runs: what we arrive to, the work, the result.
             ("leaf-removal", "leaf-covered-yard", "Heavy leaf cover before clearing"),
@@ -503,6 +583,30 @@ SERVICES = [
             ("soft-washing", "soft-wash-siding-before", "soft-wash-siding-after",
              "Vinyl siding", "Years of algae on a shaded elevation, removed without pressure damage"),
         ],
+        "project_heading": "More siding transformations",
+        "gallery_with_projects": True,
+        "project_groups": [
+            {
+                "title": "Two-story rear elevation",
+                "note": "The same full rear elevation before and after a low-pressure wash.",
+                "photos": [
+                    ("Before", "soft-washing", "soft-wash-two-story-siding-before",
+                     "Two-story vinyl siding streaked with algae before soft washing"),
+                    ("After", "soft-washing", "soft-wash-two-story-siding-after",
+                     "The same rear elevation clean after soft washing"),
+                ],
+            },
+            {
+                "title": "Gray side elevation",
+                "note": "Organic growth removed from the same gable wall without high pressure.",
+                "photos": [
+                    ("Before", "soft-washing", "soft-wash-gray-siding-before",
+                     "Gray vinyl siding with visible organic staining before washing"),
+                    ("After", "soft-washing", "soft-wash-gray-siding-after",
+                     "The same gray siding clean after soft washing"),
+                ],
+            },
+        ],
         "gallery": [
             ("soft-washing", "soft-wash-siding-before", "Algae streaking on shaded vinyl siding"),
             ("soft-washing", "soft-wash-siding-after", "The same elevation after soft washing"),
@@ -562,6 +666,30 @@ SERVICES = [
              "Concrete driveway", "The same driveway, the same morning: grey and stained, then even"),
             ("pressure-washing", "awning-pressure-washing-before", "awning-pressure-washing-after",
              "Metal awning", "Spotted and weather-stained metal brought back to white"),
+        ],
+        "project_heading": "More pressure-washing results",
+        "gallery_with_projects": True,
+        "project_groups": [
+            {
+                "title": "Front walk and landing",
+                "note": "The same concrete approach before and after surface cleaning.",
+                "photos": [
+                    ("Before", "pressure-washing", "pressure-wash-front-walk-before",
+                     "Stained front walk and landing before pressure washing"),
+                    ("After", "pressure-washing", "pressure-wash-front-walk-after",
+                     "The same concrete walk clean after pressure washing"),
+                ],
+            },
+            {
+                "title": "Outdoor kitchen counter",
+                "note": "A weathered concrete counter restored beside the same grill.",
+                "photos": [
+                    ("Before", "pressure-washing", "pressure-wash-outdoor-counter-before",
+                     "Outdoor concrete counter stained before cleaning"),
+                    ("After", "pressure-washing", "pressure-wash-outdoor-counter-after",
+                     "The same outdoor counter clean after pressure washing"),
+                ],
+            },
         ],
         "gallery": [
             ("pressure-washing", "driveway-pressure-washing-before", "Driveway before washing"),
@@ -676,6 +804,10 @@ GALLERY_EXCLUDE = {
     "mulch-bed-brick-wall",
     "mulch-bed-spring-shrubs",
     "mulch-install-front-entry",
+    "window-cleaning-service",
+    "gutter-cleanout-service",
+    "junk-removal-service",
+    "interior-painting-service",
 }
 
 

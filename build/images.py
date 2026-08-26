@@ -45,6 +45,21 @@ CROPS = {
     "mulch-refresh-after": (0.74, 0.74, 0.04, 0.22),
 }
 
+# These camera-roll exports are screenshots with solid black letterboxing
+# around the actual photo. Trim only those known sources so the untouched
+# iPhone originals elsewhere in the library keep their full frame.
+LETTERBOX_TRIM = {
+    "leaf-cleanup-blue-house-front-before", "leaf-cleanup-blue-house-front-after",
+    "leaf-cleanup-blue-house-driveway-before", "leaf-cleanup-blue-house-driveway-after",
+    "leaf-cleanup-blue-house-side-before", "leaf-cleanup-blue-house-side-after",
+    "leaf-cleanup-pool-yard-before", "leaf-cleanup-pool-yard-after",
+    "leaf-cleanup-roadside-house-before", "leaf-cleanup-roadside-house-after",
+    "soft-wash-two-story-siding-before", "soft-wash-two-story-siding-after",
+    "soft-wash-gray-siding-before", "soft-wash-gray-siding-after",
+    "pressure-wash-front-walk-before", "pressure-wash-front-walk-after",
+    "pressure-wash-outdoor-counter-before", "pressure-wash-outdoor-counter-after",
+}
+
 
 def find_src(name):
     for ext in ("heic", "HEIC", "jpeg", "jpg", "JPG", "png"):
@@ -90,6 +105,15 @@ def apply_crop(im, slug):
     return im.crop((left, top, min(w, right), min(h, bottom)))
 
 
+def trim_letterbox(im, slug):
+    """Remove the solid black bars from known camera-roll screenshots."""
+    if slug not in LETTERBOX_TRIM:
+        return im
+    light = im.convert("L").point(lambda p: 255 if p > 8 else 0)
+    box = light.getbbox()
+    return im.crop(box) if box else im
+
+
 def main():
     manifest = {}
     made = 0
@@ -98,7 +122,8 @@ def main():
         if not src:
             print("MISSING:", name)
             continue
-        im = apply_crop(load_upright(src), slug)
+        im = load_upright(src)
+        im = apply_crop(trim_letterbox(im, slug), slug)
         w0, h0 = im.size
         os.makedirs(os.path.join(OUT, cat), exist_ok=True)
 

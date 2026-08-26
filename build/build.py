@@ -11,7 +11,7 @@ from html import escape as esc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
+from data import (SITE, SERVICES, AREAS, SEASONS, SEASONAL_SERVICE_NAMES, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
                   GALLERY_EXTRA, GALLERY_EXCLUDE, STAGING)  # noqa
 
 OUT = os.path.join(os.path.dirname(HERE), "site")
@@ -541,10 +541,20 @@ def page_home():
                  f'<span class="season__mo">{esc(s["months"])}</span>'
                  f'<span class="season__nm">{esc(s["name"])}</span>'
                  f'<span class="season__ct">{esc(s["count"])}</span></button>')
-        chips = "".join(
-            f'<a class="chip" href="services/{sl}.html"><span class="dot"></span>{esc(SVC_BY_SLUG[sl]["name"])}</a>'
-            for sl in s["services"])
-        cat, slug, alt = s["img"]
+        chips = ""
+        for sl in s["services"]:
+            if sl in SVC_BY_SLUG:
+                label, href = SVC_BY_SLUG[sl]["name"], f"services/{sl}.html"
+            else:
+                label, href = SEASONAL_SERVICE_NAMES[sl], "contact.html"
+            chips += f'<a class="chip" href="{href}"><span class="dot"></span>{esc(label)}</a>'
+        cat, slug, alt, img_label = s["img"]
+        inset = ""
+        if s.get("img_inset"):
+            icat, islug, ialt, ilabel = s["img_inset"]
+            inset = (f'<div class="seasons__fig-inset">'
+                     f'{picture(icat, islug, ialt, depth, sizes="(max-width:860px) 34vw, 18vw")}'
+                     f'<span>{esc(ilabel)}</span></div>')
         panels += f"""<div class="seasons__panel" id="panel-{s['key']}" role="tabpanel"
              aria-labelledby="seas-{s['key']}" style="--seas:{s['color']}" hidden>
           <div class="seasons__body">
@@ -553,7 +563,8 @@ def page_home():
             <p>{esc(s['body'])}</p>
             <div class="seasons__list">{chips}</div>
           </div>
-          <div class="seasons__fig">{picture(cat, slug, alt, depth, sizes="(max-width:860px) 92vw, 46vw")}</div>
+          <div class="seasons__fig">{picture(cat, slug, alt, depth, sizes="(max-width:860px) 92vw, 46vw")}
+            <span class="seasons__fig-label">{esc(img_label)}</span>{inset}</div>
         </div>"""
 
     svc_rows = ""
@@ -879,15 +890,17 @@ def page_service(s):
           </div>
           <div class="project-pair__photos">{project_photos}</div>
         </article>"""
+        project_eyebrow = s.get("project_eyebrow", "Connected project photos")
+        project_heading = s.get("project_heading", "More mulch transformations")
         projects = f"""<section class="section">
       <div class="wrap">
-        <div class="shead"><span class="eyebrow">Connected project photos</span>
-          <h2 class="display h-2">More mulch transformations</h2></div>
+        <div class="shead"><span class="eyebrow">{esc(project_eyebrow)}</span>
+          <h2 class="display h-2">{esc(project_heading)}</h2></div>
         <div class="project-pairs">{project_cards}</div>
       </div></section>"""
 
     gal = ""
-    if s.get("gallery") and not s.get("project_groups"):
+    if s.get("gallery") and (not s.get("project_groups") or s.get("gallery_with_projects")):
         figs = "".join(
             f'<a class="pcard rv" href="../gallery.html">'
             f'{picture(c, sl, alt, depth, sizes="(max-width:700px) 92vw, 30vw")}'
