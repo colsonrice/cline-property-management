@@ -210,15 +210,28 @@
   var gf = document.querySelector('.gal-filter');
   if (gf) {
     var groups = Array.prototype.slice.call(document.querySelectorAll('.gal__group'));
-    gf.addEventListener('click', function (e) {
-      var b = e.target.closest('button');
-      if (!b) return;
-      var key = b.dataset.filter;
-      gf.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+    var selectGallery = function (key, updateUrl) {
+      var button = gf.querySelector('button[data-filter="' + key + '"]') || gf.querySelector('button[data-filter="all"]');
+      key = button.dataset.filter;
+      gf.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === button)); });
       groups.forEach(function (g) {
         g.hidden = key !== 'all' && g.dataset.cat !== key;
       });
+      if (updateUrl && window.history && window.URL) {
+        var url = new URL(window.location.href);
+        if (key === 'all') url.searchParams.delete('filter');
+        else url.searchParams.set('filter', key);
+        history.replaceState(null, '', url.pathname + url.search + url.hash);
+      }
+      button.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    };
+    gf.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b) return;
+      selectGallery(b.dataset.filter, true);
     });
+    var requestedFilter = new URLSearchParams(window.location.search).get('filter') || 'all';
+    selectGallery(requestedFilter, false);
   }
 
   /* ---------- Quote form ---------- */

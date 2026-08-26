@@ -11,8 +11,8 @@ from html import escape as esc
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from data import (SITE, SERVICES, AREAS, SEASONS, SEASONAL_SERVICE_NAMES, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
-                  GALLERY_EXTRA, GALLERY_EXCLUDE, STAGING)  # noqa
+from data import (SITE, SERVICES, AREAS, SEASONS, HOME_FAQS, PROCESS, MOW_AREAS, VIDEOS, VIDEO_BY_SERVICE,
+                  GALLERY_EXTRA, GALLERY_EXCLUDE, GALLERY_FILTERS, GALLERY_SHOWCASE, STAGING)  # noqa
 
 OUT = os.path.join(os.path.dirname(HERE), "site")
 IMG = os.path.join(OUT, "assets", "img")
@@ -22,6 +22,14 @@ AREA_NAMES = [a["name"] for a in AREAS]
 AREA_SENTENCE = ", ".join(AREA_NAMES[:-1]) + ", and " + AREA_NAMES[-1]
 AREA_DOTS = " · ".join(AREA_NAMES)
 MOW_SENTENCE = ", ".join(MOW_AREAS[:-1]) + ", and " + MOW_AREAS[-1]
+SERVICE_COUNT = len(SERVICES)
+BROAD_SERVICE_COUNT = SERVICE_COUNT - 1
+COUNT_WORDS = {
+    10: "Ten",
+    11: "Eleven",
+}
+SERVICE_COUNT_WORD = COUNT_WORDS.get(SERVICE_COUNT, str(SERVICE_COUNT))
+BROAD_SERVICE_COUNT_WORD = COUNT_WORDS.get(BROAD_SERVICE_COUNT, str(BROAD_SERVICE_COUNT))
 
 
 def asset_ver(relpath):
@@ -280,9 +288,9 @@ def local_business_ld():
         "telephone": SITE["phone_display"],
         "email": SITE["email"],
         "image": SITE["base"] + "/assets/img/mowing/lawn-mowing-striped-residential-800.jpg",
-        "description": ("Year-round property care across Greater Indianapolis. Six services are "
-                        "available throughout the service area; mowing is limited to Whitestown, "
-                        "Zionsville, and West Carmel."),
+        "description": (f"Year-round property care across Greater Indianapolis. {BROAD_SERVICE_COUNT} "
+                        "services are available throughout the service area; mowing is limited to "
+                        "Whitestown, Zionsville, and West Carmel."),
         "address": {
             "@type": "PostalAddress",
             "addressLocality": SITE["city"],
@@ -294,7 +302,7 @@ def local_business_ld():
         "knowsAbout": [s["name"] for s in SERVICES],
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Grounds care services",
+            "name": "Property care services",
             "itemListElement": [
                 {"@type": "Offer",
                  "itemOffered": {"@type": "Service", "name": s["name"], "description": s["short"],
@@ -529,8 +537,8 @@ def render_body(blocks, depth):
 def page_home():
     depth = 0
     title = "Property Care Across Greater Indianapolis | Cline"
-    desc = ("Year-round property care across Greater Indianapolis, with mowing in Whitestown, "
-            "Zionsville, and West Carmel. Free estimates from Cline.")
+    desc = (f"{SERVICE_COUNT} year-round property services across Greater Indianapolis, with mowing "
+            "in Whitestown, Zionsville, and West Carmel. Free estimates from Cline.")
 
     # season rail
     rail = ""
@@ -543,10 +551,8 @@ def page_home():
                  f'<span class="season__ct">{esc(s["count"])}</span></button>')
         chips = ""
         for sl in s["services"]:
-            if sl in SVC_BY_SLUG:
-                label, href = SVC_BY_SLUG[sl]["name"], f"services/{sl}.html"
-            else:
-                label, href = SEASONAL_SERVICE_NAMES[sl], "contact.html"
+            svc = SVC_BY_SLUG[sl]
+            label, href = svc["name"], f"services/{sl}.html"
             chips += f'<a class="chip" href="{href}"><span class="dot"></span>{esc(label)}</a>'
         cat, slug, alt, img_label = s["img"]
         inset = ""
@@ -606,15 +612,15 @@ def page_home():
     <div class="hero-s__body">
       <span class="hero-s__kicker rise d1"><span class="dot"></span>{esc(SITE['areas_short'])}</span>
       <h1 class="display h-hero rise d2">Property care,<br><em>done right.</em></h1>
-      <p class="hero-s__lede rise d3">Mowing, mulch, seasonal cleanups, leaf and snow removal, and exterior washing for homes, businesses, HOAs, and municipal properties.</p>
+      <p class="hero-s__lede rise d3">Year-round grounds care, exterior cleaning, cleanouts, interior painting, and snow service for homes, businesses, HOAs, and municipal properties.</p>
       <div class="hero-s__acts rise d4">
         <a class="btn btn--primary" href="contact.html">Get a free estimate {icon('arrow','arw')}</a>
         <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
       </div>
       <div class="hero-s__foot rise d5">
-        <div class="hero-s__stat"><b>Complete every visit</b><span>Edge · trim · blow off</span></div>
-        <div class="hero-s__stat"><b>One crew, all year</b><span>Grounds care through snow</span></div>
-        <div class="hero-s__stat"><b>Fully insured</b><span>Residential &amp; commercial</span></div>
+        <div class="hero-s__stat"><b>20 years of experience</b><span>Hands-on property care</span></div>
+        <div class="hero-s__stat"><b>One call, all year</b><span>Eleven coordinated services</span></div>
+        <div class="hero-s__stat"><b>Fully insured</b><span>Homes · businesses · HOAs</span></div>
       </div>
     </div>
     <div class="hero-s__fig">
@@ -669,10 +675,10 @@ def page_home():
       <div class="shead__top">
         <div>
           <span class="eyebrow">What we do</span>
-          <h2 class="display h-1" style="margin-top:.7rem">Seven services,<br>one phone number</h2>
+          <h2 class="display h-1" style="margin-top:.7rem">{SERVICE_COUNT_WORD} services,<br>one phone number</h2>
         </div>
-        <p>Our own crew does all of it. You won't be handed off to a subcontractor
-        you've never met.</p>
+        <p>One contact for recurring grounds care, one-time cleanup, washing, hauling,
+        painting, and winter service.</p>
       </div>
     </div>
     <div class="svc-list rv">{svc_rows}</div>
@@ -742,10 +748,10 @@ def page_home():
       <div class="shead__top">
         <div>
           <span class="eyebrow">Service area</span>
-          <h2 class="display h-1" style="margin-top:.7rem">Ten communities.<br>Six services throughout.</h2>
+          <h2 class="display h-1" style="margin-top:.7rem">Ten communities.<br>{BROAD_SERVICE_COUNT_WORD} services throughout.</h2>
         </div>
-        <p>Mulching, seasonal cleanups, leaf removal, snow removal, soft washing, and pressure washing
-        cover all ten communities. Mowing is limited to {esc(MOW_SENTENCE)}.</p>
+        <p>Every service except mowing covers all ten communities. Mowing is limited to
+        {esc(MOW_SENTENCE)} so recurring routes stay reliable.</p>
       </div>
     </div>
     <div class="service-city-grid rv">{area_cards}</div>
@@ -773,9 +779,9 @@ def page_home():
 
 def page_services_index():
     depth = 1
-    title = "Our Services | Lawn, Mulch, Snow & Washing | Cline"
-    desc = ("Seven property care services across Greater Indianapolis, including mulch, cleanups, "
-            "leaf and snow removal, exterior washing, and mowing in select communities.")
+    title = "Our Services | Year-Round Property Care | Cline"
+    desc = (f"Explore {SERVICE_COUNT} property services across Greater Indianapolis, from grounds care "
+            "and exterior cleaning to hauling, interior painting, snow service, and more.")
     cards = ""
     for s in SERVICES:
         cat, slug = s["hero"]
@@ -792,8 +798,8 @@ def page_services_index():
     {crumbs([("Home","index.html"),("Services",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Services</span>
     <h1 class="display h-1">Everything the property needs, from one crew.</h1>
-    <p>Seven services covering all four seasons — so you're not chasing a different vendor
-    every time the weather changes.</p>
+    <p>{SERVICE_COUNT_WORD} services covering all four seasons — one reliable contact for the
+    property inside and out.</p>
     </div>
     <div class="phead__fig">{picture('mulching','mulch-install-front-entry','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
@@ -901,8 +907,9 @@ def page_service(s):
 
     gal = ""
     if s.get("gallery") and (not s.get("project_groups") or s.get("gallery_with_projects")):
+        gallery_filter = "mowing" if s["slug"] == "lawn-mowing" else s["slug"]
         figs = "".join(
-            f'<a class="pcard rv" href="../gallery.html">'
+            f'<a class="pcard rv" href="../gallery.html?filter={gallery_filter}">'
             f'{picture(c, sl, alt, depth, sizes="(max-width:700px) 92vw, 30vw")}'
             f'<span class="pcard__cap"><span>{esc(alt)}</span></span></a>'
             for c, sl, alt in s["gallery"])
@@ -920,11 +927,16 @@ def page_service(s):
         area_note = f"""<div class="pricebox rv" style="margin-top:2rem">
       <span class="tag">Mowing service area</span>
       <p style="margin-top:.8rem">We mow in <strong>{esc(", ".join(MOW_AREAS[:-1]))}, and {esc(MOW_AREAS[-1])}</strong>.
-      Mowing routes stay tight so we can hold a set day of the week. Our other six services
-      also cover <strong>Westfield</strong>.</p>
+      Mowing routes stay tight so we can hold a set day of the week. Our other {BROAD_SERVICE_COUNT}
+      services cover all ten communities in the broader service area.</p>
     </div>"""
 
+    gallery_filter = "mowing" if s["slug"] == "lawn-mowing" else s["slug"]
     photo_note = ""
+    if not s.get("gallery") and not s.get("project_groups") and not s.get("beforeafter"):
+        photo_note = (f'<p class="rv" style="margin-top:1.8rem">'
+                      f'<a class="btn btn--solid-dark" href="../gallery.html?filter={gallery_filter}">'
+                      f'See {esc(s["name"])} in Our Work {icon("arrow", "arw")}</a></p>')
 
     # Some heroes need their focal point moved: the 16/9 slot on mobile crops a
     # portrait shot hard, and the subject is not always centred.
@@ -955,7 +967,7 @@ def page_service(s):
       <a class="btn btn--ghost" href="tel:{SITE['phone_href']}">{icon('phone','')} {SITE['phone_display']}</a>
     </div>
     </div>
-    <div class="phead__fig"{fig_pos}>{picture(cat, hslug, "", depth, sizes="(max-width:900px) 100vw, 46vw", eager=True)}</div>
+    <div class="phead__fig"{fig_pos}>{picture(cat, hslug, s["hero_alt"], depth, sizes="(max-width:900px) 100vw, 46vw", eager=True)}</div>
   </div>
 </section>
 
@@ -1007,14 +1019,9 @@ def page_area_redirect():
 def page_gallery():
     depth = 0
     title = "Our Work | Project Photo Gallery | Cline"
-    desc = ("Real project photos from Cline Property Management: mowing, mulching, leaf removal, "
-            "commercial grounds care and exterior washing in our Central Indiana service area.")
-    cats = [
-        ("all", "Everything"), ("mowing", "Mowing"), ("mulching", "Mulching"),
-        ("leaf-removal", "Leaf Removal"), ("snow-removal", "Snow Removal"),
-        ("commercial", "Commercial & HOA"),
-        ("pressure-washing", "Pressure Washing"), ("soft-washing", "Soft Washing"),
-    ]
+    desc = (f"Browse project photos and service examples across {SERVICE_COUNT} property services, "
+            "including grounds care, washing, cleanouts, hauling and painting.")
+    cats = [("all", "Everything")] + GALLERY_FILTERS
     cat_labels = dict(cats)
     btns = "".join(
         f'<button data-filter="{k}" aria-pressed="{"true" if k=="all" else "false"}">{esc(lbl)}</button>'
@@ -1026,8 +1033,7 @@ def page_gallery():
     # backwards; and swept leftovers landed in a clump at the end instead of
     # with their own category. Collect everything first, then group and order
     # deliberately.
-    CAT_ORDER = ["mowing", "mulching", "leaf-removal", "snow-removal", "commercial",
-                 "pressure-washing", "soft-washing"]
+    CAT_ORDER = [key for key, _label in GALLERY_FILTERS]
     PHASE = {"before": 0, "in-progress": 1, "during": 1, "after": 2}
 
     # Several images appear in more than one service's list -- the leaf shots
@@ -1036,8 +1042,11 @@ def page_gallery():
     # to the top of the leaf-removal group ahead of its own before shots. Let
     # the service that owns the category claim its images first.
     CAT_OWNER = {"mowing": "lawn-mowing", "mulching": "mulching",
+                 "spring-fall-cleanups": "spring-fall-cleanups",
                  "leaf-removal": "leaf-removal", "soft-washing": "soft-washing",
-                 "pressure-washing": "pressure-washing", "snow-removal": "snow-removal"}
+                 "pressure-washing": "pressure-washing", "snow-removal": "snow-removal",
+                 "window-cleaning": "window-cleaning", "gutter-cleanout": "gutter-cleanout",
+                 "junk-removal": "junk-removal", "interior-painting": "interior-painting"}
 
     # A gallery tile is the wrong unit for a documented transformation. Build
     # the known comparisons first so their photos share one card and can never
@@ -1074,7 +1083,17 @@ def page_gallery():
             })
             connected_slugs.update((before, after))
 
+    # Start with the explicit service taxonomy. Asset folders describe where a
+    # file lives; gallery groups describe what a visitor is shopping for. They
+    # are intentionally separate for seasonal cleanups and the four newer
+    # services, whose images live in shared source folders.
     items, seen = [], set()
+    for group_cat, showcase in GALLERY_SHOWCASE.items():
+        for asset_cat, sl, alt in showcase:
+            if sl in connected_slugs or sl in seen:
+                continue
+            seen.add(sl)
+            items.append((group_cat, asset_cat, sl, alt))
     for owned_only in (True, False):
         for svc in SERVICES:
             for c, sl, alt in svc.get("gallery", []):
@@ -1084,7 +1103,7 @@ def page_gallery():
                 if owned_only != owns:
                     continue
                 seen.add(sl)
-                items.append((c, sl, alt))
+                items.append((c, c, sl, alt))
     for c in sorted(os.listdir(IMG)):
         d = os.path.join(IMG, c)
         if not os.path.isdir(d):
@@ -1096,15 +1115,15 @@ def page_gallery():
             if sl in seen or sl in connected_slugs or sl in GALLERY_EXCLUDE:
                 continue
             seen.add(sl)
-            items.append((c, sl, GALLERY_EXTRA.get(sl) or sl.replace("-", " ").capitalize()))
+            items.append((c, c, sl, GALLERY_EXTRA.get(sl) or sl.replace("-", " ").capitalize()))
 
     by_cat = {}
-    for c, sl, alt in items:
-        by_cat.setdefault(c, []).append((sl, alt))
+    for group_cat, asset_cat, sl, alt in items:
+        by_cat.setdefault(group_cat, []).append((asset_cat, sl, alt))
 
     def sequenced(lst):
         """Lead with comparison pairs, kept adjacent in job order."""
-        pos = {sl: i for i, (sl, _) in enumerate(lst)}
+        pos = {sl: i for i, (_asset_cat, sl, _alt) in enumerate(lst)}
 
         def split(sl):
             m = re.match(r"^(.*?)-(before|after|in-progress|during)$", sl)
@@ -1112,13 +1131,13 @@ def page_gallery():
 
         anchor = {}
         stem_count = {}
-        for sl, _ in lst:
+        for _asset_cat, sl, _alt in lst:
             stem, _p = split(sl)
             anchor[stem] = min(anchor.get(stem, len(lst) + 1), pos[sl])
             stem_count[stem] = stem_count.get(stem, 0) + 1
         return sorted(lst, key=lambda t: (
-            0 if stem_count[split(t[0])[0]] > 1 else 1,
-            anchor[split(t[0])[0]], split(t[0])[1], pos[t[0]],
+            0 if stem_count[split(t[1])[0]] > 1 else 1,
+            anchor[split(t[1])[0]], split(t[1])[1], pos[t[1]],
         ))
 
     def project_card(project):
@@ -1143,7 +1162,7 @@ def page_gallery():
     for c in CAT_ORDER + [k for k in sorted(all_cats) if k not in CAT_ORDER]:
         projects = "".join(project_card(project) for project in connected.get(c, []))
         figs = ""
-        for sl, alt in sequenced(by_cat.get(c, [])):
+        for asset_cat, sl, alt in sequenced(by_cat.get(c, [])):
             phase = ""
             phase_class = ""
             if sl.endswith("-before-after"):
@@ -1159,7 +1178,7 @@ def page_gallery():
             phase_html = (f'<span class="gal__phase gal__phase--{phase_class}">{phase}</span>'
                           if phase else "")
             figs += (f'<figure data-cat="{c}">'
-                     f'{picture(c, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:1320px) 46vw, 600px")}'
+                     f'{picture(asset_cat, sl, alt, depth, sizes="(max-width:520px) 92vw, (max-width:1320px) 46vw, 600px")}'
                      f'<figcaption>{phase_html}<span>{esc(alt)}</span></figcaption></figure>')
         if projects or figs:
             count = len(by_cat.get(c, [])) + sum(len(p["photos"]) for p in connected.get(c, []))
@@ -1186,8 +1205,8 @@ def page_gallery():
     <div class="phead__in">
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
-    <h1 class="display h-1">View our work</h1>
-    <p>Work from across all seven services, around Greater Indianapolis.</p>
+    <h1 class="display h-1">See the work, service by service.</h1>
+    <p>Browse completed work and service examples across all {SERVICE_COUNT} services in Greater Indianapolis.</p>
     </div>
     <div class="phead__fig">{picture('leaf-removal','leaf-vacuum-truck-curb','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
@@ -1195,7 +1214,7 @@ def page_gallery():
 
 <section class="section">
   <div class="wrap">
-    <div class="gal-filter">{btns}</div>
+    <div class="gal-filter" aria-label="Filter work by service">{btns}</div>
     <div class="gal">{groups}</div>
   </div>
 </section>
@@ -1210,8 +1229,8 @@ def page_gallery():
 def page_about():
     depth = 0
     title = "About Cline Property Management | Central Indiana"
-    desc = ("A local grounds care company serving Greater Indianapolis with landscape care, cleanups, "
-            "snow removal, exterior washing, and mowing in select communities.")
+    desc = (f"Meet Cline Property Management: 20 years of hands-on experience and {SERVICE_COUNT} "
+            "year-round property services for homes, businesses, HOAs, and municipalities.")
     steps = "".join(f'<div class="step"><div><h3>{esc(t)}</h3><p>{esc(d)}</p></div></div>' for t, d in PROCESS)
     ld = [breadcrumb_ld([("Home", "/"), ("About", "/about.html")])]
     return head(title, desc, depth, "/about.html", extra_ld=ld) + header(depth, "about") + f"""
@@ -1222,7 +1241,7 @@ def page_about():
     {crumbs([("Home","index.html"),("About",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">About</span>
     <h1 class="display h-1">One crew. The whole property. All year.</h1>
-    <p>Cline Property Management provides year-round property care across Greater Indianapolis.</p>
+    <p>Year-round property care across Greater Indianapolis, backed by 20 years of hands-on experience.</p>
     </div>
     <div class="phead__fig">{picture('commercial','commercial-median-crew','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>
@@ -1242,8 +1261,8 @@ def page_about():
           where the sprinkler heads are, and they know what it's supposed to look like.</p>
           <h2>Who we work for</h2>
           <p>We work for homeowners, businesses, HOAs, and municipalities in {esc(AREA_SENTENCE)}.
-          Mulching, cleanups, leaf removal, snow removal, soft washing, and pressure washing are
-          available throughout that service area. Mowing is limited to {esc(MOW_SENTENCE)}.</p>
+          Ten services — everything except mowing — are available throughout that service area.
+          Mowing is limited to {esc(MOW_SENTENCE)}.</p>
           <p>Those are genuinely different jobs. A homeowner wants their Saturday back. An HOA board
           wants the entrance to look right and the invoices to match the contract. A property manager
           wants a certificate of insurance on file and someone who answers the phone. We're set up
@@ -1269,6 +1288,7 @@ def page_about():
             <dl class="kv"><dt>Service area</dt><dd>{esc(AREA_SENTENCE)}</dd></dl>
             <dl class="kv"><dt>Mowing area</dt><dd>{esc(MOW_SENTENCE)}</dd></dl>
             <dl class="kv"><dt>Property types</dt><dd>Residential · Commercial · HOA · Municipal</dd></dl>
+            <dl class="kv"><dt>Experience</dt><dd>20 years of hands-on property care</dd></dl>
             <dl class="kv"><dt>Insurance</dt><dd>Certificates available on request</dd></dl>
           </div>
         </div>
@@ -1560,7 +1580,7 @@ def main():
         f"# {SITE['name']}",
         "",
         f"> Grounds care and property maintenance in {SITE['city']}, {SITE['region_long']}, "
-        f"serving Greater Indianapolis. Seven services covering all four seasons for "
+        f"serving Greater Indianapolis. {SERVICE_COUNT} services covering all four seasons for "
         f"residential, commercial, HOA and municipal properties.",
         "",
         "## Contact",
@@ -1584,14 +1604,14 @@ def main():
         "## Pages",
         "",
         f"- [Home]({SITE['base']}/): overview, services by season, service area",
-        f"- [All services]({SITE['base']}/services/): the seven services in one place",
+        f"- [All services]({SITE['base']}/services/): all {SERVICE_COUNT} services in one place",
         f"- [Our work]({SITE['base']}/gallery.html): project photographs by service",
         f"- [About]({SITE['base']}/about.html): how the company operates",
         f"- [Contact]({SITE['base']}/contact.html): estimate request form",
         "",
         "## Notes for assistants",
         "",
-        "- Mowing has a narrower service area than the other six services. Do not",
+        f"- Mowing has a narrower service area than the other {BROAD_SERVICE_COUNT} services. Do not",
         f"  tell someone outside {mow} that we mow; the other services do reach them.",
         "- Estimates are free. The fastest route to a person is the phone number above.",
         "- Photographs are of work across the service area. Do not attribute any",

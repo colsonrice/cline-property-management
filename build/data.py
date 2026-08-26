@@ -22,21 +22,11 @@ SITE = {
     "areas_short": "Whitestown · Greater Indianapolis",
 }
 
-# The site currently lives on a borrowed GitHub Pages domain. Keep it out of
-# the search index until it sits on a real Cline domain -- otherwise Google
-# builds ranking authority at an address that is going to change, and the
-# listings show someone else's brand in the URL.
-# Flip to False, rebuild and redeploy once SITE["base"] is the real domain.
+# Keep staging builds out of the search index. Production uses the real Cline
+# domain and should remain indexable.
 STAGING = False
 
 MOW_AREAS = ["Whitestown", "Zionsville", "West Carmel"]
-
-SEASONAL_SERVICE_NAMES = {
-    "window-cleaning": "Window Cleaning",
-    "gutter-cleanout": "Gutter Cleanout",
-    "junk-removal": "Junk Removal",
-    "interior-painting": "Interior Painting",
-}
 
 SEASONS = [
     {
@@ -157,9 +147,8 @@ SERVICES = [
              "We mow in Whitestown, Zionsville, and West Carmel. Mowing routes stay tight so we can "
              "hold a set day of the week."),
             ("Do you mow in Westfield?",
-             "No. Westfield is outside our mowing routes. Our other six services -- mulching, cleanups, "
-             "leaf removal, snow removal, soft washing, and pressure washing -- cover all ten communities "
-             "in our broader service area."),
+             "No. Westfield is outside our mowing routes. Our other ten services cover all ten "
+             "communities in our broader service area."),
             ("Weekly or every other week?",
              "Weekly is best during the main growing season. Bi-weekly service can work when growth slows."),
             ("Do I need to be home?",
@@ -716,40 +705,216 @@ SERVICES = [
              "in one day. Bundling the visit costs less than booking them separately."),
         ],
     },
+    {
+        "slug": "window-cleaning",
+        "name": "Window Cleaning",
+        "nav": "Window Cleaning",
+        "short": "Clear glass, clean frames, and a tidy finish inside or out.",
+        "title": "Window Cleaning | Greater Indianapolis | Cline",
+        "desc": "Professional interior and exterior window cleaning for homes and businesses across "
+                "Greater Indianapolis. Free estimates from Cline Property Management.",
+        "hero": ("seasonal", "window-cleaning-service"),
+        "hero_alt": "Exterior window cleaning with a water-fed pole at a residential property",
+        "hero_pos": "50% 48%",
+        "lede": "Clean windows change the light inside and the curb appeal outside. We handle the "
+                "glass carefully, work cleanly around the property, and leave the view streak-free.",
+        "body": [
+            ("h2", "Window cleaning without the mess"),
+            ("p", "The goal is simple: clear glass without drips on the siding, dirty tracks, or a "
+                  "trail through the house. We match the method to the window and the access."),
+            ("ul", [
+                "Exterior glass cleaned from the ground or with safe ladder access",
+                "Interior panes cleaned with floors and furnishings protected",
+                "Frames, sills, and accessible tracks wiped as included in the quote",
+                "Screens removed, cleaned, and reinstalled when requested",
+                "A final glass check from more than one angle before we leave",
+            ]),
+            ("h2", "Exterior and interior service"),
+            ("p", "Some properties only need the outside glass cleaned. Others need an interior and "
+                  "exterior reset. Tell us which rooms or elevations matter most and we will write the "
+                  "scope clearly before the visit."),
+            ("h2", "Stains that need extra work"),
+            ("p", "Paint, mineral deposits, adhesive, and oxidation are different from ordinary dirt. "
+                  "Point them out during the estimate so we can confirm what is removable and choose a "
+                  "method that is safe for the glass and surrounding finish."),
+        ],
+        "faqs": [
+            ("Do you clean inside and outside?",
+             "Yes. We can clean exterior glass only or include interior panes, screens, sills, and "
+             "accessible tracks. The estimate will spell out exactly what is included."),
+            ("Do I need to be home?",
+             "Not for exterior-only work if we have access to the windows and water source. Someone "
+             "will need to provide entry for interior cleaning."),
+            ("Can you reach second-story windows?",
+             "Yes. We use the access method that fits the property, including water-fed poles and safe "
+             "ladder work where appropriate."),
+        ],
+    },
+    {
+        "slug": "gutter-cleanout",
+        "name": "Gutter Cleanout",
+        "nav": "Gutter Cleanout",
+        "short": "Leaves and debris removed so gutters and downspouts can move water again.",
+        "title": "Gutter Cleanout | Greater Indianapolis | Cline",
+        "desc": "Seasonal gutter and downspout cleanout for homes and small commercial properties "
+                "across Greater Indianapolis. Free estimates from Cline.",
+        "hero": ("seasonal", "gutter-cleanout-service"),
+        "hero_alt": "Worker clearing leaves from the gutter of a one-story home",
+        "hero_pos": "50% 25%",
+        "lede": "A gutter does not need to look full to be blocked. We clear the channels, check the "
+                "downspout openings, and get roof water moving away from the property again.",
+        "body": [
+            ("h2", "What a cleanout covers"),
+            ("ul", [
+                "Leaves, seed pods, roof grit, and loose debris removed from gutter runs",
+                "Downspout openings checked and cleared where accessible",
+                "Collected debris bagged or hauled away as agreed in the estimate",
+                "Walks, drives, decks, and siding blown or rinsed clean afterward",
+                "Visible loose fasteners, separation, or drainage concerns pointed out",
+            ]),
+            ("h2", "When to schedule"),
+            ("p", "Late fall is the main cleanout window, after most leaves have dropped. Properties "
+                  "under maples, oaks, or pines may need a second visit, and spring is a good time to "
+                  "clear anything that settled over winter."),
+            ("h2", "Cleanout versus repair"),
+            ("p", "Cleaning restores the flow path. It does not fix a crushed downspout, a gutter that "
+                  "has pulled away from the fascia, or a drainage system pitched the wrong direction. "
+                  "If we see one of those problems, we will show you rather than pretending a cleaning "
+                  "solved it."),
+        ],
+        "faqs": [
+            ("How often should gutters be cleaned?",
+             "Most homes need one thorough fall cleanout. Heavy tree cover can require spring and fall "
+             "service or a second pass after the last leaves drop."),
+            ("Do you clear downspouts too?",
+             "We check and clear accessible downspout openings as part of the cleanout. A buried, broken, "
+             "or disconnected drain line is a separate repair issue."),
+            ("What happens to the debris?",
+             "We collect it and dispose of it according to the scope in your estimate, then clean the "
+             "hard surfaces around the work area."),
+        ],
+    },
+    {
+        "slug": "junk-removal",
+        "name": "Junk Removal",
+        "nav": "Junk Removal",
+        "short": "Non-hazardous household, garage, yard, and property clutter hauled away.",
+        "title": "Junk Removal | Greater Indianapolis | Cline",
+        "desc": "Junk removal for homes, rentals, garages and small commercial properties across "
+                "Greater Indianapolis. Clear estimates and scheduled hauling.",
+        "hero": ("seasonal", "junk-removal-service"),
+        "hero_alt": "Household items being loaded into a utility trailer for junk removal",
+        "hero_pos": "50% 48%",
+        "lede": "The hardest part of clearing a garage, rental, or spare room is often getting the "
+                "pile off the property. Show us what needs to go and we will give you a clear scope.",
+        "body": [
+            ("h2", "Good fits for a removal visit"),
+            ("ul", [
+                "Garage, basement, attic, and storage-area cleanouts",
+                "Furniture, shelving, boxes, and ordinary household clutter",
+                "Rental turnover and move-out debris",
+                "Yard debris and outdoor items that are ready to go",
+                "Small commercial or office cleanouts",
+            ]),
+            ("h2", "A quote based on the actual pile"),
+            ("p", "Volume, weight, access, and disposal requirements all affect a removal. Photos are "
+                  "usually enough for a first estimate. For a larger cleanout, we may need to see the "
+                  "property before we schedule the trailer and crew."),
+            ("h2", "Items that need special handling"),
+            ("p", "Paint, chemicals, fuel, batteries, medical waste, and other hazardous materials do "
+                  "not go into an ordinary junk load. Tell us about unusual or especially heavy items "
+                  "before the visit so we can confirm what we can take and avoid surprises."),
+        ],
+        "faqs": [
+            ("How do you price junk removal?",
+             "The estimate is based on how much space the load uses, how heavy it is, access to the items, "
+             "and any special disposal requirements. Photos help us quote accurately."),
+            ("Do I need to move everything outside first?",
+             "No. We can include carrying items out, but clear access and a quick walkthrough at the start "
+             "help the visit move faster."),
+            ("What can you not take?",
+             "Hazardous materials and certain regulated items need special disposal. Send a list or photos "
+             "and we will confirm the scope before scheduling."),
+        ],
+    },
+    {
+        "slug": "interior-painting",
+        "name": "Interior Painting",
+        "nav": "Interior Painting",
+        "short": "Walls, ceilings, trim, and doors prepared carefully and painted cleanly.",
+        "title": "Interior Painting | Greater Indianapolis | Cline",
+        "desc": "Interior painting for homes, rentals and small commercial spaces across Greater "
+                "Indianapolis, including careful prep, clean lines and tidy work areas.",
+        "hero": ("seasonal", "interior-painting-service"),
+        "hero_alt": "Interior wall being professionally painted with the floor protected",
+        "hero_pos": "50% 50%",
+        "lede": "A good paint job starts before the first coat. We protect the room, repair the small "
+                "surface flaws that would show through, and leave clean lines and an even finish.",
+        "body": [
+            ("h2", "Preparation is part of the finish"),
+            ("ul", [
+                "Floors, fixtures, and nearby furnishings covered before work begins",
+                "Small nail holes and minor surface flaws filled and sanded as scoped",
+                "Walls, ceilings, trim, and doors painted as listed in the estimate",
+                "Clean cut lines at ceilings, corners, windows, and baseboards",
+                "Work areas picked up and returned to usable condition each day",
+            ]),
+            ("h2", "Rooms, rentals, and small commercial spaces"),
+            ("p", "We handle single-room updates, several-room refreshes, rental turnovers, and smaller "
+                  "commercial interiors. The quote identifies the surfaces, number of coats, paint "
+                  "responsibility, and prep so everyone knows what finished means."),
+            ("h2", "Choosing the right finish"),
+            ("p", "Sheen changes both the look and the durability of a room. We can help you match the "
+                  "finish to the space, from lower-sheen living areas to washable kitchens, baths, trim, "
+                  "and doors."),
+        ],
+        "faqs": [
+            ("Do you supply the paint?",
+             "We can include paint in the quote or work with a product you have selected. Brand, color, "
+             "finish, and who supplies it will be written into the estimate."),
+            ("Do I need to empty the room?",
+             "Small items and wall decor should be removed. We will confirm what needs to be moved and "
+             "what can be covered or shifted before the start date."),
+            ("How many coats will it take?",
+             "That depends on the existing color, the new color, surface condition, and paint. The scope "
+             "will state the planned coats and any primer needed for the change."),
+        ],
+    },
 ]
 
 AREAS = [
     {"slug": "whitestown", "name": "Whitestown", "mows": True,
-     "note": "All seven services, mowing included."},
+     "note": "All eleven services, mowing included."},
     {"slug": "zionsville", "name": "Zionsville", "mows": True,
-     "note": "All seven services, mowing included."},
+     "note": "All eleven services, mowing included."},
     {"slug": "indianapolis", "name": "Indianapolis", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "carmel", "name": "Carmel", "mows": True,
-     "note": "All seven services. Mowing: West Carmel."},
+     "note": "All eleven services; mowing in West Carmel."},
     {"slug": "westfield", "name": "Westfield", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "brownsburg", "name": "Brownsburg", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "lebanon", "name": "Lebanon", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "avon", "name": "Avon", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "plainfield", "name": "Plainfield", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
     {"slug": "fishers", "name": "Fishers", "mows": False,
-     "note": "All services except mowing."},
+     "note": "Ten services; mowing is not available."},
 ]
 
 HOME_FAQS = [
     ("What areas do you serve?",
-     "Mulching, seasonal cleanups, leaf removal, snow removal, soft washing, and pressure washing are "
-     "available in Whitestown, Zionsville, Indianapolis, Carmel, Westfield, Brownsburg, Lebanon, Avon, "
-     "Plainfield, and Fishers. Mowing is limited to Whitestown, Zionsville, and West Carmel."),
+     "Ten services—everything except mowing—are available in Whitestown, Zionsville, Indianapolis, "
+     "Carmel, Westfield, Brownsburg, Lebanon, Avon, Plainfield, and Fishers. Mowing is limited to "
+     "Whitestown, Zionsville, and West Carmel."),
     ("Do you work with HOAs and commercial properties?",
      "Yes. We maintain homes, businesses, HOA common areas, and municipal properties."),
     ("Can I get more than one service on the same visit?",
-     "Yes. We can combine services such as cleanup and mulching, or soft washing and pressure washing."),
+     "Yes. We can combine services such as cleanup and mulching, soft washing and pressure washing, or "
+     "window cleaning and gutter cleanout."),
     ("How do I get a quote?",
      "Call or text " + SITE["phone_display"] + ", email us, or use the contact form. Larger commercial "
      "and HOA properties may need a walkthrough."),
@@ -793,6 +958,48 @@ GALLERY_EXTRA = {
     "driveway-pressure-washing-after": "The same driveway after pressure washing",
     "awning-pressure-washing-before": "Weather-stained metal awning before cleaning",
     "awning-pressure-washing-after": "The same awning cleaned back to white",
+    "window-cleaning-service": "Exterior windows cleaned with a water-fed pole",
+    "gutter-cleanout-service": "Seasonal gutter cleanout at a one-story home",
+    "junk-removal-service": "Household items loaded for junk removal",
+    "interior-painting-service": "Interior wall painting with the room protected",
+}
+
+GALLERY_FILTERS = [
+    ("mowing", "Lawn Mowing"),
+    ("mulching", "Mulching"),
+    ("spring-fall-cleanups", "Seasonal Cleanups"),
+    ("leaf-removal", "Leaf Removal"),
+    ("snow-removal", "Snow Removal"),
+    ("soft-washing", "Soft Washing"),
+    ("pressure-washing", "Pressure Washing"),
+    ("window-cleaning", "Window Cleaning"),
+    ("gutter-cleanout", "Gutter Cleanout"),
+    ("junk-removal", "Junk Removal"),
+    ("interior-painting", "Interior Painting"),
+    ("commercial", "Commercial & HOA"),
+]
+
+# The visible gallery taxonomy is about the service a visitor is shopping for,
+# while the asset folder remains about where a file lives. Keeping that split
+# explicit lets seasonal-cleanup photos live with their source images and still
+# appear under a clear Seasonal Cleanups filter.
+GALLERY_SHOWCASE = {
+    "spring-fall-cleanups": [
+        ("leaf-removal", "leaf-removal-raking-pile", "Raking out a heavy fall leaf accumulation"),
+        ("leaf-removal", "leaf-removal-finished-lawn", "Property cleared after a seasonal cleanup"),
+    ],
+    "window-cleaning": [
+        ("seasonal", "window-cleaning-service", "Exterior windows cleaned with a water-fed pole"),
+    ],
+    "gutter-cleanout": [
+        ("seasonal", "gutter-cleanout-service", "Seasonal gutter cleanout at a one-story home"),
+    ],
+    "junk-removal": [
+        ("seasonal", "junk-removal-service", "Household items loaded for junk removal"),
+    ],
+    "interior-painting": [
+        ("seasonal", "interior-painting-service", "Interior wall painting with the room protected"),
+    ],
 }
 
 # Useful source or hero frames that should not appear as standalone showcase
@@ -805,10 +1012,6 @@ GALLERY_EXCLUDE = {
     "mulch-bed-brick-wall",
     "mulch-bed-spring-shrubs",
     "mulch-install-front-entry",
-    "window-cleaning-service",
-    "gutter-cleanout-service",
-    "junk-removal-service",
-    "interior-painting-service",
 }
 
 

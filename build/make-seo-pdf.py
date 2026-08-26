@@ -145,13 +145,13 @@ def build():
     st.append(P("What is on the site", "h2"))
     st.append(table([
         ["", ""],
-        ["27 pages", "A page for each of your seven services, plus home, gallery, about and contact. "
+        ["11 service pages", "A page for each service, plus home, gallery, about and contact. "
                      "Each service page is written to be found on its own."],
         ["10 communities", "Your service area is spelled out, including the part people get wrong: "
                            "mowing is Whitestown, Zionsville and West Carmel only, while your other "
-                           "six services cover all ten."],
-        ["48 photographs", "Sorted by service, every one of them your own work, with the before "
-                           "and after pairs on sliders people can drag."],
+                           "ten services cover all ten."],
+        ["Project gallery", "Real project photos stay grouped by service, before-and-after sets stay "
+                            "together, and newer service examples appear under the right filters."],
         ["3 video clips", "Short, silent, and they do not load until someone scrolls to them, so "
                           "they never slow the site down."],
     ], [1.35 * inch, 5.0 * inch], header=False))
@@ -179,8 +179,8 @@ def build():
                 "show extra detail under your listing instead of a plain blue link.", "body"))
 
     st.append(P("A map of the site, submitted to Google", "h3"))
-    st.append(P("There is a sitemap listing all 12 public pages, and it includes 38 of your "
-                "photographs so they can turn up in Google Images. For a business whose work is "
+    st.append(P("There is a sitemap listing every public page and its key images so they can turn "
+                "up in Google Images. For a business whose work is "
                 "this visual, image search is a real way to get found. I have also verified the "
                 "site with Google Search Console, which is the dashboard that reports how you are "
                 "doing in search.", "body"))
@@ -246,15 +246,15 @@ def build():
          "purpose rather than write something you did not say."]))
 
     st.append(priority_block(
-        "4", "Photographs I am still missing",
-        "Two gaps stand out, and one of them is probably costing you commercial work.",
+        "4", "Real photographs still worth collecting",
+        "The gallery is much stronger now, but two kinds of real project photos would build more trust.",
         ["Snow: one driveway or lot, photographed covered in snow and then again once you "
          "have cleared it, from the same spot both times. That pairing is the strongest "
          "possible advert for snow work and it drops straight into the site.",
-         "You, your crew, or a truck with your name on it. There is currently not one "
-         "photograph of a person or a vehicle on the whole site. For a trade business that "
-         "is the biggest trust gap after reviews.",
-         "Anything from December to February. Your year-round pitch is thin on winter."]))
+         "You, your crew, or a truck with your name on it while work is underway. A clear, "
+         "branded crew photo is one of the strongest trust signals for a trade business.",
+         "Keep taking matched before-and-after photos from the same position. They make the "
+         "result immediately clear and are easy to keep together on the site."]))
 
     st.append(priority_block(
         "5", "Details only you can confirm",
@@ -263,10 +263,10 @@ def build():
          "ask for this before you set foot on site.",
          "Snow: is two inches your actual trigger depth? Same for commercial and residential?",
          "Do you offer both seasonal snow contracts and per-event billing?",
-         "Do you actually clear gutters? It is currently listed under fall cleanups.",
+         "Does gutter cleanout include downspout flushing, or debris removal only? The service "
+         "now has its own page and the scope should stay exact.",
          "Municipal work - do you contract directly, or through a general contractor?",
-         "Your business hours, and how many years you have been going. Both would strengthen "
-         "the site and neither is on it."]))
+         "Your business hours would strengthen the site and can be added once confirmed."]))
 
     # ---- expectations ----
     st.append(P("What to expect, and when", "h2"))

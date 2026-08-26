@@ -12,7 +12,8 @@ from urllib.parse import urlparse, unquote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 sys.path.insert(0, os.path.join(ROOT, "build"))
-from data import SITE as CFG, SERVICES, SEASONS, SEASONAL_SERVICE_NAMES, GALLERY_EXCLUDE  # noqa
+from data import (SITE as CFG, SERVICES, SEASONS, GALLERY_EXCLUDE,
+                  GALLERY_FILTERS, GALLERY_SHOWCASE)  # noqa
 from imagemap import MAP  # noqa
 # Project sites (e.g. GitHub Pages) live under a path prefix; strip it before
 # comparing sitemap <loc> paths with on-disk file paths.
@@ -259,10 +260,10 @@ def main():
                     prob("images", f"{svc['slug']} before/after use identical files: {before}, {after}")
 
     service_slugs = {svc["slug"] for svc in SERVICES}
-    mapped_slugs = {slug for _source, _cat, slug in MAP}
+    mapped_assets = {(cat, slug) for _source, cat, slug in MAP}
     for season in SEASONS:
         for slug in season.get("services", []):
-            if slug not in service_slugs and slug not in SEASONAL_SERVICE_NAMES:
+            if slug not in service_slugs:
                 prob("seasons", f"{season['key']} references unknown service: {slug}")
         expected_count = len(season.get("services", []))
         if season.get("count") != f"{expected_count} services":
@@ -270,9 +271,28 @@ def main():
         for field in ("img", "img_inset"):
             if field not in season:
                 continue
-            _cat, slug, _alt, _label = season[field]
-            if slug not in mapped_slugs:
-                prob("seasons", f"{season['key']} {field} is not mapped: {slug}")
+            cat, slug, _alt, _label = season[field]
+            if (cat, slug) not in mapped_assets:
+                prob("seasons", f"{season['key']} {field} is not mapped: {cat}/{slug}")
+
+    services_index = os.path.join(SITE, "services", "index.html")
+    services_html = open(services_index, encoding="utf-8").read() if os.path.exists(services_index) else ""
+    for svc in SERVICES:
+        service_page = os.path.join(SITE, "services", svc["slug"] + ".html")
+        if not os.path.exists(service_page):
+            prob("services", f"missing page for {svc['slug']}")
+        if f'href="{svc["slug"]}.html"' not in services_html:
+            prob("services/index.html", f"missing service card for {svc['slug']}")
+
+    filter_keys = {key for key, _label in GALLERY_FILTERS}
+    for group_cat, showcase in GALLERY_SHOWCASE.items():
+        if group_cat not in filter_keys:
+            prob("gallery", f"showcase group has no declared filter: {group_cat}")
+        for asset_cat, slug, _alt in showcase:
+            if (asset_cat, slug) not in mapped_assets:
+                prob("gallery", f"showcase image is not mapped: {asset_cat}/{slug}")
+            if slug in GALLERY_EXCLUDE:
+                prob("gallery", f"showcase image is also excluded: {slug}")
 
     gallery = os.path.join(SITE, "gallery.html")
     if os.path.exists(gallery):
@@ -283,6 +303,26 @@ def main():
             prob("gallery.html", f"image group has no filter button: {cat}")
         for cat in sorted(buttons - groups):
             prob("gallery.html", f"filter button has no image group: {cat}")
+        for cat in sorted(filter_keys - buttons):
+            prob("gallery.html", f"declared service filter is not rendered: {cat}")
+
+        for group_cat, showcase in GALLERY_SHOWCASE.items():
+            section = re.search(
+                rf'<section class="gal__group" data-cat="{re.escape(group_cat)}">(.*?)</section>',
+                gallery_html, re.S)
+            if not section:
+                continue
+            for _asset_cat, slug, _alt in showcase:
+                if slug not in section.group(1):
+                    prob("gallery.html", f"{slug} is missing from its {group_cat} filter")
+
+    stale_copy = ("Seven services", "Six services throughout", "all seven services",
+                  "other six services", "the seven services")
+    for phrase in stale_copy:
+        for pg in pages:
+            html = open(pg, encoding="utf-8").read()
+            if phrase.lower() in html.lower():
+                prob(os.path.relpath(pg, SITE), f"stale service-count copy: {phrase}")
 
         connected = {
             tuple(photo[2] for photo in project.get("photos", []))

@@ -272,13 +272,13 @@ body::before {
 .has-sub { position: relative; }
 .sub {
   position: absolute; top: calc(100% + .35rem); left: 0;
-  min-width: 244px;
+  min-width: min(470px, calc(100vw - 2 * var(--gut)));
   background: var(--cream);
   border: 1px solid var(--rule);
   border-radius: 3px;
   box-shadow: 0 18px 44px -14px rgba(10,31,49,.28);
   padding: .4rem;
-  display: grid;
+  display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
   opacity: 0; visibility: hidden; transform: translateY(-6px);
   transition: opacity .22s, transform .22s var(--ease-out), visibility .22s;
 }
@@ -1089,6 +1089,13 @@ a.card:hover { transform: translateY(-4px); border-color: var(--amber); box-shad
 }
 .gal-filter button:hover { border-color: var(--amber); }
 .gal-filter button[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--bone); }
+@media (max-width: 620px) {
+  .gal-filter {
+    flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gut) * -1);
+    padding: 0 var(--gut) .7rem; scrollbar-width: thin; scroll-snap-type: x proximity;
+  }
+  .gal-filter button { flex: none; white-space: nowrap; scroll-snap-align: start; }
+}
 
 /* ---------- Connected project photos ---------- */
 .project-pairs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.2rem; align-items: start; }

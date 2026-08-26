@@ -5,7 +5,7 @@ No framework, no build dependencies beyond Python + Pillow. Every page is
 plain HTML served straight from disk, which is the fastest and most
 SEO-friendly option for a local service business.
 
-**Live:** https://colsonrice.github.io/cline-property-management/
+**Live:** https://clinepropertymgmt.com/
 
 ---
 
@@ -54,9 +54,9 @@ sideways in the browser while the JPEG fallback looks fine. `images.py` bakes
 the rotation into the pixels with `ImageOps.exif_transpose()` and strips EXIF,
 so every rendition is correct in every format.
 
-42 of the 44 source photos are 3:4 portrait, so the layouts are built
-portrait-first — the hero and page headers are split (type in one column,
-photo in the other) rather than full-bleed bands that would crop them badly.
+Most source photos are portrait-oriented, so the layouts are built portrait-first —
+the hero and page headers are split (type in one column, photo in the other)
+rather than full-bleed bands that would crop them badly.
 
 ## Deploying
 
@@ -69,19 +69,16 @@ git push origin main
 git subtree push --prefix site origin gh-pages
 ```
 
-## Things to change when a real domain is ready
+## Domain and indexing
 
-1. `SITE["base"]` in `build/data.py` — this drives every canonical tag,
-   Open Graph URL, sitemap entry and schema block.
-2. `python3 build/build.py` and redeploy.
-3. Point the domain at GitHub Pages and add a `CNAME` file to `site/`.
+`SITE["base"]` in `build/data.py` is the canonical production domain used by
+Open Graph tags, the sitemap, and structured data. The `site/CNAME` file keeps
+GitHub Pages on that domain. Leave `STAGING = False` for production builds;
+temporary preview builds should set it to `True` so search engines do not index
+the preview address.
 
 ## The contact form
 
-Static hosting has no backend, so the form validates in the browser and then
-hands the completed details to the visitor's mail client
-(`build/build.py` sets `data-mode="mailto"` on the form).
-
-To upgrade to a real form backend later, either deploy to Netlify — the
-`data-netlify` attributes are already in place — or point the form at a
-Formspree endpoint and change `data-mode` to `post`.
+The static site submits through FormSubmit to the business email address. After
+the first submission, confirm the activation email once, then send a second test
+submission and verify that both the message and reply address work correctly.
