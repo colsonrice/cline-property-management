@@ -467,9 +467,51 @@ body::before {
   .hero-s__folio { top: 1rem; left: var(--gut); right: var(--gut); }
 }
 @media (max-width: 560px) {
-  .hero-s__foot { grid-template-columns: 1fr; gap: .75rem; }
-  .hero-s__stat { display: grid; grid-template-columns: minmax(0,1.35fr) 1fr; align-items: baseline; gap: .8rem; }
-  .hero-s__stat span { margin-top: 0; }
+  /* Treat the mobile proof points like a compact field checklist. The old
+     two-column rows left a dead gap through the middle and forced the detail
+     copy into narrow, uneven wraps. Numbered rows give each claim one clear
+     reading path while matching the editorial folio treatment on the photo. */
+  .hero-s__foot {
+    counter-reset: hero-proof;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-top: 0;
+    border: 1px solid rgba(243,239,228,.2);
+    background: rgba(255,255,255,.035);
+  }
+  .hero-s__stat {
+    counter-increment: hero-proof;
+    display: grid;
+    grid-template-columns: 2.35rem minmax(0,1fr);
+    column-gap: .8rem;
+    align-items: center;
+    padding: .9rem 1rem;
+    border-bottom: 1px solid rgba(243,239,228,.16);
+  }
+  .hero-s__stat:last-child { border-bottom: 0; }
+  .hero-s__stat::before {
+    content: "0" counter(hero-proof);
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(168,211,236,.34);
+    color: var(--gold);
+    font-size: .61rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+  }
+  .hero-s__stat b {
+    font-size: .78rem;
+    line-height: 1.25;
+    letter-spacing: .055em;
+  }
+  .hero-s__stat span {
+    margin-top: .15rem;
+    font-size: .59rem;
+    line-height: 1.35;
+    letter-spacing: .115em;
+  }
 }
 
 /* ---------- Cline standard strip ---------- */

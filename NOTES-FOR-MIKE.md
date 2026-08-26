@@ -87,23 +87,60 @@ map pack for "lawn mowing near me."
 
 ---
 
-## 6. One action Mike has to take himself
+## 6. Turning the contact form on, and testing it
 
-**The estimate form will not deliver until he clicks an activation link.**
+**Right now the form does not deliver.** It needs one activation click from
+Mike, and until that happens every enquiry is silently discarded. The site is
+live and indexable, so this is the one item that is actively costing money.
 
-The form posts to FormSubmit, which emails a one-time confirmation to
-`Clinepropertymanagement@gmail.com` the first time the form is used. Until he
-clicks that link, submissions go nowhere.
+### The part that confuses everyone
 
-Either send a test from the live contact page and have him click it, or tell us
-to trigger it.
+The form posts to FormSubmit. **The first submission is consumed by activation** —
+it does not arrive as an enquiry. Instead FormSubmit emails a confirmation link
+to `Clinepropertymanagement@gmail.com`. So the sequence is:
 
-Once active, every message arrives tagged:
+1. Someone submits the form once. That submission is **not** delivered.
+2. Mike gets an email from FormSubmit with a confirmation link, and clicks it.
+3. From then on, submissions arrive normally.
 
-```
-[Cline Web] Lawn Mowing + Mulching · Zionsville — Dana Whitfield
-```
+If Mike submits once, sees nothing land, and concludes it is broken, he has
+stopped exactly one step early. That is the failure mode to warn him about.
 
-so a single Gmail filter on `[Cline Web]` catches all of them, and the subject
-alone says what and where before he opens it. Hitting reply goes straight back to
-the customer.
+### The test, step by step
+
+**Step 1 — activate.** Go to https://clinepropertymgmt.com/contact.html and
+send a submission. Use real details so the result is easy to recognise.
+
+**Step 2 — Mike checks his inbox** for a message from FormSubmit asking him to
+confirm. **Check spam and the Promotions tab.** Automated senders land there
+constantly. He clicks the link in that email. This is one time only.
+
+**Step 3 — send a second submission.** This one should arrive as a proper
+enquiry within a minute or two.
+
+**Step 4 — check what arrived.** A working enquiry looks like:
+
+- **Subject:** `[Cline Web] Lawn Mowing + Mulching · Zionsville — Dana Whitfield`
+  The service and town are built from what the person actually ticked, so the
+  subject alone says what and where before he opens it.
+- **Body:** a table with name, phone, email, property type, address, services,
+  message, and which page they were reading when they asked.
+- **Reply-to:** the customer's own address. Hitting reply goes to them, not to
+  FormSubmit. Worth having Mike actually test reply on this message.
+
+### Make sure it never gets lost
+
+In Gmail: **Settings → Filters → Create a new filter**, with `[Cline Web]` in
+the *Has the words* box. Then tick **Never send it to Spam**, **Always mark as
+important**, and apply a label like `Website enquiries`.
+
+That single filter catches every submission, because the `[Cline Web]` tag is
+on every one of them, including the plain-HTML fallback if JavaScript fails.
+
+### Ongoing confidence
+
+Worth submitting a test through the live form once a month, or before any
+seasonal push. It is a free service with no delivery dashboard and no alert if
+it stops working, so a silent failure would otherwise only surface as an
+unexplained quiet spell.
+
