@@ -199,8 +199,8 @@
  },
  "mulch-refresh-before": {
   "cat": "mulching",
-  "w": 1950,
-  "h": 2600,
+  "w": 1443,
+  "h": 1924,
   "orient": "portrait",
   "widths": [
    480,
@@ -210,8 +210,8 @@
  },
  "mulch-refresh-after": {
   "cat": "mulching",
-  "w": 1950,
-  "h": 2600,
+  "w": 1443,
+  "h": 1924,
   "orient": "portrait",
   "widths": [
    480,
@@ -329,6 +329,116 @@
    1280
   ]
  },
+ "leaf-cleanup-blue-house-front-before": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-blue-house-front-after": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-blue-house-driveway-before": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-blue-house-driveway-after": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-blue-house-side-before": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-blue-house-side-after": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-pool-yard-before": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-pool-yard-after": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-roadside-house-before": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "leaf-cleanup-roadside-house-after": {
+  "cat": "leaf-removal",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
  "commercial-median-crew": {
   "cat": "commercial",
   "w": 1950,
@@ -417,6 +527,50 @@
    1280
   ]
  },
+ "soft-wash-two-story-siding-before": {
+  "cat": "soft-washing",
+  "w": 1179,
+  "h": 884,
+  "orient": "landscape",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "soft-wash-two-story-siding-after": {
+  "cat": "soft-washing",
+  "w": 1179,
+  "h": 884,
+  "orient": "landscape",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "soft-wash-gray-siding-before": {
+  "cat": "soft-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "soft-wash-gray-siding-after": {
+  "cat": "soft-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
  "driveway-pressure-washing-before": {
   "cat": "pressure-washing",
   "w": 1950,
@@ -472,10 +626,98 @@
    1280
   ]
  },
- "fence-line-cleanup-before-after": {
-  "cat": "cleanups",
+ "pressure-wash-front-walk-before": {
+  "cat": "pressure-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "pressure-wash-front-walk-after": {
+  "cat": "pressure-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "pressure-wash-outdoor-counter-before": {
+  "cat": "pressure-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "pressure-wash-outdoor-counter-after": {
+  "cat": "pressure-washing",
+  "w": 1179,
+  "h": 1572,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "fence-wash-before-after": {
+  "cat": "soft-washing",
   "w": 1080,
   "h": 1350,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "window-cleaning-service": {
+  "cat": "seasonal",
+  "w": 1086,
+  "h": 1448,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "gutter-cleanout-service": {
+  "cat": "seasonal",
+  "w": 1086,
+  "h": 1448,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "junk-removal-service": {
+  "cat": "seasonal",
+  "w": 1086,
+  "h": 1448,
+  "orient": "portrait",
+  "widths": [
+   480,
+   800,
+   1280
+  ]
+ },
+ "interior-painting-service": {
+  "cat": "seasonal",
+  "w": 1086,
+  "h": 1448,
   "orient": "portrait",
   "widths": [
    480,

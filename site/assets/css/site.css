@@ -665,6 +665,7 @@ body::before {
 .seasons__fig { position: relative; border-radius: 3px; overflow: hidden; aspect-ratio: 3/4; }
 .seasons__fig > picture { display: block; width: 100%; height: 100%; }
 .seasons__fig img { width: 100%; height: 100%; object-fit: cover; }
+.seasons__fig > picture > img { object-position: var(--season-pos, 50% 50%); }
 .seasons__fig::after {
   content: ""; position: absolute; inset: auto 0 0; height: 32%;
   background: linear-gradient(to top, rgba(10,31,49,.62), transparent);

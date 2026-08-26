@@ -12,7 +12,7 @@ from urllib.parse import urlparse, unquote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = os.path.join(ROOT, "site")
 sys.path.insert(0, os.path.join(ROOT, "build"))
-from data import SITE as CFG, SERVICES, GALLERY_EXCLUDE  # noqa
+from data import SITE as CFG, SERVICES, SEASONS, SEASONAL_SERVICE_NAMES, GALLERY_EXCLUDE  # noqa
 from imagemap import MAP  # noqa
 # Project sites (e.g. GitHub Pages) live under a path prefix; strip it before
 # comparing sitemap <loc> paths with on-disk file paths.
@@ -257,6 +257,22 @@ def main():
             if os.path.exists(b) and os.path.exists(a):
                 if open(b, "rb").read() == open(a, "rb").read():
                     prob("images", f"{svc['slug']} before/after use identical files: {before}, {after}")
+
+    service_slugs = {svc["slug"] for svc in SERVICES}
+    mapped_slugs = {slug for _source, _cat, slug in MAP}
+    for season in SEASONS:
+        for slug in season.get("services", []):
+            if slug not in service_slugs and slug not in SEASONAL_SERVICE_NAMES:
+                prob("seasons", f"{season['key']} references unknown service: {slug}")
+        expected_count = len(season.get("services", []))
+        if season.get("count") != f"{expected_count} services":
+            prob("seasons", f"{season['key']} count does not match its service list")
+        for field in ("img", "img_inset"):
+            if field not in season:
+                continue
+            _cat, slug, _alt, _label = season[field]
+            if slug not in mapped_slugs:
+                prob("seasons", f"{season['key']} {field} is not mapped: {slug}")
 
     gallery = os.path.join(SITE, "gallery.html")
     if os.path.exists(gallery):

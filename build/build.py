@@ -563,7 +563,7 @@ def page_home():
             <p>{esc(s['body'])}</p>
             <div class="seasons__list">{chips}</div>
           </div>
-          <div class="seasons__fig">{picture(cat, slug, alt, depth, sizes="(max-width:860px) 92vw, 46vw")}
+          <div class="seasons__fig" style="--season-pos:{esc(s.get('img_pos', '50% 50%'))}">{picture(cat, slug, alt, depth, sizes="(max-width:860px) 92vw, 46vw")}
             <span class="seasons__fig-label">{esc(img_label)}</span>{inset}</div>
         </div>"""
 
@@ -1187,7 +1187,7 @@ def page_gallery():
     {crumbs([("Home","index.html"),("Our Work",None)], depth)}
     <span class="eyebrow" style="color:var(--gold)">Our work</span>
     <h1 class="display h-1">View our work</h1>
-    <p>Work from across all seven services, around Greater Indianapolis. Photos from the same job are grouped together.</p>
+    <p>Work from across all seven services, around Greater Indianapolis.</p>
     </div>
     <div class="phead__fig">{picture('leaf-removal','leaf-vacuum-truck-curb','',depth,sizes="(max-width:900px) 100vw, 46vw")}</div>
   </div>

@@ -50,7 +50,8 @@ SEASONS = [
         "services": ["spring-fall-cleanups", "mulching", "lawn-mowing", "soft-washing",
                      "pressure-washing", "window-cleaning", "gutter-cleanout"],
         "img": ("seasonal", "gutter-cleanout-service",
-                "Gutter cleanout at a two-story home", "Gutter cleanout"),
+                "Gutter cleanout at a one-story home", "Gutter cleanout"),
+        "img_pos": "50% 25%",
         "img_inset": ("seasonal", "window-cleaning-service",
                       "Exterior window cleaning with a water-fed pole", "Window cleaning"),
     },
@@ -81,7 +82,7 @@ SEASONS = [
         "img": ("leaf-removal", "leaf-removal-backpack-blower",
                 "Crew clearing fall leaves with backpack blowers", "Leaf removal"),
         "img_inset": ("seasonal", "gutter-cleanout-service",
-                      "Fall gutter cleanout at a two-story home", "Gutter cleanout"),
+                      "Fall gutter cleanout at a one-story home", "Gutter cleanout"),
     },
     {
         "key": "winter", "name": "Winter", "months": "December – February",
