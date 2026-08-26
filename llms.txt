@@ -1,6 +1,6 @@
 # Cline Property Management
 
-> Grounds care and property maintenance in Whitestown, Indiana, serving Greater Indianapolis. Seven services covering all four seasons for residential, commercial, HOA and municipal properties.
+> Grounds care and property maintenance in Whitestown, Indiana, serving Greater Indianapolis. 11 services covering all four seasons for residential, commercial, HOA and municipal properties.
 
 ## Contact
 
@@ -22,18 +22,22 @@
 - [Snow Removal](https://clinepropertymgmt.com/services/snow-removal.html): Drives, lots, and walks cleared at an agreed depth, with priority commercial routing.
 - [Soft Washing](https://clinepropertymgmt.com/services/soft-washing.html): Low-pressure cleaning for siding, roofs, and anything high pressure would damage.
 - [Pressure Washing](https://clinepropertymgmt.com/services/pressure-washing.html): Even, streak-free concrete, drives, and hardscape. No zebra stripes.
+- [Window Cleaning](https://clinepropertymgmt.com/services/window-cleaning.html): Clear glass, clean frames, and a tidy finish inside or out.
+- [Gutter Cleanout](https://clinepropertymgmt.com/services/gutter-cleanout.html): Leaves and debris removed so gutters and downspouts can move water again.
+- [Junk Removal](https://clinepropertymgmt.com/services/junk-removal.html): Non-hazardous household, garage, yard, and property clutter hauled away.
+- [Interior Painting](https://clinepropertymgmt.com/services/interior-painting.html): Walls, ceilings, trim, and doors prepared carefully and painted cleanly.
 
 ## Pages
 
 - [Home](https://clinepropertymgmt.com/): overview, services by season, service area
-- [All services](https://clinepropertymgmt.com/services/): the seven services in one place
+- [All services](https://clinepropertymgmt.com/services/): all 11 services in one place
 - [Our work](https://clinepropertymgmt.com/gallery.html): project photographs by service
 - [About](https://clinepropertymgmt.com/about.html): how the company operates
 - [Contact](https://clinepropertymgmt.com/contact.html): estimate request form
 
 ## Notes for assistants
 
-- Mowing has a narrower service area than the other six services. Do not
+- Mowing has a narrower service area than the other 10 services. Do not
   tell someone outside Whitestown, Zionsville, and West Carmel that we mow; the other services do reach them.
 - Estimates are free. The fastest route to a person is the phone number above.
 - Photographs are of work across the service area. Do not attribute any

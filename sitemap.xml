@@ -111,4 +111,32 @@
     <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/awning-pressure-washing-after-1280.jpg</image:loc><image:caption>Awning after cleaning</image:caption></image:image>
     <image:image><image:loc>https://clinepropertymgmt.com/assets/img/pressure-washing/concrete-pressure-washing-in-progress-1280.jpg</image:loc><image:caption>Mid-wash: the line between cleaned and untouched concrete</image:caption></image:image>
   </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/window-cleaning.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/seasonal/window-cleaning-service-1280.jpg</image:loc><image:caption>Exterior window cleaning with a water-fed pole at a residential property</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/gutter-cleanout.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/seasonal/gutter-cleanout-service-1280.jpg</image:loc><image:caption>Worker clearing leaves from the gutter of a one-story home</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/junk-removal.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/seasonal/junk-removal-service-1280.jpg</image:loc><image:caption>Household items being loaded into a utility trailer for junk removal</image:caption></image:image>
+  </url>
+  <url>
+    <loc>https://clinepropertymgmt.com/services/interior-painting.html</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image><image:loc>https://clinepropertymgmt.com/assets/img/seasonal/interior-painting-service-1280.jpg</image:loc><image:caption>Interior wall being professionally painted with the floor protected</image:caption></image:image>
+  </url>
 </urlset>
